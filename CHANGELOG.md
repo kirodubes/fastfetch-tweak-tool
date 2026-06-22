@@ -14,6 +14,19 @@ All notable changes to fastfetch-tweak-tool are documented here.
   had grown large (logo source pickers, generators, position, dimensions, plus colours);
   it's now `_logo_tab` (everything logo-related + the logo-type help text) and
   `_appearance_tab` (separator, colours, key width). Tab order: Logo before Appearance.
+- **Pokémon is now a logo Type — one source active at a time.** Added **Pokémon** to the
+  Type dropdown. It's a UI-only pseudo-type (`_TYPE_ALIAS = {"pokemon": "file"}`): the model
+  always stores fastfetch's real `file` type, and on reload it's surfaced back as "Pokémon"
+  by detecting the `/opt/pokemon-colorscripts` source path (`_ui_logo_type`). The Pokémon
+  picker row now greys out unless the Type is Pokémon, fixing the bug where Inline text left
+  both the inline box *and* the Pokémon row clickable — exactly one logo source is active for
+  any Type now.
+- **Generator layout + Kiro button polish.** The "Text:" entry now sits on its **own
+  row** above the Tool/variant/Generate controls (less cramped). The old "Insert Kiro
+  figlet" button is now **tool-aware** — it reads "Insert Kiro `<tool>`" and generates
+  "Kiro" with the currently selected tool (figlet/cowsay/botsay) instead of always
+  inserting a pre-baked figlet. Removed the now-unused bundled `data/logo/kiro.txt` and
+  `_insert_kiro_figlet`; `_generate_text` gained an optional text override.
 - **cowsay & botsay text generators.** The inline-text generator gained a **Tool**
   dropdown — `figlet` / `cowsay` / `botsay`. The second dropdown adapts: figlet **Font**,
   cowsay **Cowfile** (51 installed, `default` first), and is hidden for botsay (no
@@ -58,8 +71,13 @@ All notable changes to fastfetch-tweak-tool are documented here.
   if not already an image type, switches Type to **Chafa** (renders in any terminal,
   including Alacritty, and respects PNG transparency). Sits alongside the existing
   file picker for the user's own images.
-- **figlet added to Optional features** (Install & Enable tab) so users can install it
-  to generate ASCII-art text logos.
+- **Cleaned up bundled logo assets — PNG-only, size-in-name ladder.** Removed all 8 JPG
+  logos (no alpha → ugly white box; see transparency note). Renamed the colour K logo into
+  a consistent width-labelled ladder: `logo-32/48/64/72/128/192/256/512/1024.png` (the old
+  `favicon-*` names dropped, `logo.png`→`logo-1024.png`), and generated the missing 64/128/
+  256 sizes from the 1024 master. Variants renamed `logo-grey-1024.png` / `logo-mono-1024.png`.
+  All are transparent. The bundled-image dropdown picks these up automatically (it scans
+  the folder), so users can choose a logo size by name.
 - **Pokémon logo picker.** When `pokemon-colorscripts` is installed (`/opt/pokemon-
   colorscripts/colorscripts/`), a "Pokémon" row appears with a searchable name dropdown
   (1329 entries), a **Size** dropdown (small/large) and a **Shiny** toggle. The **Use**
@@ -84,9 +102,11 @@ All notable changes to fastfetch-tweak-tool are documented here.
   fastfetch supports **left** (default), **top**, **right**. There is no "bottom" in
   fastfetch, so it isn't offered. Greys out for Type `none` like the other logo
   dimension rows.
-- **Transparency guidance.** Bottom help text now advises using a transparent **PNG**
-  (not JPG) so the logo renders with no background box — JPG has no alpha channel and
-  fills transparent areas with solid white.
+- **Transparency + terminal guidance.** Bottom help text now advises using a transparent
+  **PNG** (not JPG) so the logo renders with no background box — JPG has no alpha channel
+  and fills transparent areas with solid white — and adds a tip that real images
+  (Sixel/Kitty/Raw) need a graphics-capable terminal (kitty, Ghostty, Konsole, WezTerm,
+  foot); **Alacritty shows no images**, so use Chafa there.
 
 - **Fixed over-wide window/left pane (notably on Plasma).** Long description labels —
   the Start/Presets intro, the Privacy note, the Logo & Appearance help text, and the
@@ -123,7 +143,6 @@ All notable changes to fastfetch-tweak-tool are documented here.
 ### Files Modified
 - `usr/share/fastfetch-tweak-tool/ff_gui.py`
 - `usr/share/fastfetch-tweak-tool/ff_install.py` (new `package_in_repos()`)
-- `usr/share/fastfetch-tweak-tool/data/logo/kiro.txt` (new — bundled Kiro figlet)
 
 ## 2026.06.18
 

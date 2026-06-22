@@ -33,7 +33,10 @@ _COLORS = [
     "1", "2", "3", "4", "5", "6", "9", "10", "11", "12", "13", "14",
 ]
 
-_LOGO_TYPES = ["builtin", "small", "none", "file", "data", "sixel", "kitty", "chafa", "raw"]
+# "pokemon" is a UI-only pseudo-type: it maps to fastfetch's real "file" type (see _TYPE_ALIAS),
+# detected on reload by the source path. The model never stores "pokemon".
+_LOGO_TYPES = ["builtin", "small", "none", "file", "pokemon", "data", "sixel", "kitty", "chafa", "raw"]
+_TYPE_ALIAS = {"pokemon": "file"}
 
 # Human-friendly labels shown in the Type dropdown; the config value stays the raw key.
 _LOGO_TYPE_LABELS = {
@@ -41,6 +44,7 @@ _LOGO_TYPE_LABELS = {
     "small": "Small ASCII",
     "none": "None",
     "file": "Text file",
+    "pokemon": "Pokémon",
     "data": "Inline text",
     "sixel": "Sixel image",
     "kitty": "Kitty image",
@@ -559,7 +563,7 @@ def _logo_tab(window):
     type_row = _row()
     type_row.append(_label("Type:"))
     window.logo_type = Gtk.DropDown.new_from_strings([_LOGO_TYPE_LABELS[t] for t in _LOGO_TYPES])
-    current_type = str((window.model.get("logo") or {}).get("type", "builtin"))
+    current_type = _ui_logo_type(window.model.get("logo"))
     if current_type in _LOGO_TYPES:
         window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
     window.logo_type.connect("notify::selected", lambda _d, _p: _set_logo_type(window))
@@ -623,13 +627,16 @@ def _logo_tab(window):
     inline_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
     inline_row.append(_label("Inline text (ASCII art stored in the config):"))
 
-    gen_bar = _row()
-    gen_bar.append(_label("Text:"))
+    text_row = _row()
+    text_row.append(_label("Text:"))
     window.gen_entry = Gtk.Entry()
     window.gen_entry.set_hexpand(True)
     window.gen_entry.set_placeholder_text("Type text, then Generate")
     window.gen_entry.connect("activate", lambda _e: _generate_text(window))
-    gen_bar.append(window.gen_entry)
+    text_row.append(window.gen_entry)
+    inline_row.append(text_row)
+
+    gen_bar = _row()
     gen_bar.append(_label("Tool:"))
     window.gen_tool = Gtk.DropDown.new_from_strings(_TEXT_TOOLS)
     window.gen_tool.connect("notify::selected", lambda _d, _p: _refresh_gen_controls(window))
@@ -642,9 +649,9 @@ def _logo_tab(window):
     window.gen_btn = Gtk.Button(label="Generate")
     window.gen_btn.connect("clicked", lambda _w: _generate_text(window))
     gen_bar.append(window.gen_btn)
-    btn_figlet = Gtk.Button(label="Insert Kiro figlet")
-    btn_figlet.connect("clicked", lambda _w: _insert_kiro_figlet(window))
-    gen_bar.append(btn_figlet)
+    window.gen_kiro_btn = Gtk.Button(label="Insert Kiro figlet")
+    window.gen_kiro_btn.connect("clicked", lambda _w: _generate_text(window, "Kiro"))
+    gen_bar.append(window.gen_kiro_btn)
     inline_row.append(gen_bar)
 
     window.gen_hint = _label("", css_class="info-label", wrap=True, max_chars=60)
@@ -692,10 +699,14 @@ def _logo_tab(window):
         "<b>Logo type — where the logo comes from:</b>\n"
         "• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked in “Built-in logo”.\n"
         "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+        "• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” row.\n"
         "• <b>Inline text</b>: ASCII art typed/generated into the box, stored in the config.\n"
         "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b> / <b>Raw image</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
         "• <b>None</b>: no logo at all.\n"
-        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box."
+        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box.\n"
+        "Tip: real images (Sixel/Kitty/Raw) need a graphics-capable terminal — kitty, Ghostty, "
+        "Konsole, WezTerm, foot. <b>Alacritty shows no images</b>; use <b>Chafa</b> there (image "
+        "rendered as coloured text)."
     )
     help_label = _label(help_text, css_class="info-label", markup=True, wrap=True, max_chars=60)
     help_label.set_margin_top(12)
@@ -797,6 +808,15 @@ def _pokemon_names():
         return []
 
 
+def _ui_logo_type(logo):
+    """Map the stored logo to the Type dropdown value, surfacing the Pokémon pseudo-type."""
+    logo = logo or {}
+    real = str(logo.get("type", "builtin"))
+    if real == "file" and str(logo.get("source", "")).startswith(_POKEMON_BASE):
+        return "pokemon"
+    return real
+
+
 def _bundled_logo_images():
     """Return sorted basenames of the image files bundled in data/logo/."""
     logo_dir = os.path.join(cfg.BASE_DIR, "data", "logo")
@@ -843,6 +863,7 @@ def _apply_logo_type_state(window):
     window.logo_builtin_row.set_sensitive(value in _BUILTIN_LOGO_TYPES)
     window.logo_bundled_row.set_sensitive(value in _IMAGE_LOGO_TYPES)
     window.logo_file_row.set_sensitive(value in _FILE_LOGO_TYPES)
+    window.pokemon_row.set_sensitive(value == "pokemon")
     window.logo_inline_row.set_sensitive(value in _INLINE_LOGO_TYPES)
     has_logo = value != "none"
     for row in window.logo_dim_rows:
@@ -880,13 +901,15 @@ def _refresh_gen_controls(window):
     window.gen_entry.set_sensitive(ok)
     window.gen_variant.set_sensitive(ok and has_variants)
     window.gen_btn.set_sensitive(ok)
+    window.gen_kiro_btn.set_sensitive(ok)
+    window.gen_kiro_btn.set_label(f"Insert Kiro {tool}")
     window.gen_hint.set_visible(not ok)
     window.gen_hint.set_text(f"{tool} not installed — install it on the Install & Enable tab")
     return False
 
 
-def _generate_text(window):
-    text = window.gen_entry.get_text().strip()
+def _generate_text(window, override=None):
+    text = (override if override is not None else window.gen_entry.get_text()).strip()
     if not text:
         return
     tool = _TEXT_TOOLS[window.gen_tool.get_selected()]
@@ -918,32 +941,18 @@ def _apply_generated(window, art):
     return False
 
 
-def _insert_kiro_figlet(window):
-    path = os.path.join(cfg.BASE_DIR, "data", "logo", "kiro.txt")
-    try:
-        with open(path, encoding="utf-8") as fh:
-            art = fh.read()
-    except OSError as exc:
-        log.log_error(f"Could not read Kiro figlet: {exc}")
-        return
-    window.logo_inline_view.get_buffer().set_text(art)
-    window.model.setdefault("logo", {})["type"] = "data"
-    window.logo_type.set_selected(_LOGO_TYPES.index("data"))
-    _notify(window, "Inserted Kiro figlet")
-
-
 def _set_logo_position(window):
     window.model.setdefault("logo", {})["position"] = _LOGO_POSITIONS[window.logo_position.get_selected()]
 
 
 def _set_logo_type(window):
     value = _LOGO_TYPES[window.logo_type.get_selected()]
-    window.model.setdefault("logo", {})["type"] = value
+    window.model.setdefault("logo", {})["type"] = _TYPE_ALIAS.get(value, value)
     _apply_logo_type_state(window)
     if value == "chafa" and not shutil.which("chafa"):
         _notify(window, "chafa not installed — install it on the Install & Enable tab to render image logos")
     else:
-        _notify(window, f"Logo type: {value}")
+        _notify(window, f"Logo type: {_LOGO_TYPE_LABELS[value]}")
 
 
 def _set_logo_source(window):
@@ -974,7 +983,7 @@ def _set_logo_pokemon(window):
     logo = window.model.setdefault("logo", {})
     logo["source"] = os.path.join(_POKEMON_BASE, size, variant, name)
     logo["type"] = "file"
-    window.logo_type.set_selected(_LOGO_TYPES.index("file"))
+    window.logo_type.set_selected(_LOGO_TYPES.index("pokemon"))
     _notify(window, f"Pokémon logo: {name} ({size}, {variant})")
 
 
@@ -1711,7 +1720,7 @@ def _reload_widgets(window):
     if hasattr(window, "separator_entry"):
         window.separator_entry.set_text(str((window.model.get("display") or {}).get("separator", ": ")))
     if hasattr(window, "logo_type"):
-        current_type = str((window.model.get("logo") or {}).get("type", "builtin"))
+        current_type = _ui_logo_type(window.model.get("logo"))
         if current_type in _LOGO_TYPES:
             window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
         _apply_logo_type_state(window)
