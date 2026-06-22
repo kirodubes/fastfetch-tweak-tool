@@ -71,13 +71,18 @@ All notable changes to fastfetch-tweak-tool are documented here.
   if not already an image type, switches Type to **Chafa** (renders in any terminal,
   including Alacritty, and respects PNG transparency). Sits alongside the existing
   file picker for the user's own images.
+- **Removed the "Raw image" logo type.** fastfetch's `raw` dumps a file's raw bytes
+  verbatim (only useful for pre-encoded terminal-image files; a normal PNG prints as
+  garbage) — a footgun for this tool's users. Dropped from the Type dropdown and the
+  greying sets; image logos are now Sixel/Kitty/Chafa only.
 - **Cleaned up bundled logo assets — PNG-only, size-in-name ladder.** Removed all 8 JPG
   logos (no alpha → ugly white box; see transparency note). Renamed the colour K logo into
   a consistent width-labelled ladder: `logo-32/48/64/72/128/192/256/512/1024.png` (the old
   `favicon-*` names dropped, `logo.png`→`logo-1024.png`), and generated the missing 64/128/
-  256 sizes from the 1024 master. Variants renamed `logo-grey-1024.png` / `logo-mono-1024.png`.
-  All are transparent. The bundled-image dropdown picks these up automatically (it scans
-  the folder), so users can choose a logo size by name.
+  256 sizes from the 1024 master. The grey and mono variants got the **same ladder**
+  (`logo-grey-32…1024.png`, `logo-mono-32…1024.png`). All are transparent. The
+  bundled-image dropdown picks these up automatically (it scans the folder), so users
+  can choose a logo style + size by name.
 - **Pokémon logo picker.** When `pokemon-colorscripts` is installed (`/opt/pokemon-
   colorscripts/colorscripts/`), a "Pokémon" row appears with a searchable name dropdown
   (1329 entries), a **Size** dropdown (small/large) and a **Shiny** toggle. The **Use**
@@ -98,6 +103,17 @@ All notable changes to fastfetch-tweak-tool are documented here.
   repopulates from the now-present font dir (it ships with the `figlet` package). If
   `chafa` isn't installed, selecting the Chafa type shows a toast that it's needed for
   image logos.
+- **Fixed stale logo source on Type switch.** Changing the Type dropdown left the old
+  `logo.source` in place — e.g. switching from Pokémon to Big ASCII kept the pokemon path,
+  producing an invalid `builtin` + pokemon-path config (fastfetch silently fell back to the
+  auto logo). Now `_sync_source_for_type` re-points `source` at the new type's own picker
+  (builtin/small → Built-in dropdown, Pokémon → pokemon path, Inline text → the text box,
+  None → cleared); file/image types keep using their Custom/Bundled pickers. A suppress
+  flag keeps Reload from clobbering the on-disk source.
+- **"In use" indicator next to the Type dropdown** showing the logo currently saved in
+  `config.jsonc` (e.g. "in use: Big ASCII — Adélie", "in use: Pokémon — pikachu") so you
+  can see the active/default logo vs the one you're editing. Reads from disk via
+  `_logo_summary` / `_refresh_current_logo_label`; updates on Apply and Reload.
 - **Logo position dropdown.** New "Logo position" control writes `logo.position` —
   fastfetch supports **left** (default), **top**, **right**. There is no "bottom" in
   fastfetch, so it isn't offered. Greys out for Type `none` like the other logo

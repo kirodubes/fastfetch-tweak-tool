@@ -35,7 +35,7 @@ _COLORS = [
 
 # "pokemon" is a UI-only pseudo-type: it maps to fastfetch's real "file" type (see _TYPE_ALIAS),
 # detected on reload by the source path. The model never stores "pokemon".
-_LOGO_TYPES = ["builtin", "small", "none", "file", "pokemon", "data", "sixel", "kitty", "chafa", "raw"]
+_LOGO_TYPES = ["builtin", "small", "none", "file", "pokemon", "data", "sixel", "kitty", "chafa"]
 _TYPE_ALIAS = {"pokemon": "file"}
 
 # Human-friendly labels shown in the Type dropdown; the config value stays the raw key.
@@ -49,7 +49,6 @@ _LOGO_TYPE_LABELS = {
     "sixel": "Sixel image",
     "kitty": "Kitty image",
     "chafa": "Chafa image",
-    "raw": "Raw image",
 }
 
 # Module types that may legitimately appear more than once — never filtered from the picker.
@@ -568,6 +567,10 @@ def _logo_tab(window):
         window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
     window.logo_type.connect("notify::selected", lambda _d, _p: _set_logo_type(window))
     type_row.append(window.logo_type)
+    window.logo_current_label = _label("", css_class="info-label")
+    window.logo_current_label.set_margin_start(10)
+    type_row.append(window.logo_current_label)
+    _refresh_current_logo_label(window)
     box.append(type_row)
 
     logo_row = _row()
@@ -701,10 +704,10 @@ def _logo_tab(window):
         "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
         "• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” row.\n"
         "• <b>Inline text</b>: ASCII art typed/generated into the box, stored in the config.\n"
-        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b> / <b>Raw image</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
+        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
         "• <b>None</b>: no logo at all.\n"
         "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box.\n"
-        "Tip: real images (Sixel/Kitty/Raw) need a graphics-capable terminal — kitty, Ghostty, "
+        "Tip: real images (Sixel/Kitty) need a graphics-capable terminal — kitty, Ghostty, "
         "Konsole, WezTerm, foot. <b>Alacritty shows no images</b>; use <b>Chafa</b> there (image "
         "rendered as coloured text)."
     )
@@ -781,9 +784,9 @@ def _color_row(window, label, path):
 
 
 _BUILTIN_LOGO_TYPES = {"builtin", "small"}
-_FILE_LOGO_TYPES = {"file", "raw", "sixel", "kitty", "chafa"}
+_FILE_LOGO_TYPES = {"file", "sixel", "kitty", "chafa"}
 _INLINE_LOGO_TYPES = {"data"}
-_IMAGE_LOGO_TYPES = {"sixel", "kitty", "chafa", "raw"}
+_IMAGE_LOGO_TYPES = {"sixel", "kitty", "chafa"}
 _LOGO_IMG_EXTS = (".png", ".jpg", ".jpeg", ".svg", ".gif", ".bmp")
 _LOGO_POSITIONS = ["left", "top", "right"]  # fastfetch logo.position (no "bottom")
 
@@ -815,6 +818,33 @@ def _ui_logo_type(logo):
     if real == "file" and str(logo.get("source", "")).startswith(_POKEMON_BASE):
         return "pokemon"
     return real
+
+
+def _logo_summary(logo):
+    """One-line description of the active logo for the 'in use' indicator."""
+    if isinstance(logo, str):
+        return f"Built-in — {logo}" if logo else "Built-in"
+    logo = logo or {}
+    ui = _ui_logo_type(logo)
+    label = _LOGO_TYPE_LABELS.get(ui, ui)
+    real = str(logo.get("type", "builtin"))
+    src = str(logo.get("source", ""))
+    if real == "data":
+        detail = "inline text"
+    elif real in ("builtin", "small"):
+        detail = src
+    elif src:
+        detail = os.path.basename(src)
+    else:
+        detail = ""
+    return f"{label} — {detail}" if detail else label
+
+
+def _refresh_current_logo_label(window):
+    """Update the dim 'in use' label next to Type from the on-disk config."""
+    if not hasattr(window, "logo_current_label"):
+        return
+    window.logo_current_label.set_text(f"in use: {_logo_summary(cfg.read_config().get('logo'))}")
 
 
 def _bundled_logo_images():
@@ -945,9 +975,30 @@ def _set_logo_position(window):
     window.model.setdefault("logo", {})["position"] = _LOGO_POSITIONS[window.logo_position.get_selected()]
 
 
+def _sync_source_for_type(window, value):
+    """Point logo.source at the picker that owns the new type, clearing a stale path."""
+    logo = window.model.setdefault("logo", {})
+    if value in ("builtin", "small"):
+        logos = catalog.logos()
+        if logos:
+            logo["source"] = logos[window.logo_source.get_selected()]
+    elif value == "pokemon":
+        if getattr(window, "pokemon_names", None):
+            logo["source"] = _pokemon_path(window)
+    elif value == "data":
+        buf = window.logo_inline_view.get_buffer()
+        start, end = buf.get_bounds()
+        logo["source"] = buf.get_text(start, end, False)
+    elif value == "none":
+        logo.pop("source", None)
+    # file / sixel / kitty / chafa: source comes from the Custom image / Bundled image pickers.
+
+
 def _set_logo_type(window):
     value = _LOGO_TYPES[window.logo_type.get_selected()]
     window.model.setdefault("logo", {})["type"] = _TYPE_ALIAS.get(value, value)
+    if not getattr(window, "_suppress_source_sync", False):
+        _sync_source_for_type(window, value)
     _apply_logo_type_state(window)
     if value == "chafa" and not shutil.which("chafa"):
         _notify(window, "chafa not installed — install it on the Install & Enable tab to render image logos")
@@ -974,17 +1025,22 @@ def _refresh_pokemon_controls(window):
     return False
 
 
+def _pokemon_path(window):
+    name = window.pokemon_names[window.pokemon_dd.get_selected()]
+    size = _POKEMON_SIZES[window.pokemon_size.get_selected()]
+    variant = "shiny" if window.pokemon_shiny.get_active() else "regular"
+    return os.path.join(_POKEMON_BASE, size, variant, name)
+
+
 def _set_logo_pokemon(window):
     if not window.pokemon_names:
         return
     name = window.pokemon_names[window.pokemon_dd.get_selected()]
-    size = _POKEMON_SIZES[window.pokemon_size.get_selected()]
-    variant = "shiny" if window.pokemon_shiny.get_active() else "regular"
     logo = window.model.setdefault("logo", {})
-    logo["source"] = os.path.join(_POKEMON_BASE, size, variant, name)
+    logo["source"] = _pokemon_path(window)
     logo["type"] = "file"
     window.logo_type.set_selected(_LOGO_TYPES.index("pokemon"))
-    _notify(window, f"Pokémon logo: {name} ({size}, {variant})")
+    _notify(window, f"Pokémon logo: {name}")
 
 
 def _set_logo_bundled(window):
@@ -1700,6 +1756,7 @@ def _apply(window):
         model = cfg.without_public_ip(model)
     cfg.write_config(model)
     _refresh_preview(window)
+    _refresh_current_logo_label(window)
     if model is not window.model:
         _notify(window, "Configuration applied (public IP module omitted)")
     else:
@@ -1710,6 +1767,7 @@ def _reload(window):
     window.model = _normalize_model(cfg.read_config())
     _reload_widgets(window)
     _refresh_preview(window)
+    _refresh_current_logo_label(window)
     _notify(window, "Reloaded from config.jsonc")
 
 
@@ -1721,8 +1779,10 @@ def _reload_widgets(window):
         window.separator_entry.set_text(str((window.model.get("display") or {}).get("separator", ": ")))
     if hasattr(window, "logo_type"):
         current_type = _ui_logo_type(window.model.get("logo"))
+        window._suppress_source_sync = True
         if current_type in _LOGO_TYPES:
             window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
+        window._suppress_source_sync = False
         _apply_logo_type_state(window)
     if hasattr(window, "logo_inline_view"):
         logo_d = window.model.get("logo") or {}
