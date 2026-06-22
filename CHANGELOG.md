@@ -5,6 +5,18 @@ All notable changes to fastfetch-tweak-tool are documented here.
 ## 2026.06.22
 
 ### What Changed
+- **Split "Logo & Appearance" into two tabs — "Logo" then "Appearance".** The single tab
+  had grown large (logo source pickers, generators, position, dimensions, plus colours);
+  it's now `_logo_tab` (everything logo-related + the logo-type help text) and
+  `_appearance_tab` (separator, colours, key width). Tab order: Logo before Appearance.
+- **cowsay & botsay text generators.** The inline-text generator gained a **Tool**
+  dropdown — `figlet` / `cowsay` / `botsay`. The second dropdown adapts: figlet **Font**,
+  cowsay **Cowfile** (51 installed, `default` first), and is hidden for botsay (no
+  variants). One shared **Generate** button runs the selected tool into the inline box.
+  Both were added to **Optional features** (they're in the base repo). Generalised the
+  old figlet-only code: `_generate_figlet`→`_generate_text`, `_refresh_figlet_controls`→
+  `_refresh_gen_controls`, `_apply_figlet`→`_apply_generated`, new `_gen_variants()` and
+  `_cowfiles()`. Per-tool install state drives the greying + hint, live-refreshing on install.
 - **Logo & Appearance tab now greys out rows that don't apply to the selected logo
   Type.** Previously all three logo-source rows (Built-in logo, Custom image) were
   clickable regardless of `logo.type`, which was confusing — e.g. with `Type: small`

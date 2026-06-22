@@ -163,7 +163,8 @@ def build(window, ff_version):
     notebook.append_page(_presets_tab(window), _label("Start / Presets"))
     notebook.append_page(_preset_gallery_tab(window), _label("Preset Gallery"))
     notebook.append_page(_modules_tab(window), _label("Modules"))
-    notebook.append_page(_appearance_tab(window), _label("Logo & Appearance"))
+    notebook.append_page(_logo_tab(window), _label("Logo"))
+    notebook.append_page(_appearance_tab(window), _label("Appearance"))
     notebook.append_page(_install_tab(window), _label("Install & Enable"))
     notebook.append_page(_raw_tab(window), _label("Raw"))
 
@@ -541,11 +542,10 @@ def _del_option(window, index, key):
     window.modules_list.select_row(window.modules_list.get_row_at_index(index))
 
 
-# ── Logo & Appearance tab ────────────────────────────────────────────────────
+# ── Logo + Appearance tabs ───────────────────────────────────────────────────
 
 
-def _appearance_tab(window):
-    window.color_combos = {}
+def _logo_tab(window):
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
     box.set_margin_start(6)
     box.set_margin_end(6)
@@ -620,30 +620,33 @@ def _appearance_tab(window):
     inline_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
     inline_row.append(_label("Inline text (ASCII art stored in the config):"))
 
-    figlet_bar = _row()
-    figlet_bar.append(_label("Figlet text:"))
-    window.figlet_entry = Gtk.Entry()
-    window.figlet_entry.set_hexpand(True)
-    window.figlet_entry.set_placeholder_text("Type text, then Generate")
-    window.figlet_entry.connect("activate", lambda _e: _generate_figlet(window))
-    figlet_bar.append(window.figlet_entry)
-    figlet_bar.append(_label("Font:"))
-    window.figlet_font_names = _figlet_fonts()
-    window.figlet_font = _searchable_dropdown(window.figlet_font_names)
-    figlet_bar.append(window.figlet_font)
-    window.figlet_gen_btn = Gtk.Button(label="Generate")
-    window.figlet_gen_btn.connect("clicked", lambda _w: _generate_figlet(window))
-    figlet_bar.append(window.figlet_gen_btn)
+    gen_bar = _row()
+    gen_bar.append(_label("Text:"))
+    window.gen_entry = Gtk.Entry()
+    window.gen_entry.set_hexpand(True)
+    window.gen_entry.set_placeholder_text("Type text, then Generate")
+    window.gen_entry.connect("activate", lambda _e: _generate_text(window))
+    gen_bar.append(window.gen_entry)
+    gen_bar.append(_label("Tool:"))
+    window.gen_tool = Gtk.DropDown.new_from_strings(_TEXT_TOOLS)
+    window.gen_tool.connect("notify::selected", lambda _d, _p: _refresh_gen_controls(window))
+    gen_bar.append(window.gen_tool)
+    window.gen_variant_label = _label("Font:")
+    gen_bar.append(window.gen_variant_label)
+    window.gen_variant_names = _figlet_fonts()
+    window.gen_variant = _searchable_dropdown(window.gen_variant_names)
+    gen_bar.append(window.gen_variant)
+    window.gen_btn = Gtk.Button(label="Generate")
+    window.gen_btn.connect("clicked", lambda _w: _generate_text(window))
+    gen_bar.append(window.gen_btn)
     btn_figlet = Gtk.Button(label="Insert Kiro figlet")
     btn_figlet.connect("clicked", lambda _w: _insert_kiro_figlet(window))
-    figlet_bar.append(btn_figlet)
-    inline_row.append(figlet_bar)
+    gen_bar.append(btn_figlet)
+    inline_row.append(gen_bar)
 
-    window.figlet_hint = _label(
-        "figlet not installed — install it on the Install & Enable tab to generate text logos",
-        css_class="info-label", wrap=True, max_chars=60)
-    inline_row.append(window.figlet_hint)
-    _refresh_figlet_controls(window)
+    window.gen_hint = _label("", css_class="info-label", wrap=True, max_chars=60)
+    inline_row.append(window.gen_hint)
+    _refresh_gen_controls(window)
 
     window.logo_inline_view = Gtk.TextView()
     window.logo_inline_view.set_monospace(True)
@@ -682,6 +685,29 @@ def _appearance_tab(window):
 
     _apply_logo_type_state(window)
 
+    help_text = (
+        "<b>Logo type — where the logo comes from:</b>\n"
+        "• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked in “Built-in logo”.\n"
+        "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+        "• <b>Inline text</b>: ASCII art typed/generated into the box, stored in the config.\n"
+        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b> / <b>Raw image</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
+        "• <b>None</b>: no logo at all.\n"
+        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box."
+    )
+    help_label = _label(help_text, css_class="info-label", markup=True, wrap=True, max_chars=60)
+    help_label.set_margin_top(12)
+    box.append(help_label)
+
+    return _scrolled(box)
+
+
+def _appearance_tab(window):
+    window.color_combos = {}
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+    box.set_margin_start(6)
+    box.set_margin_end(6)
+    box.set_margin_top(6)
+
     box.append(_label("<b>Appearance</b>", markup=True))
 
     sep_row = _row()
@@ -699,19 +725,6 @@ def _appearance_tab(window):
     box.append(_color_row(window, "Title color", ("display", "color", "title")))
     box.append(_color_row(window, "Output color", ("display", "color", "output")))
     box.append(_spin_row(window, "Key width", ("display", "key", "width"), 0, 60))
-
-    help_text = (
-        "<b>Logo type — where the logo comes from:</b>\n"
-        "• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked in “Built-in logo”.\n"
-        "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
-        "• <b>Inline text</b>: ASCII art typed directly into the box, stored in the config.\n"
-        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b> / <b>Raw image</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
-        "• <b>None</b>: no logo at all.\n"
-        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box."
-    )
-    help_label = _label(help_text, css_class="info-label", markup=True, wrap=True, max_chars=60)
-    help_label.set_margin_top(12)
-    box.append(help_label)
 
     return _scrolled(box)
 
@@ -762,6 +775,8 @@ _LOGO_POSITIONS = ["left", "top", "right"]  # fastfetch logo.position (no "botto
 
 
 _FIGLET_FONT_DIR = "/usr/share/figlet/fonts"
+_COWFILE_DIR = "/usr/share/cowsay/cows"
+_TEXT_TOOLS = ["figlet", "cowsay", "botsay"]  # ASCII-art text generators
 _POKEMON_BASE = "/opt/pokemon-colorscripts/colorscripts"
 _POKEMON_SIZES = ["small", "large"]
 
@@ -807,6 +822,18 @@ def _figlet_fonts():
     return names or ["standard"]
 
 
+def _cowfiles():
+    """Return installed cowsay cowfile names, 'default' first."""
+    try:
+        names = sorted(f[:-4] for f in os.listdir(_COWFILE_DIR) if f.endswith(".cow"))
+    except OSError:
+        return ["default"]
+    if "default" in names:
+        names.remove("default")
+        names.insert(0, "default")
+    return names or ["default"]
+
+
 def _apply_logo_type_state(window):
     """Grey out the logo rows that don't apply to the selected logo type."""
     value = _LOGO_TYPES[window.logo_type.get_selected()]
@@ -824,46 +851,64 @@ def _set_logo_inline(window, buffer):
     window.model.setdefault("logo", {})["source"] = buffer.get_text(start, end, False)
 
 
-def _refresh_figlet_controls(window):
-    """Enable/disable the figlet controls based on whether figlet is installed."""
-    if not hasattr(window, "figlet_gen_btn"):
+def _gen_variants(tool):
+    """Return (label, variant-list) for the given text tool; botsay has no variants."""
+    if tool == "figlet":
+        return "Font:", _figlet_fonts()
+    if tool == "cowsay":
+        return "Cowfile:", _cowfiles()
+    return "", []
+
+
+def _refresh_gen_controls(window):
+    """Sync the text-generator controls to the selected tool and its install state."""
+    if not hasattr(window, "gen_btn"):
         return False
-    ok = bool(shutil.which("figlet"))
-    window.figlet_entry.set_sensitive(ok)
-    window.figlet_font.set_sensitive(ok)
-    window.figlet_gen_btn.set_sensitive(ok)
-    window.figlet_hint.set_visible(not ok)
-    if ok:
-        fonts = _figlet_fonts()
-        if fonts != window.figlet_font_names:
-            window.figlet_font_names = fonts
-            window.figlet_font.set_model(Gtk.StringList.new(fonts))
+    tool = _TEXT_TOOLS[window.gen_tool.get_selected()]
+    ok = bool(shutil.which(tool))
+    label, variants = _gen_variants(tool)
+    has_variants = bool(variants)
+    window.gen_variant_label.set_text(label)
+    window.gen_variant_label.set_visible(has_variants)
+    window.gen_variant.set_visible(has_variants)
+    if has_variants and variants != window.gen_variant_names:
+        window.gen_variant_names = variants
+        window.gen_variant.set_model(Gtk.StringList.new(variants))
+    window.gen_entry.set_sensitive(ok)
+    window.gen_variant.set_sensitive(ok and has_variants)
+    window.gen_btn.set_sensitive(ok)
+    window.gen_hint.set_visible(not ok)
+    window.gen_hint.set_text(f"{tool} not installed — install it on the Install & Enable tab")
     return False
 
 
-def _generate_figlet(window):
-    text = window.figlet_entry.get_text().strip()
+def _generate_text(window):
+    text = window.gen_entry.get_text().strip()
     if not text:
         return
-    if not shutil.which("figlet"):
-        _notify(window, "figlet not installed — install it on the Install & Enable tab")
+    tool = _TEXT_TOOLS[window.gen_tool.get_selected()]
+    if not shutil.which(tool):
+        _notify(window, f"{tool} not installed — install it on the Install & Enable tab")
         return
-    font = window.figlet_font_names[window.figlet_font.get_selected()]
+    if tool == "figlet":
+        # -w 1000 overrules figlet's 80-column default so the art never wraps into stacked blocks.
+        cmd = ["figlet", "-f", window.gen_variant_names[window.gen_variant.get_selected()], "-w", "1000", text]
+    elif tool == "cowsay":
+        cmd = ["cowsay", "-f", window.gen_variant_names[window.gen_variant.get_selected()], text]
+    else:
+        cmd = ["botsay", text]
 
     def work():
         try:
-            # -w 1000 overrules figlet's 80-column default so the art never wraps into stacked blocks.
-            result = subprocess.run(
-                ["figlet", "-f", font, "-w", "1000", text], capture_output=True, text=True, timeout=10
-            )
-            GLib.idle_add(_apply_figlet, window, result.stdout)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
+            GLib.idle_add(_apply_generated, window, result.stdout)
         except (OSError, subprocess.SubprocessError) as exc:
-            GLib.idle_add(_notify, window, f"figlet failed: {exc}")
+            GLib.idle_add(_notify, window, f"{tool} failed: {exc}")
 
     threading.Thread(target=work, daemon=True).start()
 
 
-def _apply_figlet(window, art):
+def _apply_generated(window, art):
     window.logo_inline_view.get_buffer().set_text(art)
     window.model.setdefault("logo", {})["type"] = "data"
     window.logo_type.set_selected(_LOGO_TYPES.index("data"))
@@ -1011,6 +1056,8 @@ def _install_tab(window):
         ("chafa", "image logos as ASCII art"),
         ("imagemagick", "sixel / kitty image logos"),
         ("figlet", "generate ASCII-art text logos"),
+        ("cowsay", "speech-bubble text logos"),
+        ("botsay", "robot text logos"),
         ("pokemon-colorscripts-git", "Pokémon logos"),
         ("lolcat", "rainbow output pipe"),
         ("ddcutil", "external-display brightness"),
@@ -1156,7 +1203,7 @@ def _refresh_install_status(window):
     installed = cfg.fastfetch_installed()
     window.ff_installed.set_markup("<b>installed</b>" if installed else "")
     _refresh_optional_status(window)
-    _refresh_figlet_controls(window)
+    _refresh_gen_controls(window)
     _refresh_pokemon_controls(window)
     _notify(window, "Package operation finished")
     return False
