@@ -1,6 +1,8 @@
 """GTK4 GUI for fastfetch-tweak-tool — Notebook tabs plus a live VTE preview."""
 
 import os
+import shutil
+import subprocess
 import threading
 
 import gi
@@ -33,6 +35,19 @@ _COLORS = [
 
 _LOGO_TYPES = ["builtin", "small", "none", "file", "data", "sixel", "kitty", "chafa", "raw"]
 
+# Human-friendly labels shown in the Type dropdown; the config value stays the raw key.
+_LOGO_TYPE_LABELS = {
+    "builtin": "Big ASCII",
+    "small": "Small ASCII",
+    "none": "None",
+    "file": "Text file",
+    "data": "Inline text",
+    "sixel": "Sixel image",
+    "kitty": "Kitty image",
+    "chafa": "Chafa image",
+    "raw": "Raw image",
+}
+
 # Module types that may legitimately appear more than once — never filtered from the picker.
 _REPEATABLE_MODULES = {"break", "custom", "command"}
 
@@ -40,8 +55,8 @@ _REPEATABLE_MODULES = {"break", "custom", "command"}
 # ── Small helpers ────────────────────────────────────────────────────────────
 
 
-def _label(text, css_class=None, markup=False):
-    """Create a left-aligned Gtk.Label with optional CSS class or markup."""
+def _label(text, css_class=None, markup=False, wrap=False, max_chars=None):
+    """Create a left-aligned Gtk.Label with optional CSS class, markup or wrapping."""
     lbl = Gtk.Label()
     if markup:
         lbl.set_markup(text)
@@ -50,6 +65,10 @@ def _label(text, css_class=None, markup=False):
     lbl.set_xalign(0.0)
     if css_class:
         lbl.add_css_class(css_class)
+    if wrap:
+        lbl.set_wrap(True)
+    if max_chars is not None:
+        lbl.set_max_width_chars(max_chars)
     return lbl
 
 
@@ -536,7 +555,7 @@ def _appearance_tab(window):
 
     type_row = _row()
     type_row.append(_label("Type:"))
-    window.logo_type = Gtk.DropDown.new_from_strings(_LOGO_TYPES)
+    window.logo_type = Gtk.DropDown.new_from_strings([_LOGO_TYPE_LABELS[t] for t in _LOGO_TYPES])
     current_type = str((window.model.get("logo") or {}).get("type", "builtin"))
     if current_type in _LOGO_TYPES:
         window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
@@ -554,7 +573,21 @@ def _appearance_tab(window):
         window.logo_source.set_selected(logos.index(src))
     window.logo_source.connect("notify::selected", lambda _d, _p: _set_logo_source(window))
     logo_row.append(window.logo_source)
+    window.logo_builtin_row = logo_row
     box.append(logo_row)
+
+    bundled_row = _row()
+    bundled_row.append(_label("Bundled image:"))
+    window.logo_bundled_names = _bundled_logo_images()
+    window.logo_bundled = _searchable_dropdown(window.logo_bundled_names or ["(none bundled)"])
+    window.logo_bundled.set_hexpand(True)
+    cur_base = os.path.basename(str((window.model.get("logo") or {}).get("source", "")))
+    if cur_base in window.logo_bundled_names:
+        window.logo_bundled.set_selected(window.logo_bundled_names.index(cur_base))
+    window.logo_bundled.connect("notify::selected", lambda _d, _p: _set_logo_bundled(window))
+    bundled_row.append(window.logo_bundled)
+    window.logo_bundled_row = bundled_row
+    box.append(bundled_row)
 
     file_row = _row()
     file_row.append(_label("Custom image:"))
@@ -564,12 +597,90 @@ def _appearance_tab(window):
     btn_file.connect("clicked", lambda _w: _choose_logo_file(window))
     file_row.append(window.logo_file_label)
     file_row.append(btn_file)
+    window.logo_file_row = file_row
     box.append(file_row)
 
-    box.append(_spin_row(window, "Logo width", ("logo", "width"), 0, 200))
-    box.append(_spin_row(window, "Logo height", ("logo", "height"), 0, 200))
-    box.append(_spin_row(window, "Logo padding top", ("logo", "padding", "top"), 0, 50))
-    box.append(_spin_row(window, "Logo padding left", ("logo", "padding", "left"), 0, 50))
+    window.pokemon_names = _pokemon_names()
+    poke_row = _row()
+    poke_row.append(_label("Pokémon:"))
+    window.pokemon_dd = _searchable_dropdown(window.pokemon_names or ["(none)"])
+    window.pokemon_dd.set_hexpand(True)
+    poke_row.append(window.pokemon_dd)
+    window.pokemon_size = Gtk.DropDown.new_from_strings(_POKEMON_SIZES)
+    poke_row.append(window.pokemon_size)
+    window.pokemon_shiny = Gtk.CheckButton(label="Shiny")
+    poke_row.append(window.pokemon_shiny)
+    btn_poke = Gtk.Button(label="Use")
+    btn_poke.connect("clicked", lambda _w: _set_logo_pokemon(window))
+    poke_row.append(btn_poke)
+    window.pokemon_row = poke_row
+    box.append(poke_row)
+    _refresh_pokemon_controls(window)
+
+    inline_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+    inline_row.append(_label("Inline text (ASCII art stored in the config):"))
+
+    figlet_bar = _row()
+    figlet_bar.append(_label("Figlet text:"))
+    window.figlet_entry = Gtk.Entry()
+    window.figlet_entry.set_hexpand(True)
+    window.figlet_entry.set_placeholder_text("Type text, then Generate")
+    window.figlet_entry.connect("activate", lambda _e: _generate_figlet(window))
+    figlet_bar.append(window.figlet_entry)
+    figlet_bar.append(_label("Font:"))
+    window.figlet_font_names = _figlet_fonts()
+    window.figlet_font = _searchable_dropdown(window.figlet_font_names)
+    figlet_bar.append(window.figlet_font)
+    window.figlet_gen_btn = Gtk.Button(label="Generate")
+    window.figlet_gen_btn.connect("clicked", lambda _w: _generate_figlet(window))
+    figlet_bar.append(window.figlet_gen_btn)
+    btn_figlet = Gtk.Button(label="Insert Kiro figlet")
+    btn_figlet.connect("clicked", lambda _w: _insert_kiro_figlet(window))
+    figlet_bar.append(btn_figlet)
+    inline_row.append(figlet_bar)
+
+    window.figlet_hint = _label(
+        "figlet not installed — install it on the Install & Enable tab to generate text logos",
+        css_class="info-label", wrap=True, max_chars=60)
+    inline_row.append(window.figlet_hint)
+    _refresh_figlet_controls(window)
+
+    window.logo_inline_view = Gtk.TextView()
+    window.logo_inline_view.set_monospace(True)
+    window.logo_inline_view.set_wrap_mode(Gtk.WrapMode.NONE)
+    inline_buf = window.logo_inline_view.get_buffer()
+    logo_d = window.model.get("logo") or {}
+    if str(logo_d.get("type", "")) in _INLINE_LOGO_TYPES:
+        inline_buf.set_text(str(logo_d.get("source", "")))
+    inline_buf.connect("changed", lambda b: _set_logo_inline(window, b))
+    inline_sw = Gtk.ScrolledWindow()
+    inline_sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+    inline_sw.set_min_content_height(90)
+    inline_sw.set_child(window.logo_inline_view)
+    inline_row.append(inline_sw)
+    window.logo_inline_row = inline_row
+    box.append(inline_row)
+
+    pos_row = _row()
+    pos_row.append(_label("Logo position:"))
+    window.logo_position = Gtk.DropDown.new_from_strings(_LOGO_POSITIONS)
+    cur_pos = str((window.model.get("logo") or {}).get("position", "left"))
+    if cur_pos in _LOGO_POSITIONS:
+        window.logo_position.set_selected(_LOGO_POSITIONS.index(cur_pos))
+    window.logo_position.connect("notify::selected", lambda _d, _p: _set_logo_position(window))
+    pos_row.append(window.logo_position)
+
+    window.logo_dim_rows = [
+        pos_row,
+        _spin_row(window, "Logo width", ("logo", "width"), 0, 200),
+        _spin_row(window, "Logo height", ("logo", "height"), 0, 200),
+        _spin_row(window, "Logo padding top", ("logo", "padding", "top"), 0, 50),
+        _spin_row(window, "Logo padding left", ("logo", "padding", "left"), 0, 50),
+    ]
+    for row in window.logo_dim_rows:
+        box.append(row)
+
+    _apply_logo_type_state(window)
 
     box.append(_label("<b>Appearance</b>", markup=True))
 
@@ -588,6 +699,19 @@ def _appearance_tab(window):
     box.append(_color_row(window, "Title color", ("display", "color", "title")))
     box.append(_color_row(window, "Output color", ("display", "color", "output")))
     box.append(_spin_row(window, "Key width", ("display", "key", "width"), 0, 60))
+
+    help_text = (
+        "<b>Logo type — where the logo comes from:</b>\n"
+        "• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked in “Built-in logo”.\n"
+        "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+        "• <b>Inline text</b>: ASCII art typed directly into the box, stored in the config.\n"
+        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b> / <b>Raw image</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
+        "• <b>None</b>: no logo at all.\n"
+        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box."
+    )
+    help_label = _label(help_text, css_class="info-label", markup=True, wrap=True, max_chars=60)
+    help_label.set_margin_top(12)
+    box.append(help_label)
 
     return _scrolled(box)
 
@@ -629,10 +753,149 @@ def _color_row(window, label, path):
     return line
 
 
+_BUILTIN_LOGO_TYPES = {"builtin", "small"}
+_FILE_LOGO_TYPES = {"file", "raw", "sixel", "kitty", "chafa"}
+_INLINE_LOGO_TYPES = {"data"}
+_IMAGE_LOGO_TYPES = {"sixel", "kitty", "chafa", "raw"}
+_LOGO_IMG_EXTS = (".png", ".jpg", ".jpeg", ".svg", ".gif", ".bmp")
+_LOGO_POSITIONS = ["left", "top", "right"]  # fastfetch logo.position (no "bottom")
+
+
+_FIGLET_FONT_DIR = "/usr/share/figlet/fonts"
+_POKEMON_BASE = "/opt/pokemon-colorscripts/colorscripts"
+_POKEMON_SIZES = ["small", "large"]
+
+# Optional packages that aren't in the base Arch repos — what to tell the user if missing.
+_OPTIONAL_REPO_HINT = {
+    "pokemon-colorscripts-git": "the chaotic-aur or cachyos repo",
+}
+
+
+def _pokemon_names():
+    """Return sorted pokemon-colorscripts names, or [] if the package isn't installed."""
+    try:
+        return sorted(os.listdir(os.path.join(_POKEMON_BASE, "small", "regular")))
+    except OSError:
+        return []
+
+
+def _bundled_logo_images():
+    """Return sorted basenames of the image files bundled in data/logo/."""
+    logo_dir = os.path.join(cfg.BASE_DIR, "data", "logo")
+    try:
+        names = os.listdir(logo_dir)
+    except OSError:
+        return []
+    return sorted(n for n in names if n.lower().endswith(_LOGO_IMG_EXTS))
+
+
+_FIGLET_FONT_SKIP = {"mini", "mnemonic", "ivrit"}
+
+
+def _figlet_fonts():
+    """Return installed figlet font names, 'standard' first as the default."""
+    try:
+        names = sorted(
+            f[:-4] for f in os.listdir(_FIGLET_FONT_DIR)
+            if f.endswith(".flf") and f[:-4] not in _FIGLET_FONT_SKIP
+        )
+    except OSError:
+        return ["standard"]
+    if "standard" in names:
+        names.remove("standard")
+        names.insert(0, "standard")
+    return names or ["standard"]
+
+
+def _apply_logo_type_state(window):
+    """Grey out the logo rows that don't apply to the selected logo type."""
+    value = _LOGO_TYPES[window.logo_type.get_selected()]
+    window.logo_builtin_row.set_sensitive(value in _BUILTIN_LOGO_TYPES)
+    window.logo_bundled_row.set_sensitive(value in _IMAGE_LOGO_TYPES)
+    window.logo_file_row.set_sensitive(value in _FILE_LOGO_TYPES)
+    window.logo_inline_row.set_sensitive(value in _INLINE_LOGO_TYPES)
+    has_logo = value != "none"
+    for row in window.logo_dim_rows:
+        row.set_sensitive(has_logo)
+
+
+def _set_logo_inline(window, buffer):
+    start, end = buffer.get_bounds()
+    window.model.setdefault("logo", {})["source"] = buffer.get_text(start, end, False)
+
+
+def _refresh_figlet_controls(window):
+    """Enable/disable the figlet controls based on whether figlet is installed."""
+    if not hasattr(window, "figlet_gen_btn"):
+        return False
+    ok = bool(shutil.which("figlet"))
+    window.figlet_entry.set_sensitive(ok)
+    window.figlet_font.set_sensitive(ok)
+    window.figlet_gen_btn.set_sensitive(ok)
+    window.figlet_hint.set_visible(not ok)
+    if ok:
+        fonts = _figlet_fonts()
+        if fonts != window.figlet_font_names:
+            window.figlet_font_names = fonts
+            window.figlet_font.set_model(Gtk.StringList.new(fonts))
+    return False
+
+
+def _generate_figlet(window):
+    text = window.figlet_entry.get_text().strip()
+    if not text:
+        return
+    if not shutil.which("figlet"):
+        _notify(window, "figlet not installed — install it on the Install & Enable tab")
+        return
+    font = window.figlet_font_names[window.figlet_font.get_selected()]
+
+    def work():
+        try:
+            # -w 1000 overrules figlet's 80-column default so the art never wraps into stacked blocks.
+            result = subprocess.run(
+                ["figlet", "-f", font, "-w", "1000", text], capture_output=True, text=True, timeout=10
+            )
+            GLib.idle_add(_apply_figlet, window, result.stdout)
+        except (OSError, subprocess.SubprocessError) as exc:
+            GLib.idle_add(_notify, window, f"figlet failed: {exc}")
+
+    threading.Thread(target=work, daemon=True).start()
+
+
+def _apply_figlet(window, art):
+    window.logo_inline_view.get_buffer().set_text(art)
+    window.model.setdefault("logo", {})["type"] = "data"
+    window.logo_type.set_selected(_LOGO_TYPES.index("data"))
+    return False
+
+
+def _insert_kiro_figlet(window):
+    path = os.path.join(cfg.BASE_DIR, "data", "logo", "kiro.txt")
+    try:
+        with open(path, encoding="utf-8") as fh:
+            art = fh.read()
+    except OSError as exc:
+        log.log_error(f"Could not read Kiro figlet: {exc}")
+        return
+    window.logo_inline_view.get_buffer().set_text(art)
+    window.model.setdefault("logo", {})["type"] = "data"
+    window.logo_type.set_selected(_LOGO_TYPES.index("data"))
+    _notify(window, "Inserted Kiro figlet")
+
+
+def _set_logo_position(window):
+    window.model.setdefault("logo", {})["position"] = _LOGO_POSITIONS[window.logo_position.get_selected()]
+
+
 def _set_logo_type(window):
     value = _LOGO_TYPES[window.logo_type.get_selected()]
     window.model.setdefault("logo", {})["type"] = value
-    _notify(window, f"Logo type: {value}")
+    _apply_logo_type_state(window)
+    if value == "chafa" and not shutil.which("chafa"):
+        _notify(window, "chafa not installed — install it on the Install & Enable tab to render image logos")
+    else:
+        _notify(window, f"Logo type: {value}")
 
 
 def _set_logo_source(window):
@@ -640,6 +903,44 @@ def _set_logo_source(window):
     if not logos:
         return
     window.model.setdefault("logo", {})["source"] = logos[window.logo_source.get_selected()]
+
+
+def _refresh_pokemon_controls(window):
+    """Show/repopulate the Pokémon picker based on whether pokemon-colorscripts is installed."""
+    if not hasattr(window, "pokemon_row"):
+        return False
+    names = _pokemon_names()
+    window.pokemon_row.set_visible(bool(names))
+    if names and names != window.pokemon_names:
+        window.pokemon_names = names
+        window.pokemon_dd.set_model(Gtk.StringList.new(names))
+    return False
+
+
+def _set_logo_pokemon(window):
+    if not window.pokemon_names:
+        return
+    name = window.pokemon_names[window.pokemon_dd.get_selected()]
+    size = _POKEMON_SIZES[window.pokemon_size.get_selected()]
+    variant = "shiny" if window.pokemon_shiny.get_active() else "regular"
+    logo = window.model.setdefault("logo", {})
+    logo["source"] = os.path.join(_POKEMON_BASE, size, variant, name)
+    logo["type"] = "file"
+    window.logo_type.set_selected(_LOGO_TYPES.index("file"))
+    _notify(window, f"Pokémon logo: {name} ({size}, {variant})")
+
+
+def _set_logo_bundled(window):
+    names = window.logo_bundled_names
+    if not names:
+        return
+    name = names[window.logo_bundled.get_selected()]
+    logo = window.model.setdefault("logo", {})
+    logo["source"] = os.path.join(cfg.BASE_DIR, "data", "logo", name)
+    if str(logo.get("type", "")) not in _IMAGE_LOGO_TYPES:
+        logo["type"] = "chafa"
+        window.logo_type.set_selected(_LOGO_TYPES.index("chafa"))
+    _notify(window, f"Logo image: {name}")
 
 
 def _choose_logo_file(window):
@@ -709,6 +1010,8 @@ def _install_tab(window):
     for pkg, desc in (
         ("chafa", "image logos as ASCII art"),
         ("imagemagick", "sixel / kitty image logos"),
+        ("figlet", "generate ASCII-art text logos"),
+        ("pokemon-colorscripts-git", "Pokémon logos"),
         ("lolcat", "rainbow output pipe"),
         ("ddcutil", "external-display brightness"),
     ):
@@ -740,7 +1043,7 @@ def _install_tab(window):
     box.append(_label(
         "When on, Apply writes config.jsonc without the publicip module, so your real IP "
         "can't leak from your config — e.g. while recording or sharing your screen.",
-        css_class="info-label"))
+        css_class="info-label", wrap=True, max_chars=60))
 
     return _scrolled(box)
 
@@ -828,6 +1131,11 @@ def _install_optional(window, pkg):
     if install.package_installed(pkg):
         _flash_message(window, pkg, window.optional_msg.get(pkg), "already installed")
         return
+    if not install.package_in_repos(pkg):
+        hint = _OPTIONAL_REPO_HINT.get(pkg)
+        msg = f"needs {hint}" if hint else "not available in your repos"
+        _flash_message(window, pkg, window.optional_msg.get(pkg), msg)
+        return
     _run_pkg_op(window, install.install_package, pkg, f"Installing {pkg}…")
 
 
@@ -848,6 +1156,8 @@ def _refresh_install_status(window):
     installed = cfg.fastfetch_installed()
     window.ff_installed.set_markup("<b>installed</b>" if installed else "")
     _refresh_optional_status(window)
+    _refresh_figlet_controls(window)
+    _refresh_pokemon_controls(window)
     _notify(window, "Package operation finished")
     return False
 
@@ -866,8 +1176,7 @@ def _presets_tab(window):
         "preview, then tweak it on the Modules and Logo &amp; Appearance tabs. Nothing is "
         "written until you Apply — and before applying we always save a backup of your "
         "current config to <tt>config.jsonc.ftt-bak</tt>, so you can Restore backup any time.",
-        markup=True)
-    intro.set_wrap(True)
+        markup=True, wrap=True, max_chars=60)
     box.append(intro)
 
     box.append(_label("<b>Presets</b> — load into the editor, then Apply", markup=True))
@@ -1355,11 +1664,24 @@ def _reload_widgets(window):
         current_type = str((window.model.get("logo") or {}).get("type", "builtin"))
         if current_type in _LOGO_TYPES:
             window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
+        _apply_logo_type_state(window)
+    if hasattr(window, "logo_inline_view"):
+        logo_d = window.model.get("logo") or {}
+        inline_text = str(logo_d.get("source", "")) if str(logo_d.get("type", "")) in _INLINE_LOGO_TYPES else ""
+        window.logo_inline_view.get_buffer().set_text(inline_text)
     if hasattr(window, "logo_source"):
         logos = catalog.logos() or ["(none)"]
         src = str((window.model.get("logo") or {}).get("source", ""))
         if src in logos:
             window.logo_source.set_selected(logos.index(src))
+    if hasattr(window, "logo_bundled") and window.logo_bundled_names:
+        cur_base = os.path.basename(str((window.model.get("logo") or {}).get("source", "")))
+        if cur_base in window.logo_bundled_names:
+            window.logo_bundled.set_selected(window.logo_bundled_names.index(cur_base))
+    if hasattr(window, "logo_position"):
+        cur_pos = str((window.model.get("logo") or {}).get("position", "left"))
+        if cur_pos in _LOGO_POSITIONS:
+            window.logo_position.set_selected(_LOGO_POSITIONS.index(cur_pos))
     for path, combo in getattr(window, "color_combos", {}).items():
         current = str(_get_path(window, path) or "default")
         if current in _COLORS:

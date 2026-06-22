@@ -2,6 +2,112 @@
 
 All notable changes to fastfetch-tweak-tool are documented here.
 
+## 2026.06.22
+
+### What Changed
+- **Logo & Appearance tab now greys out rows that don't apply to the selected logo
+  Type.** Previously all three logo-source rows (Built-in logo, Custom image) were
+  clickable regardless of `logo.type`, which was confusing — e.g. with `Type: small`
+  the Custom image / Choose file… row did nothing yet showed a stale path. Now the
+  inapplicable rows are disabled (`set_sensitive(False)`): `builtin`/`small` enable
+  only the Built-in logo row; `file`/`data`/`raw`/`sixel`/`kitty`/`chafa` enable only
+  the Custom image row; `none` disables both source rows plus the width/height/padding
+  spins. Chose disable over hide to keep the layout stable.
+- **Human-friendly logo Type labels.** The Type dropdown now shows readable names —
+  `builtin` → **Big ASCII**, `small` → **Small ASCII**, plus Text file / Inline text /
+  Raw file / Sixel image / Kitty image / Chafa image / None — while still writing the
+  raw fastfetch key to `logo.type`.
+- **Bottom help text on the Logo & Appearance tab** explaining what each logo type does
+  and which row (Built-in logo vs Custom image vs inline text) it reads from.
+- **Inline-text logo support.** Added a multi-line `Gtk.TextView` row ("Inline text")
+  for the `data` logo type, whose `logo.source` is the literal ASCII art stored in the
+  config (not a file path). Previously `data` was unsupported in the GUI — the only
+  widget wrote a file path.
+- **Fixed `raw` mislabel/grouping.** Per fastfetch's own help, `raw` is an *image* file
+  ("printed as raw binary string"), not text — relabeled "Raw file" → **Raw image** and
+  moved it into the file-picker group with sixel/kitty/chafa. `data` moved out of the
+  file-picker group into the new inline-text group.
+- **Figlet generator on the inline-text row.** A "Figlet text:" entry sits above the
+  inline art box — type any text, hit **Generate** (or Enter) and figlet renders it into
+  the box, switching Type to Inline text. A **Font** dropdown (installed figlet fonts,
+  `standard` first; `mini`/`mnemonic`/`ivrit` filtered out) controls the look/height, and figlet is run with `-w 1000` to
+  overrule its 80-column default so wide text stays one block instead of wrapping into
+  stacked blocks. An **"Insert Kiro figlet"** button still fills the box with the bundled
+  Kiro banner (`data/logo/kiro.txt`). Generation runs `figlet` via `subprocess` in a
+  daemon thread (never blocks the GUI); if figlet isn't installed it points the user to
+  the Install & Enable tab.
+- **Bundled-image dropdown.** New "Bundled image" row lists the image files shipped in
+  `data/logo/` (scanned at runtime); selecting one sets `logo.source` to its path and,
+  if not already an image type, switches Type to **Chafa** (renders in any terminal,
+  including Alacritty, and respects PNG transparency). Sits alongside the existing
+  file picker for the user's own images.
+- **figlet added to Optional features** (Install & Enable tab) so users can install it
+  to generate ASCII-art text logos.
+- **Pokémon logo picker.** When `pokemon-colorscripts` is installed (`/opt/pokemon-
+  colorscripts/colorscripts/`), a "Pokémon" row appears with a searchable name dropdown
+  (1329 entries), a **Size** dropdown (small/large) and a **Shiny** toggle. The **Use**
+  button sets `logo.source` to the chosen colorscript and switches Type to **Text file**
+  (the scripts are ANSI-coloured text). The row is hidden when the package isn't present
+  and **live-refreshes** (shows + repopulates) once it's installed.
+- **`pokemon-colorscripts-git` added to Optional features** with its own Install button.
+  The real package lives in **chaotic-aur** (also cachyos) — both are pacman repos, so
+  `sudo pacman -S` installs it when the repo is configured. New `install.package_in_repos()`
+  pre-checks availability: if the package isn't in any configured repo, the row flashes
+  "needs the chaotic-aur or cachyos repo" instead of launching a doomed install. The
+  generic case (no hint) flashes "not available in your repos".
+- **Graceful handling of missing optional deps on the Logo & Appearance tab.** If
+  `figlet` isn't installed, the Figlet entry / Font dropdown / Generate button are
+  greyed out with an inline hint pointing to the Install & Enable tab ("Insert Kiro
+  figlet" stays enabled — it reads a bundled file). The figlet controls **live-refresh**
+  the moment an install finishes — no app restart needed — and the Font dropdown
+  repopulates from the now-present font dir (it ships with the `figlet` package). If
+  `chafa` isn't installed, selecting the Chafa type shows a toast that it's needed for
+  image logos.
+- **Logo position dropdown.** New "Logo position" control writes `logo.position` —
+  fastfetch supports **left** (default), **top**, **right**. There is no "bottom" in
+  fastfetch, so it isn't offered. Greys out for Type `none` like the other logo
+  dimension rows.
+- **Transparency guidance.** Bottom help text now advises using a transparent **PNG**
+  (not JPG) so the logo renders with no background box — JPG has no alpha channel and
+  fills transparent areas with solid white.
+
+- **Fixed over-wide window/left pane (notably on Plasma).** Long description labels —
+  the Start/Presets intro, the Privacy note, the Logo & Appearance help text, and the
+  figlet hint — were single long lines with no width cap. A wrapping GTK4 label still
+  reports its full single-line width as its *natural* width, and the Notebook sizes to
+  its widest tab, so the window (and the 50/50 split) opened far too wide. Capped these
+  to `max_width_chars=60` so they wrap. The `_label()` helper gained `wrap`/`max_chars`
+  params.
+
+### Technical Details
+- New helper `_apply_logo_type_state(window)` in `ff_gui.py` reads the current Type and
+  toggles sensitivity on `window.logo_builtin_row`, `window.logo_file_row`, and
+  `window.logo_dim_rows`. Called at the end of `_appearance_tab` build, from
+  `_set_logo_type` on every Type change, and from `_reload_widgets` (a same-index
+  `set_selected` won't fire `notify::selected`). `_BUILTIN_LOGO_TYPES` /
+  `_FILE_LOGO_TYPES` drive the mapping. `set_sensitive` on the row `Box` cascades to its
+  child widgets. Choosing a file via `_choose_logo_file` flips the Type dropdown, which
+  fires `_set_logo_type` and re-applies the state automatically.
+- Display labels live in `_LOGO_TYPE_LABELS`, a dict parallel to `_LOGO_TYPES`. The
+  dropdown is built from `[_LOGO_TYPE_LABELS[t] for t in _LOGO_TYPES]`, preserving order
+  so all existing index-based logic stays correct and the config value is unchanged.
+- Inline text uses `_INLINE_LOGO_TYPES = {"data"}`; `_FILE_LOGO_TYPES` is now
+  `{"file", "raw", "sixel", "kitty", "chafa"}`. New `_set_logo_inline(window, buffer)`
+  writes the TextView buffer to `logo.source`; the buffer is populated at build and in
+  `_reload_widgets` only when the active type is inline (cleared otherwise), so a file
+  path never leaks into the text box.
+- Bundled images: `_bundled_logo_images()` scans `cfg.BASE_DIR/data/logo/` for
+  `_LOGO_IMG_EXTS` (png/jpg/jpeg/svg/gif/bmp). `_set_logo_bundled(window)` writes the
+  absolute path to `logo.source` and defaults Type to `chafa` via `_IMAGE_LOGO_TYPES =
+  {"sixel","kitty","chafa","raw"}`. `_insert_kiro_figlet(window)` reads the bundled
+  `kiro.txt`. The bundled-image row greys out with the other image rows in
+  `_apply_logo_type_state` and re-syncs in `_reload_widgets`.
+
+### Files Modified
+- `usr/share/fastfetch-tweak-tool/ff_gui.py`
+- `usr/share/fastfetch-tweak-tool/ff_install.py` (new `package_in_repos()`)
+- `usr/share/fastfetch-tweak-tool/data/logo/kiro.txt` (new — bundled Kiro figlet)
+
 ## 2026.06.18
 
 ### What Changed

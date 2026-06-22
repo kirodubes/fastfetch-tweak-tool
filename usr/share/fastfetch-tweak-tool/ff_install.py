@@ -143,6 +143,11 @@ def package_installed(pkg):
     return subprocess.run(["pacman", "-Q", pkg], capture_output=True).returncode == 0
 
 
+def package_in_repos(pkg):
+    """Return True if the package is available in a configured pacman repo."""
+    return subprocess.run(["pacman", "-Si", pkg], capture_output=True).returncode == 0
+
+
 def _find_terminal():
     for name, exec_flag in _TERMINALS:
         if shutil.which(name):
