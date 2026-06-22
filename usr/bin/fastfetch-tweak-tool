@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+
+RESET=$(tput sgr0 2>/dev/null || echo "")
+CYAN=$(tput setaf 6 2>/dev/null || echo "")
+GREEN=$(tput setaf 2 2>/dev/null || echo "")
+RED=$(tput setaf 1 2>/dev/null || echo "")
+YELLOW=$(tput setaf 3 2>/dev/null || echo "")
+
+separator() { echo "${CYAN}===============================================================================${RESET}"; }
+header()    { echo ""; separator; echo "${CYAN}  $1${RESET}"; separator; }
+success()   { echo "${GREEN}  ✓ $1${RESET}"; }
+info()      { echo "    $1"; }
+warn()      { echo "${YELLOW}  ⚠ $1${RESET}"; }
+error()     { echo "${RED}  ✗ $1${RESET}"; }
+
+header "Fastfetch Tweak Tool"
+
+if [[ ${EUID} -eq 0 ]]; then
+    error "Do not run as root — the config must be written to your own ~/.config."
+    error "Run it as your normal user: fastfetch-tweak-tool"
+    exit 1
+fi
+
+if ! command -v python3 &>/dev/null; then
+    error "python3 not found — please install it"
+    exit 1
+fi
+
+if ! python3 -c "import gi; gi.require_version('Gtk', '4.0')" &>/dev/null; then
+    error "GTK4 Python bindings not found — install with: sudo pacman -S python-gobject gtk4"
+    exit 1
+fi
+
+if ! command -v fastfetch &>/dev/null; then
+    warn "fastfetch not installed — you can install it from the Install tab"
+fi
+
+if ! python3 -c "import gi; gi.require_version('Vte', '3.91')" &>/dev/null; then
+    warn "vte4 not installed — live preview disabled (sudo pacman -S vte4)"
+fi
+
+info "Starting Fastfetch Tweak Tool..."
+exec python3 /usr/share/fastfetch-tweak-tool/fastfetch-tweak-tool.py "$@"

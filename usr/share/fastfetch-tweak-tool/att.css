@@ -1,0 +1,25 @@
+window > box {
+    margin: 6px;
+}
+
+label#title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+label.info-label {
+    color: alpha(currentColor, 0.65);
+    font-size: 11px;
+}
+
+label.detail-name {
+    font-size: 14px;
+}
+
+.theme-list row {
+    padding: 2px 0;
+}
+
+.theme-list row:selected {
+    background-color: alpha(@accent_bg_color, 0.3);
+}
