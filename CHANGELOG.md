@@ -5,6 +5,11 @@ All notable changes to fastfetch-tweak-tool are documented here.
 ## 2026.06.22
 
 ### What Changed
+- **Divider is now draggable smaller and remembers your position.** The left pane's
+  minimum width dropped from 360→280px so the handle can be dragged further left, and the
+  split logic (`_init_split_5050`→`_init_split_position`) no longer snaps back to 50/50 on
+  every resize — it centres only until you first drag the handle, then keeps your chosen
+  **ratio** across window/tile resizes. (Resets to 50/50 on app restart; not yet persisted.)
 - **Split "Logo & Appearance" into two tabs — "Logo" then "Appearance".** The single tab
   had grown large (logo source pickers, generators, position, dimensions, plus colours);
   it's now `_logo_tab` (everything logo-related + the logo-type help text) and

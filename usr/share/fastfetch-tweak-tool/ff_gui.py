@@ -159,7 +159,7 @@ def build(window, ff_version):
 
     notebook = Gtk.Notebook()
     notebook.set_hexpand(True)
-    notebook.set_size_request(360, -1)
+    notebook.set_size_request(280, -1)
     notebook.append_page(_presets_tab(window), _label("Start / Presets"))
     notebook.append_page(_preset_gallery_tab(window), _label("Preset Gallery"))
     notebook.append_page(_modules_tab(window), _label("Modules"))
@@ -176,7 +176,7 @@ def build(window, ff_version):
     # to collapse a pane to zero width (the preview vanishing off the right edge).
     split.set_shrink_start_child(False)
     split.set_shrink_end_child(False)
-    _init_split_5050(window, split)
+    _init_split_position(window, split)
 
     root.append(split)
     root.append(_action_bar(window))
@@ -193,24 +193,27 @@ def _short_version(version):
     return version
 
 
-def _init_split_5050(window, split):
-    """Centre the Paned divider on resize until the user drags the handle, then respect the drag."""
+def _init_split_position(window, split):
+    """Centre the divider at 50/50 until the user drags it, then keep that ratio on resize."""
     window._split_timer_started = False
-    state = {"width": -1, "pos": -1}
+    state = {"width": -1, "pos": -1, "ratio": None}  # ratio None → still following 50/50
 
     def _tick():
         width = split.get_width()
         if width <= 1:
             return True  # not allocated yet
         if width != state["width"]:
-            # Allocation changed (initial settle, window/tile resize) — re-centre and record
-            # the resulting position so a later genuine drag can be told apart from a clamp.
+            # Window/tile resize: reapply the user's chosen ratio, or centre if untouched.
             state["width"] = width
-            split.set_position(width // 2)
+            ratio = 0.5 if state["ratio"] is None else state["ratio"]
+            split.set_position(int(width * ratio))
             state["pos"] = split.get_position()
             return True
         if split.get_position() != state["pos"]:
-            return False  # steady width but the handle moved → a real drag; stop re-centring
+            # Steady width but the handle moved → a real drag; remember it as a ratio so it
+            # survives later resizes instead of snapping back to centre.
+            state["pos"] = split.get_position()
+            state["ratio"] = state["pos"] / width
         return True
 
     def _start_timer(_pane):
