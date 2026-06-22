@@ -182,6 +182,16 @@ def module_options(entry):
     return {}
 
 
+def without_public_ip(model):
+    """Return a copy of the model with all publicip modules omitted (privacy)."""
+    mods = model.get("modules", [])
+    if not any(module_type(m) == "publicip" for m in mods):
+        return model
+    stripped = dict(model)
+    stripped["modules"] = [m for m in mods if module_type(m) != "publicip"]
+    return stripped
+
+
 # ── fastfetch CLI catalogs ───────────────────────────────────────────────────
 
 

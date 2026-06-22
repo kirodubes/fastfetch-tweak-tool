@@ -110,6 +110,7 @@ def build(window, ff_version):
     """Assemble the full UI on the given window."""
     window.model = _normalize_model(cfg.read_config())
     window.ff_version = ff_version
+    window.hide_public_ip = bool(cfg.load_prefs().get("hide_public_ip", True))
 
     root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
 
@@ -731,7 +732,26 @@ def _install_tab(window):
         box.append(opt)
     _refresh_optional_status(window)
 
+    box.append(_label("<b>Privacy</b>", markup=True))
+    window.hide_ip_switch = _switch_row(
+        box, "Omit public IP module from saved config",
+        getattr(window, "hide_public_ip", True),
+        lambda active: _toggle_hide_public_ip(window, active))
+    box.append(_label(
+        "When on, Apply writes config.jsonc without the publicip module, so your real IP "
+        "can't leak from your config — e.g. while recording or sharing your screen.",
+        css_class="info-label"))
+
     return _scrolled(box)
+
+
+def _toggle_hide_public_ip(window, active):
+    window.hide_public_ip = active
+    prefs = cfg.load_prefs()
+    prefs["hide_public_ip"] = active
+    cfg.save_prefs(prefs)
+    _notify(window, "Public IP will be omitted from saved config" if active
+            else "Public IP will be written to saved config")
 
 
 def _refresh_optional_status(window):
@@ -1307,9 +1327,15 @@ def _preview_external(window):
 
 
 def _apply(window):
-    cfg.write_config(window.model)
+    model = window.model
+    if getattr(window, "hide_public_ip", True):
+        model = cfg.without_public_ip(model)
+    cfg.write_config(model)
     _refresh_preview(window)
-    _notify(window, "Configuration applied")
+    if model is not window.model:
+        _notify(window, "Configuration applied (public IP module omitted)")
+    else:
+        _notify(window, "Configuration applied")
 
 
 def _reload(window):
