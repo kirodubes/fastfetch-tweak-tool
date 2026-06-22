@@ -1,6 +1,7 @@
 """GTK4 GUI for fastfetch-tweak-tool — Notebook tabs plus a live VTE preview."""
 
 import os
+import random
 import shutil
 import subprocess
 import threading
@@ -35,8 +36,8 @@ _COLORS = [
 
 # "pokemon" is a UI-only pseudo-type: it maps to fastfetch's real "file" type (see _TYPE_ALIAS),
 # detected on reload by the source path. The model never stores "pokemon".
-_LOGO_TYPES = ["builtin", "small", "none", "file", "pokemon", "data", "sixel", "kitty", "chafa"]
-_TYPE_ALIAS = {"pokemon": "file"}
+_LOGO_TYPES = ["builtin", "small", "none", "file", "pokemon", "kiroart", "data", "sixel", "kitty", "chafa"]
+_TYPE_ALIAS = {"pokemon": "file", "kiroart": "file"}
 
 # Human-friendly labels shown in the Type dropdown; the config value stays the raw key.
 _LOGO_TYPE_LABELS = {
@@ -45,6 +46,7 @@ _LOGO_TYPE_LABELS = {
     "none": "None",
     "file": "Text file",
     "pokemon": "Pokémon",
+    "kiroart": "Kiro art",
     "data": "Inline text",
     "sixel": "Sixel image",
     "kitty": "Kitty image",
@@ -571,6 +573,13 @@ def _logo_tab(window):
     window.logo_current_label.set_margin_start(10)
     type_row.append(window.logo_current_label)
     _refresh_current_logo_label(window)
+    type_spacer = Gtk.Box()
+    type_spacer.set_hexpand(True)
+    type_row.append(type_spacer)
+    btn_random = Gtk.Button(label="🎲 Random")
+    btn_random.set_tooltip_text("Pick a random logo — built-in, Pokémon or Kiro art")
+    btn_random.connect("clicked", lambda _w: _random_logo(window))
+    type_row.append(btn_random)
     box.append(type_row)
 
     logo_row = _row()
@@ -627,6 +636,18 @@ def _logo_tab(window):
     box.append(poke_row)
     _refresh_pokemon_controls(window)
 
+    art_row = _row()
+    art_row.append(_label("Kiro art:"))
+    window.kiroart_names = _kiro_art_names()
+    window.kiroart_dd = _searchable_dropdown(window.kiroart_names or ["(none)"])
+    window.kiroart_dd.set_hexpand(True)
+    art_row.append(window.kiroart_dd)
+    btn_art = Gtk.Button(label="Use")
+    btn_art.connect("clicked", lambda _w: _set_logo_kiroart(window))
+    art_row.append(btn_art)
+    window.kiroart_row = art_row
+    box.append(art_row)
+
     inline_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
     inline_row.append(_label("Inline text (ASCII art stored in the config):"))
 
@@ -649,6 +670,8 @@ def _logo_tab(window):
     window.gen_variant_names = _figlet_fonts()
     window.gen_variant = _searchable_dropdown(window.gen_variant_names)
     gen_bar.append(window.gen_variant)
+    window.gen_rainbow = Gtk.CheckButton(label="Rainbow")
+    gen_bar.append(window.gen_rainbow)
     window.gen_btn = Gtk.Button(label="Generate")
     window.gen_btn.connect("clicked", lambda _w: _generate_text(window))
     gen_bar.append(window.gen_btn)
@@ -703,6 +726,7 @@ def _logo_tab(window):
         "• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked in “Built-in logo”.\n"
         "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
         "• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” row.\n"
+        "• <b>Kiro art</b>: a bundled Kiro ASCII/ANSI logo, picked in the “Kiro art” row.\n"
         "• <b>Inline text</b>: ASCII art typed/generated into the box, stored in the config.\n"
         "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
         "• <b>None</b>: no logo at all.\n"
@@ -793,7 +817,7 @@ _LOGO_POSITIONS = ["left", "top", "right"]  # fastfetch logo.position (no "botto
 
 _FIGLET_FONT_DIR = "/usr/share/figlet/fonts"
 _COWFILE_DIR = "/usr/share/cowsay/cows"
-_TEXT_TOOLS = ["figlet", "cowsay", "botsay"]  # ASCII-art text generators
+_TEXT_TOOLS = ["figlet", "toilet", "cowsay", "botsay"]  # ASCII-art text generators
 _POKEMON_BASE = "/opt/pokemon-colorscripts/colorscripts"
 _POKEMON_SIZES = ["small", "large"]
 
@@ -811,12 +835,28 @@ def _pokemon_names():
         return []
 
 
+def _kiro_art_dir():
+    return os.path.join(cfg.BASE_DIR, "data", "ascii")
+
+
+def _kiro_art_names():
+    """Return sorted bundled Kiro ASCII/ANSI art filenames."""
+    try:
+        return sorted(f for f in os.listdir(_kiro_art_dir()) if f.endswith(".txt"))
+    except OSError:
+        return []
+
+
 def _ui_logo_type(logo):
-    """Map the stored logo to the Type dropdown value, surfacing the Pokémon pseudo-type."""
+    """Map the stored logo to the Type dropdown value, surfacing the file-based pseudo-types."""
     logo = logo or {}
     real = str(logo.get("type", "builtin"))
-    if real == "file" and str(logo.get("source", "")).startswith(_POKEMON_BASE):
-        return "pokemon"
+    src = str(logo.get("source", ""))
+    if real == "file":
+        if src.startswith(_POKEMON_BASE):
+            return "pokemon"
+        if src.startswith(_kiro_art_dir()):
+            return "kiroart"
     return real
 
 
@@ -875,6 +915,23 @@ def _figlet_fonts():
     return names or ["standard"]
 
 
+_TOILET_FONT_DIR = "/usr/share/figlet"  # toilet ships its .tlf fonts here (not the figlet /fonts subdir)
+
+
+def _toilet_fonts():
+    """Return toilet's own .tlf font names, a nice one first."""
+    try:
+        names = sorted(f[:-4] for f in os.listdir(_TOILET_FONT_DIR) if f.endswith(".tlf"))
+    except OSError:
+        return ["future"]
+    for pref in ("future", "pagga", "emboss", "bigmono9"):
+        if pref in names:
+            names.remove(pref)
+            names.insert(0, pref)
+            break
+    return names or ["future"]
+
+
 def _cowfiles():
     """Return installed cowsay cowfile names, 'default' first."""
     try:
@@ -894,6 +951,7 @@ def _apply_logo_type_state(window):
     window.logo_bundled_row.set_sensitive(value in _IMAGE_LOGO_TYPES)
     window.logo_file_row.set_sensitive(value in _FILE_LOGO_TYPES)
     window.pokemon_row.set_sensitive(value == "pokemon")
+    window.kiroart_row.set_sensitive(value == "kiroart")
     window.logo_inline_row.set_sensitive(value in _INLINE_LOGO_TYPES)
     has_logo = value != "none"
     for row in window.logo_dim_rows:
@@ -909,6 +967,8 @@ def _gen_variants(tool):
     """Return (label, variant-list) for the given text tool; botsay has no variants."""
     if tool == "figlet":
         return "Font:", _figlet_fonts()
+    if tool == "toilet":
+        return "Font:", _toilet_fonts()
     if tool == "cowsay":
         return "Cowfile:", _cowfiles()
     return "", []
@@ -930,11 +990,13 @@ def _refresh_gen_controls(window):
         window.gen_variant.set_model(Gtk.StringList.new(variants))
     window.gen_entry.set_sensitive(ok)
     window.gen_variant.set_sensitive(ok and has_variants)
+    window.gen_rainbow.set_sensitive(ok and bool(shutil.which("lolcat")))
     window.gen_btn.set_sensitive(ok)
     window.gen_kiro_btn.set_sensitive(ok)
     window.gen_kiro_btn.set_label(f"Insert Kiro {tool}")
     window.gen_hint.set_visible(not ok)
-    window.gen_hint.set_text(f"{tool} not installed — install it on the Install & Enable tab")
+    window.gen_hint.set_markup(
+        f'<span foreground="#e8820c">{tool} not installed — install it on the Install &amp; Enable tab</span>')
     return False
 
 
@@ -946,18 +1008,25 @@ def _generate_text(window, override=None):
     if not shutil.which(tool):
         _notify(window, f"{tool} not installed — install it on the Install & Enable tab")
         return
+    font = window.gen_variant_names[window.gen_variant.get_selected()]
     if tool == "figlet":
         # -w 1000 overrules figlet's 80-column default so the art never wraps into stacked blocks.
-        cmd = ["figlet", "-f", window.gen_variant_names[window.gen_variant.get_selected()], "-w", "1000", text]
+        cmd = ["figlet", "-f", font, "-w", "1000", text]
+    elif tool == "toilet":
+        cmd = ["toilet", "-f", font, "-w", "1000", text]
     elif tool == "cowsay":
-        cmd = ["cowsay", "-f", window.gen_variant_names[window.gen_variant.get_selected()], text]
+        cmd = ["cowsay", "-f", font, text]
     else:
         cmd = ["botsay", text]
+    rainbow = window.gen_rainbow.get_active() and bool(shutil.which("lolcat"))
 
     def work():
         try:
-            result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
-            GLib.idle_add(_apply_generated, window, result.stdout)
+            art = subprocess.run(cmd, capture_output=True, text=True, timeout=10).stdout
+            if rainbow:
+                # -f forces colour even though output isn't a TTY; bakes ANSI colour into the art.
+                art = subprocess.run(["lolcat", "-f"], input=art, capture_output=True, text=True, timeout=10).stdout
+            GLib.idle_add(_apply_generated, window, art)
         except (OSError, subprocess.SubprocessError) as exc:
             GLib.idle_add(_notify, window, f"{tool} failed: {exc}")
 
@@ -969,6 +1038,36 @@ def _apply_generated(window, art):
     window.model.setdefault("logo", {})["type"] = "data"
     window.logo_type.set_selected(_LOGO_TYPES.index("data"))
     return False
+
+
+def _random_logo(window):
+    """Pick a random logo from whatever's available — built-in, Pokémon, or Kiro art."""
+    pools = []
+    logos = catalog.logos()
+    if logos:
+        pools.append("builtin")
+    if getattr(window, "pokemon_names", None):
+        pools.append("pokemon")
+    if getattr(window, "kiroart_names", None):
+        pools.append("kiroart")
+    if not pools:
+        return
+    kind = random.choice(pools)
+    if kind == "builtin":
+        src = random.choice(logos)
+        logo = window.model.setdefault("logo", {})
+        logo["type"] = "builtin"
+        logo["source"] = src
+        window.logo_source.set_selected(logos.index(src))
+        window.logo_type.set_selected(_LOGO_TYPES.index("builtin"))
+        _notify(window, f"Random logo: {src}")
+    elif kind == "pokemon":
+        window.pokemon_shiny.set_active(random.randrange(8) == 0)
+        window.pokemon_dd.set_selected(random.randrange(len(window.pokemon_names)))
+        _set_logo_pokemon(window)
+    else:
+        window.kiroart_dd.set_selected(random.randrange(len(window.kiroart_names)))
+        _set_logo_kiroart(window)
 
 
 def _set_logo_position(window):
@@ -985,6 +1084,9 @@ def _sync_source_for_type(window, value):
     elif value == "pokemon":
         if getattr(window, "pokemon_names", None):
             logo["source"] = _pokemon_path(window)
+    elif value == "kiroart":
+        if getattr(window, "kiroart_names", None):
+            logo["source"] = _kiro_art_path(window)
     elif value == "data":
         buf = window.logo_inline_view.get_buffer()
         start, end = buf.get_bounds()
@@ -1041,6 +1143,21 @@ def _set_logo_pokemon(window):
     logo["type"] = "file"
     window.logo_type.set_selected(_LOGO_TYPES.index("pokemon"))
     _notify(window, f"Pokémon logo: {name}")
+
+
+def _kiro_art_path(window):
+    return os.path.join(_kiro_art_dir(), window.kiroart_names[window.kiroart_dd.get_selected()])
+
+
+def _set_logo_kiroart(window):
+    if not window.kiroart_names:
+        return
+    name = window.kiroart_names[window.kiroart_dd.get_selected()]
+    logo = window.model.setdefault("logo", {})
+    logo["source"] = _kiro_art_path(window)
+    logo["type"] = "file"
+    window.logo_type.set_selected(_LOGO_TYPES.index("kiroart"))
+    _notify(window, f"Kiro art: {name}")
 
 
 def _set_logo_bundled(window):
@@ -1124,6 +1241,7 @@ def _install_tab(window):
         ("chafa", "image logos as ASCII art"),
         ("imagemagick", "sixel / kitty image logos"),
         ("figlet", "generate ASCII-art text logos"),
+        ("toilet", "fancy ASCII-art text logos"),
         ("cowsay", "speech-bubble text logos"),
         ("botsay", "robot text logos"),
         ("pokemon-colorscripts-git", "Pokémon logos"),
@@ -1797,6 +1915,10 @@ def _reload_widgets(window):
         cur_base = os.path.basename(str((window.model.get("logo") or {}).get("source", "")))
         if cur_base in window.logo_bundled_names:
             window.logo_bundled.set_selected(window.logo_bundled_names.index(cur_base))
+    if hasattr(window, "kiroart_dd") and window.kiroart_names:
+        art_base = os.path.basename(str((window.model.get("logo") or {}).get("source", "")))
+        if art_base in window.kiroart_names:
+            window.kiroart_dd.set_selected(window.kiroart_names.index(art_base))
     if hasattr(window, "logo_position"):
         cur_pos = str((window.model.get("logo") or {}).get("position", "left"))
         if cur_pos in _LOGO_POSITIONS:

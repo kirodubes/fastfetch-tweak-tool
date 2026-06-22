@@ -27,6 +27,15 @@ All notable changes to fastfetch-tweak-tool are documented here.
   "Kiro" with the currently selected tool (figlet/cowsay/botsay) instead of always
   inserting a pre-baked figlet. Removed the now-unused bundled `data/logo/kiro.txt` and
   `_insert_kiro_figlet`; `_generate_text` gained an optional text override.
+- **Fun additions: Rainbow text, toilet tool, 🎲 Random logo.**
+  - **Rainbow toggle** on the generator pipes figlet/cowsay/toilet output through `lolcat -f`,
+    baking a rainbow colour gradient into the ASCII art. Greys out when `lolcat` isn't installed.
+  - **toilet** added to the Tool dropdown and to Optional features (base repo). Its Font dropdown
+    now lists toilet's **own `.tlf` fonts** (future, pagga, emboss, bigmono…) from
+    `/usr/share/figlet/`, defaulting to `future` — previously it was wrongly fed figlet's
+    `.flf` names from the `/fonts` subdir, which toilet couldn't find.
+  - **🎲 Random** button next to the Type dropdown picks a random logo from whatever's available
+    — a random built-in, a random Pokémon (1-in-8 shiny), or a random Kiro art piece.
 - **cowsay & botsay text generators.** The inline-text generator gained a **Tool**
   dropdown — `figlet` / `cowsay` / `botsay`. The second dropdown adapts: figlet **Font**,
   cowsay **Cowfile** (51 installed, `default` first), and is hidden for botsay (no
@@ -83,6 +92,13 @@ All notable changes to fastfetch-tweak-tool are documented here.
   (`logo-grey-32…1024.png`, `logo-mono-32…1024.png`). All are transparent. The
   bundled-image dropdown picks these up automatically (it scans the folder), so users
   can choose a logo style + size by name.
+- **Bundled Kiro ASCII/ANSI art + "Kiro art" picker.** Generated terminal-art versions of
+  the Kiro K logo with `chafa` into `data/ascii/` — `kiro-color-24.txt` / `kiro-color-40.txt`
+  (truecolor half-block, reproducing the blue→green gradient); cursor hide/show codes
+  stripped so they embed cleanly. Added a **Kiro
+  art** logo Type + picker row (dropdown of the bundled art + Use), mirroring the Pokémon
+  pseudo-type: maps to fastfetch `file`, exclusive greying, detected on reload by the
+  `data/ascii` source path.
 - **Pokémon logo picker.** When `pokemon-colorscripts` is installed (`/opt/pokemon-
   colorscripts/colorscripts/`), a "Pokémon" row appears with a searchable name dropdown
   (1329 entries), a **Size** dropdown (small/large) and a **Shiny** toggle. The **Use**
