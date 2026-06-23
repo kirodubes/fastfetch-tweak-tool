@@ -75,6 +75,10 @@ All notable changes to fastfetch-tweak-tool are documented here.
   a key in a curated row can't destroy the entry mid-type via the options-panel rebuild.
   `color_combos` now stores the `set_value` closure and `_reload_widgets` calls it, so
   reload/preset-load re-syncs custom colours too.
+- **Picker hidden until needed.** The GTK colour-picker button + free entry are shown
+  **only** when the row is in "custom…" mode; a named/default colour row is just the
+  dropdown. Fixes every colour row showing a misleading red swatch button regardless of
+  its actual value.
 
 ### Files Modified
 - `usr/share/fastfetch-tweak-tool/ff_options.py` — `keyWidth` in UNIVERSAL; 15 new MODULE_OPTIONS entries.

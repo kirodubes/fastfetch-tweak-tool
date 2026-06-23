@@ -881,26 +881,32 @@ def _color_editor(value, on_change):
         if not state["guard"]:
             on_change(current_value())
 
+    def show_custom(is_custom):
+        # The picker + free entry only make sense in "custom…" mode; a named/default
+        # row is just the dropdown (no misleading colour swatch).
+        entry.set_visible(is_custom)
+        button.set_visible(is_custom)
+
     def set_value(v):
         state["guard"] = True
         text = "" if v is None else str(v)
         if text == "" or text == "default":
             dropdown.set_selected(_COLORS.index("default"))
-            entry.set_visible(False)
+            show_custom(False)
         elif text in _COLORS:
             dropdown.set_selected(_COLORS.index(text))
-            entry.set_visible(False)
+            show_custom(False)
         else:
             dropdown.set_selected(names.index(_CUSTOM_COLOR))
             entry.set_text(text)
-            entry.set_visible(True)
+            show_custom(True)
             rgba = Gdk.RGBA()
             if text.startswith("#") and rgba.parse(text):
                 button.set_rgba(rgba)
         state["guard"] = False
 
     def on_dropdown(_d, _p):
-        entry.set_visible(names[dropdown.get_selected()] == _CUSTOM_COLOR)
+        show_custom(names[dropdown.get_selected()] == _CUSTOM_COLOR)
         emit()
 
     def on_button(_b, _p):
