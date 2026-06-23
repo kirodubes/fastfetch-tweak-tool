@@ -51,6 +51,10 @@ All notable changes to fastfetch-tweak-tool are documented here.
   `~/.local/share/fastfetch/presets/<name>.jsonc` — a real fastfetch data path, so they
   immediately appear in the tool's preset dropdown **and** the Preset Gallery (with a
   "no preview yet" placeholder), and are usable directly via `fastfetch -c <name>`.
+- **No black box about *where*.** Saving prints the **full path** to the terminal log and
+  the in-app status line, the "Your presets" section carries a persistent hint naming the
+  save directory + the `fastfetch -c <name>` usage, and `save_user_preset` returns the path
+  it wrote.
 - **Technical:** verified `fastfetch --list-presets` scans that directory before building
   on it. New `ff_config` helpers: `save_user_preset` (sanitized name), `resolve_preset_path`
   (searches user → `~/.config` → `/usr/local/share` → `/usr/share`, replacing the old

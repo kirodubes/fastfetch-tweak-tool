@@ -1560,6 +1560,10 @@ def _presets_tab(window):
 
     box.append(_label("<b>Your presets</b> — save the current editor as a reusable preset, "
                       "or share it via export/import", markup=True, wrap=True, max_chars=60))
+    saved_dir = cfg.USER_PRESET_DIR.replace(os.path.expanduser("~"), "~")
+    box.append(_label(f"Saved to <tt>{saved_dir}/</tt> — they appear in the list above "
+                      "and load anywhere with <tt>fastfetch -c &lt;name&gt;</tt>",
+                      markup=True, wrap=True, max_chars=60, css_class="info-label"))
     save_row = _row()
     window.user_preset_name = Gtk.Entry()
     window.user_preset_name.set_placeholder_text("preset name")
@@ -1640,13 +1644,13 @@ def _refresh_presets(window):
 
 
 def _save_user_preset(window):
-    saved = cfg.save_user_preset(window.user_preset_name.get_text(), window.model)
-    if not saved:
+    path = cfg.save_user_preset(window.user_preset_name.get_text(), window.model)
+    if not path:
         _notify(window, "Enter a preset name first")
         return
     window.user_preset_name.set_text("")
     _refresh_presets(window)
-    _notify(window, f"Saved preset: {saved}")
+    _notify(window, f"Saved to {path}")
 
 
 def _export_config(window):

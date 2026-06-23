@@ -283,15 +283,16 @@ def sanitize_preset_name(name):
 
 
 def save_user_preset(name, model):
-    """Write the model as a user preset; return the sanitized name, or '' if name is empty."""
+    """Write the model as a user preset; return the saved file path, or '' if name is empty."""
     safe = sanitize_preset_name(name)
     if not safe:
         return ""
     os.makedirs(USER_PRESET_DIR, exist_ok=True)
-    with open(os.path.join(USER_PRESET_DIR, f"{safe}.jsonc"), "w", encoding="utf-8") as f:
+    path = os.path.join(USER_PRESET_DIR, f"{safe}.jsonc")
+    with open(path, "w", encoding="utf-8") as f:
         f.write(serialize(model))
-    log.log_success(f"Saved user preset: {safe}")
-    return safe
+    log.log_success(f"Saved user preset: {path}  (load it anywhere with: fastfetch -c {safe})")
+    return path
 
 
 def export_config(model, path):
