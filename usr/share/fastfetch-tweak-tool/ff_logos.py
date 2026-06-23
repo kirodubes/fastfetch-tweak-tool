@@ -33,6 +33,13 @@ def module_descriptions():
     return _cache["module_desc"]
 
 
+def nerd_icons():
+    """Return the cached list of (name, glyph) curated Nerd Font icons."""
+    if "nerd_icons" not in _cache:
+        _cache["nerd_icons"] = ff_config.load_nerd_icons()
+    return _cache["nerd_icons"]
+
+
 def clear():
     """Drop all cached catalogs (call after installing fastfetch)."""
     _cache.clear()

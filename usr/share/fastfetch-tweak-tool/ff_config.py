@@ -29,6 +29,7 @@ _PRESET_SEARCH_DIRS = [
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 KIRO_DEFAULT = os.path.join(BASE_DIR, "data", "fastfetch", "config.jsonc")
+NERD_ICONS_PATH = os.path.join(BASE_DIR, "data", "nerd_icons.json")
 
 SCHEMA_URL = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json"
 
@@ -317,6 +318,15 @@ def read_model_file(path):
     """Read a .jsonc file into a model dict (Import); raises on invalid JSON."""
     with open(path, "r", encoding="utf-8") as f:
         return json.loads(strip_jsonc(f.read()))
+
+
+def load_nerd_icons():
+    """Return [(name, glyph), ...] from the bundled curated Nerd Font icon set, or [] if missing."""
+    try:
+        with open(NERD_ICONS_PATH, encoding="utf-8") as f:
+            return [(name, glyph) for name, glyph in json.load(f)]
+    except Exception:
+        return []
 
 
 # ── Preferences ──────────────────────────────────────────────────────────────

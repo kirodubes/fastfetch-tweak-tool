@@ -502,6 +502,13 @@ def _curated_row(window, index, options, key, kind, label):
         widget.set_hexpand(True)
         widget.set_halign(Gtk.Align.START)
         line.append(widget)
+    elif kind == "icon":
+        widget = _icon_picker(
+            value,
+            lambda v: _set_option_value(window, index, key, v) if v else _del_option(window, index, key),
+        )
+        widget.set_hexpand(True)
+        line.append(widget)
     else:
         ent = Gtk.Entry()
         ent.set_hexpand(True)
@@ -513,6 +520,43 @@ def _curated_row(window, index, options, key, kind, label):
         )
         line.append(ent)
     return line
+
+
+def _icon_picker(value, on_change):
+    """Return a box: free-text entry + searchable Nerd Font icon dropdown.
+
+    on_change(text_or_None) fires when the entry is activated or an icon is picked.
+    The dropdown is a convenience for inserting a glyph; the entry stays editable for
+    custom values (paste any glyph, or clear to remove the icon).
+    """
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+    entry = Gtk.Entry()
+    entry.set_hexpand(True)
+    entry.set_text(value if value else "")
+
+    icons = catalog.nerd_icons()
+    glyphs = [None] + [glyph for _name, glyph in icons]
+    labels = ["icon…"] + [f"{glyph}  {name}" for name, glyph in icons]
+    dropdown = _searchable_dropdown(labels)
+    dropdown.set_size_request(150, -1)
+    guard = {"on": True}
+
+    def on_pick(d, _p):
+        if guard["on"]:
+            return
+        glyph = glyphs[d.get_selected()]
+        if glyph is None:
+            return
+        entry.set_text(glyph)
+        on_change(glyph)
+
+    entry.connect("activate", lambda e: on_change(e.get_text() if e.get_text().strip() else None))
+    dropdown.connect("notify::selected", on_pick)
+    guard["on"] = False
+
+    box.append(entry)
+    box.append(dropdown)
+    return box
 
 
 def _option_row(window, index, key, value):

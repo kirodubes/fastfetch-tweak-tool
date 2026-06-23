@@ -1,7 +1,8 @@
 """Curated per-module option schema for the Modules tab (pure data, no GTK).
 
 Each entry is ``(key, kind, label)`` where ``kind`` is one of ``bool`` / ``text`` /
-``color``. Object-valued keys (e.g. ``percent``, ``separator`` sub-keys) are left to
+``color`` / ``icon`` (a free entry plus a searchable Nerd Font icon dropdown).
+Object-valued keys (e.g. ``percent``, ``separator`` sub-keys) are left to
 the Advanced raw-key editor on purpose — they need a nested editor this schema avoids.
 Keys verified against ``fastfetch --gen-config-full``.
 """
@@ -9,7 +10,7 @@ Keys verified against ``fastfetch --gen-config-full``.
 # Keys valid on (nearly) every module — rendered first, for all module types.
 UNIVERSAL = [
     ("key", "text", "Key label"),
-    ("keyIcon", "text", "Key icon"),
+    ("keyIcon", "icon", "Key icon"),
     ("keyColor", "color", "Key color"),
     ("keyWidth", "text", "Key width (0 = off)"),
     ("format", "text", "Format"),

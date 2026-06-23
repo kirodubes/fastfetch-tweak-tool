@@ -4,6 +4,20 @@ All notable changes to fastfetch-tweak-tool are documented here.
 
 ## 2026.06.23
 
+### Nerd Font icon picker for Key icon
+- The **Key icon** field (every module's curated options) is no longer a bare text box you
+  paste a glyph into — it now pairs the free entry with a **searchable dropdown of ~246
+  curated Nerd Font icons** (cpu, gpu, memory, disk, network, terminal, package, clock,
+  temperature, battery, the `linux-*` distro logos, common `dev-*` app/language logos, …).
+  Type "cpu"/"arch"/"memory" to filter; selecting an icon inserts its glyph; the entry stays
+  editable for any custom glyph or to clear it.
+- **Correct by construction, no hand-typed codepoints.** The icon set is generated from the
+  installed **Hack Nerd Font** via `tools/gen-nerd-icons.py` (fontTools, dev-time only — not
+  a runtime dep) and shipped as `data/nerd_icons.json`; the generator is idempotent and
+  re-runnable to extend the set. `keyIcon` became a new curated kind `icon`; the picker
+  (`_icon_picker`) is silent on build and on the "icon…" sentinel, emitting only on a real
+  pick. `ff_config.load_nerd_icons()` + `ff_logos.nerd_icons()` (cached) back it.
+
 ### Module browser with descriptions
 - The Modules tab is no longer a bare list of 75 cryptic type names. The **Add module**
   picker is now **searchable** and shows a **live one-line description** of the selected
