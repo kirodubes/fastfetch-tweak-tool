@@ -4,6 +4,15 @@ All notable changes to fastfetch-tweak-tool are documented here.
 
 ## 2026.06.23
 
+### New bundled default config
+- Replaced the shipped Kiro default (`data/fastfetch/config.jsonc`, the "Kiro default"
+  button + empty-config fallback) with Erik's current boxed layout: the truecolor Kiro **K**
+  logo (`kiro-color-24.txt`), `>  ` separator with a red separator colour, and the
+  ╔══╣══╚ box-drawing frame around kernel/uptime/distro/desktop/term/shell/cpu(+temp)/gpu/
+  disk/memory/network + a colors row. Captured verbatim from `~/.config/fastfetch/config.jsonc`
+  with the logo `source` **privacy-scrubbed** from `/home/erik/KIRO/...` to the installed
+  path `/usr/share/fastfetch-tweak-tool/data/ascii/kiro-color-24.txt` (works for every user).
+
 ### What Changed
 - **Many more curated module options.** The Modules tab now offers dedicated widgets for
   **15 additional module types** beyond the original 8 — `command`, `physicaldisk`,
