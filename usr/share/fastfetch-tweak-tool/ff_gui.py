@@ -502,10 +502,11 @@ def _curated_row(window, index, options, key, kind, label):
         widget.set_hexpand(True)
         widget.set_halign(Gtk.Align.START)
         line.append(widget)
-    elif kind == "icon":
+    elif kind in ("icon", "icontext"):
         widget = _icon_picker(
             value,
             lambda v: _set_option_value(window, index, key, v) if v else _del_option(window, index, key),
+            mode="insert" if kind == "icontext" else "replace",
         )
         widget.set_hexpand(True)
         line.append(widget)
@@ -522,12 +523,14 @@ def _curated_row(window, index, options, key, kind, label):
     return line
 
 
-def _icon_picker(value, on_change):
+def _icon_picker(value, on_change, mode="replace"):
     """Return a box: free-text entry + searchable Nerd Font icon dropdown.
 
     on_change(text_or_None) fires when the entry is activated or an icon is picked.
-    The dropdown is a convenience for inserting a glyph; the entry stays editable for
-    custom values (paste any glyph, or clear to remove the icon).
+    mode="replace" sets the whole value to the picked glyph (for the dedicated keyIcon
+    field); mode="insert" inserts the glyph at the cursor in the existing text (for label/
+    format strings). The dropdown is a pure launcher — it resets to "icon…" after each pick
+    so the same icon can be chosen repeatedly; the entry stays editable for custom glyphs.
     """
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
     entry = Gtk.Entry()
@@ -544,11 +547,21 @@ def _icon_picker(value, on_change):
     def on_pick(d, _p):
         if guard["on"]:
             return
-        glyph = glyphs[d.get_selected()]
+        idx = d.get_selected()
+        glyph = glyphs[idx]
         if glyph is None:
             return
-        entry.set_text(glyph)
-        on_change(glyph)
+        if mode == "insert":
+            pos = entry.get_position()
+            text = entry.get_text()
+            entry.set_text(text[:pos] + glyph + text[pos:])
+            entry.set_position(pos + len(glyph))
+        else:
+            entry.set_text(glyph)
+        guard["on"] = True
+        d.set_selected(0)  # reset launcher so the same icon can be picked again
+        guard["on"] = False
+        on_change(entry.get_text() or None)
 
     entry.connect("activate", lambda e: on_change(e.get_text() if e.get_text().strip() else None))
     dropdown.connect("notify::selected", on_pick)

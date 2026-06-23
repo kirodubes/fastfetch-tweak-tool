@@ -4,13 +4,18 @@ All notable changes to fastfetch-tweak-tool are documented here.
 
 ## 2026.06.23
 
-### Nerd Font icon picker for Key icon
-- The **Key icon** field (every module's curated options) is no longer a bare text box you
-  paste a glyph into — it now pairs the free entry with a **searchable dropdown of ~246
-  curated Nerd Font icons** (cpu, gpu, memory, disk, network, terminal, package, clock,
-  temperature, battery, the `linux-*` distro logos, common `dev-*` app/language logos, …).
-  Type "cpu"/"arch"/"memory" to filter; selecting an icon inserts its glyph; the entry stays
-  editable for any custom glyph or to clear it.
+### Nerd Font icon picker for Key icon + Key label
+- The **Key icon** *and* **Key label** fields (every module's curated options) now pair their
+  free entry with a **searchable dropdown of ~246 curated Nerd Font icons** (cpu, gpu, memory,
+  disk, network, terminal, package, clock, temperature, battery, the `linux-*` distro logos,
+  common `dev-*` app/language logos, …). Type "cpu"/"arch"/"memory" to filter.
+- **Two insert behaviours.** Key icon **replaces** the value with the picked glyph (it's the
+  dedicated single-glyph `keyIcon` field — note fastfetch only renders it when *Appearance →
+  Key style* is Icon/Both). Key label **inserts** the glyph at the cursor inside the existing
+  label text (e.g. `{$2}{#31} kernel`), which is how the shipped default embeds its icons —
+  so the picker is useful for that layout style too. The dropdown is a pure launcher that
+  resets to "icon…" after each pick, so the same glyph can be inserted repeatedly; the entry
+  stays editable for custom glyphs or to clear it.
 - **Correct by construction, no hand-typed codepoints.** The icon set is generated from the
   installed **Hack Nerd Font** via `tools/gen-nerd-icons.py` (fontTools, dev-time only — not
   a runtime dep) and shipped as `data/nerd_icons.json`; the generator is idempotent and
