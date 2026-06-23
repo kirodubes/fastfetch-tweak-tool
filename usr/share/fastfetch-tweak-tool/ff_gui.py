@@ -135,6 +135,10 @@ def build(window, ff_version):
     window.model = _normalize_model(cfg.read_config())
     window.ff_version = ff_version
     window.hide_public_ip = bool(cfg.load_prefs().get("hide_public_ip", True))
+    # Widget registries for reload-sync — init before any tab builds (used across tabs).
+    window.enum_combos = []
+    window.setting_switches = []
+    window.setting_spins = []
 
     root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
 
@@ -742,6 +746,12 @@ def _logo_tab(window):
     return _scrolled(box)
 
 
+_TEMPUNIT_CHOICES = [("C", "Celsius"), ("F", "Fahrenheit"), ("K", "Kelvin")]
+_BINPREFIX_CHOICES = [("iec", "IEC — 1024 (KiB)"), ("si", "SI — 1000 (kB)"), ("jedec", "JEDEC — 1024 (KB)")]
+_MAXPREFIX_CHOICES = [(p, p) for p in ("B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")]
+_KEY_TYPE_CHOICES = [("none", "None"), ("string", "Text"), ("icon", "Icon"), ("both", "Both")]
+
+
 def _appearance_tab(window):
     window.color_combos = {}
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
@@ -765,7 +775,25 @@ def _appearance_tab(window):
     box.append(_color_row(window, "Key color", ("display", "color", "keys")))
     box.append(_color_row(window, "Title color", ("display", "color", "title")))
     box.append(_color_row(window, "Output color", ("display", "color", "output")))
+    box.append(_color_row(window, "Separator color", ("display", "color", "separator")))
+    box.append(_switch_setting_row(window, "Bright ANSI colors", ("display", "brightColor")))
+
+    box.append(_label("<b>Key style</b>", markup=True))
     box.append(_spin_row(window, "Key width", ("display", "key", "width"), 0, 60))
+    box.append(_enum_setting_row(window, "Key style", ("display", "key", "type"), _KEY_TYPE_CHOICES))
+    box.append(_spin_row(window, "Key left padding", ("display", "key", "paddingLeft"), 0, 20))
+
+    box.append(_label("<b>Sizes &amp; temperature</b>", markup=True))
+    box.append(_enum_setting_row(window, "Size binary prefix", ("display", "size", "binaryPrefix"), _BINPREFIX_CHOICES))
+    box.append(_enum_setting_row(window, "Largest size unit", ("display", "size", "maxPrefix"), _MAXPREFIX_CHOICES))
+    box.append(_enum_setting_row(window, "Temperature unit", ("display", "temp", "unit"), _TEMPUNIT_CHOICES))
+
+    box.append(_label("<b>Threshold colors</b>", markup=True))
+    box.append(_label("Colour percentages and temperatures by severity.", css_class="dim-label"))
+    for state in ("green", "yellow", "red"):
+        box.append(_color_row(window, f"Percent {state}", ("display", "percent", "color", state)))
+    for state in ("green", "yellow", "red"):
+        box.append(_color_row(window, f"Temp {state}", ("display", "temp", "color", state)))
 
     return _scrolled(box)
 
@@ -781,7 +809,44 @@ def _spin_row(window, label, path, low, high):
         "value-changed",
         lambda s: _set_path(window, path, int(s.get_value()), drop_zero=True),
     )
+    window.setting_spins.append((path, spin))
     line.append(spin)
+    return line
+
+
+def _enum_combo(value, choices, on_change):
+    """Return a DropDown over choices=[(value, label), ...] with a leading '(default)' clearing the key."""
+    vals = [None] + [v for v, _label in choices]
+    combo = Gtk.DropDown.new_from_strings(["(default)"] + [label for _v, label in choices])
+    if value in vals:
+        combo.set_selected(vals.index(value))
+    combo.connect("notify::selected", lambda d, _p: on_change(vals[d.get_selected()]))
+    return combo
+
+
+def _enum_setting_row(window, label, path, choices):
+    line = _row()
+    line.append(_label(label + ":"))
+    combo = _enum_combo(_get_path(window, path), choices, lambda v: _set_path(window, path, v))
+    combo.set_hexpand(True)
+    combo.set_halign(Gtk.Align.START)
+    window.enum_combos.append((path, combo, [None] + [v for v, _label in choices]))
+    line.append(combo)
+    return line
+
+
+def _switch_setting_row(window, label, path):
+    """A labelled switch writing an explicit bool (on=true, off=false) to a display path."""
+    line = _row()
+    line.append(_label(label + ":"))
+    spacer = Gtk.Box()
+    spacer.set_hexpand(True)
+    line.append(spacer)
+    switch = Gtk.Switch()
+    switch.set_active(bool(_get_path(window, path)))
+    switch.connect("notify::active", lambda s, _p: _set_path(window, path, s.get_active()))
+    window.setting_switches.append((path, switch))
+    line.append(switch)
     return line
 
 
@@ -1927,6 +1992,13 @@ def _reload_widgets(window):
         current = str(_get_path(window, path) or "default")
         if current in _COLORS:
             combo.set_selected(_COLORS.index(current))
+    for path, combo, vals in getattr(window, "enum_combos", []):
+        cur = _get_path(window, path)
+        combo.set_selected(vals.index(cur) if cur in vals else 0)
+    for path, switch in getattr(window, "setting_switches", []):
+        switch.set_active(bool(_get_path(window, path)))
+    for path, spin in getattr(window, "setting_spins", []):
+        spin.set_value(float(_get_path(window, path) or 0))
     if hasattr(window, "raw_view"):
         window.raw_view.get_buffer().set_text(cfg.read_config_text() or cfg.serialize(window.model))
 

@@ -11,6 +11,7 @@ UNIVERSAL = [
     ("key", "text", "Key label"),
     ("keyIcon", "text", "Key icon"),
     ("keyColor", "color", "Key color"),
+    ("keyWidth", "text", "Key width (0 = off)"),
     ("format", "text", "Format"),
     ("outputColor", "color", "Output color"),
 ]
@@ -55,6 +56,76 @@ MODULE_OPTIONS = {
     ],
     "title": [
         ("fqdn", "bool", "Use fully-qualified hostname"),
+    ],
+    "command": [
+        ("text", "text", "Command text"),
+        ("shell", "text", "Shell"),
+        ("param", "text", "Parameter"),
+        ("useStdErr", "bool", "Use stderr instead of stdout"),
+        ("parallel", "bool", "Run in parallel"),
+        ("splitLines", "bool", "Split output into lines"),
+    ],
+    "physicaldisk": [
+        ("namePrefix", "text", "Name prefix filter"),
+        ("hideVirtual", "bool", "Hide virtual disks"),
+        ("hideUnused", "bool", "Hide unused disks"),
+        ("temp", "bool", "Show temperature"),
+    ],
+    "netio": [
+        ("namePrefix", "text", "Interface name prefix"),
+        ("defaultRouteOnly", "bool", "Default route only"),
+        ("detectTotal", "bool", "Detect total I/O"),
+        ("waitTime", "text", "Sample wait time (ms)"),
+    ],
+    "weather": [
+        ("location", "text", "Location"),
+        ("timeout", "text", "Timeout (ms)"),
+        ("outputFormat", "text", "wttr.in format string"),
+    ],
+    "publicip": [
+        ("url", "text", "Custom URL"),
+        ("timeout", "text", "Timeout (ms)"),
+        ("ipv6", "bool", "Use IPv6"),
+    ],
+    "loadavg": [
+        ("ndigits", "text", "Decimal places"),
+        ("compact", "bool", "Compact (one line)"),
+    ],
+    "display": [
+        ("compactType", "text", "Compact type"),
+        ("preciseRefreshRate", "bool", "Precise refresh rate"),
+        ("order", "text", "Sort order"),
+    ],
+    "diskio": [
+        ("namePrefix", "text", "Device name prefix"),
+        ("detectTotal", "bool", "Detect total I/O"),
+        ("waitTime", "text", "Sample wait time (ms)"),
+    ],
+    "cpuusage": [
+        ("separate", "bool", "Per-core usage"),
+        ("waitTime", "text", "Sample wait time (ms)"),
+    ],
+    "codec": [
+        ("splitGPU", "bool", "Split per GPU"),
+        ("useVulkan", "bool", "Use Vulkan"),
+        ("showType", "text", "Show type"),
+    ],
+    "brightness": [
+        ("ddcciSleep", "text", "DDC/CI sleep (ms)"),
+        ("compact", "bool", "Compact"),
+    ],
+    "users": [
+        ("compact", "bool", "Compact (one line)"),
+        ("myselfOnly", "bool", "Current user only"),
+    ],
+    "sound": [
+        ("soundType", "text", "Sound device type"),
+    ],
+    "packages": [
+        ("combined", "bool", "Combine duplicate managers"),
+    ],
+    "bluetooth": [
+        ("showDisconnected", "bool", "Show disconnected devices"),
     ],
 }
 

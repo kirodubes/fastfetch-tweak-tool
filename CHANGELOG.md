@@ -2,6 +2,53 @@
 
 All notable changes to fastfetch-tweak-tool are documented here.
 
+## 2026.06.23
+
+### What Changed
+- **Many more curated module options.** The Modules tab now offers dedicated widgets for
+  **15 additional module types** beyond the original 8 — `command`, `physicaldisk`,
+  `netio`, `weather`, `publicip`, `loadavg`, `display`, `diskio`, `cpuusage`, `codec`,
+  `brightness`, `users`, `sound`, `packages`, `bluetooth` — so their common settings
+  (e.g. `weather.location`, `packages.combined`, `cpuusage.separate`, `publicip.ipv6`)
+  no longer require the raw-key editor.
+- **`keyWidth` is now a universal option.** Every module gains a "Key width (0 = off)"
+  field — a per-module override of the key column width — rendered alongside key label /
+  icon / colour for all 75 module types.
+- **New display options in the Appearance tab.** Added: **Separator colour**, **Bright
+  ANSI colors** toggle (`display.brightColor`), **Key style** (`display.key.type` —
+  None/Text/Icon/Both) + **Key left padding**, **Size binary prefix** (IEC/SI/JEDEC) +
+  **Largest size unit**, **Temperature unit** (C/F/K), and **Threshold colours** — green/
+  yellow/red severity colours for both percentages (`display.percent.color`) and
+  temperatures (`display.temp.color`).
+
+### Technical Details
+- **#2 is pure data in `ff_options.py`** — `UNIVERSAL` gained `keyWidth`; `MODULE_OPTIONS`
+  gained the 15 entries. Each module's key set, value types, and the `display.*` enums
+  were verified against fastfetch 2.64.2's JSON schema (`doc/json_schema.json`), not
+  assumed — the originally-planned `memory`/`os`/`kernel`/`uptime`/`datetime` turned out
+  to be **format-only** (no curatable scalars), so the real option-rich modules were
+  curated instead. Array-valued (`packages.disabled`) and nested (`*.percent` object)
+  keys are still left to the Advanced raw editor by design.
+- **#4 widgets in `ff_gui.py`** — new `_enum_combo` / `_enum_setting_row` (DropDown with a
+  leading "(default)" that clears the key) and `_switch_setting_row` (writes an explicit
+  `true`/`false`, since `display.brightColor` defaults to true). The roadmap's flat key
+  names map to **nested** real paths (`display.temp.unit`, `display.size.binaryPrefix`,
+  `display.{temp,percent}.color.{green,yellow,red}`), handled natively by the existing
+  deep-tuple `_set_path`. `display.percent.type` (numeric/array bitfield) and most of
+  `display.bar` are deliberately deferred — they need a nested editor.
+- **Reload-sync** — enum/switch/spin widgets are now registered in `window.enum_combos`
+  / `setting_switches` / `setting_spins` (initialised in `build()` before any tab, since
+  `_spin_row` is shared with the Logo tab) and re-synced in `_reload_widgets`, so loading
+  a preset or pressing Reload updates them. This also fixes a pre-existing gap where the
+  Key-width and Logo width/height spins did not refresh on reload.
+- Verified with a GTK smoke test (builds the window, renders all 15 new module panels,
+  reloads) and an end-to-end fastfetch run exercising every new key — `fastfetch --config`
+  exits 0 and applies the values (e.g. SI prefix renders "GB", `key.type:both` shows icons).
+
+### Files Modified
+- `usr/share/fastfetch-tweak-tool/ff_options.py` — `keyWidth` in UNIVERSAL; 15 new MODULE_OPTIONS entries.
+- `usr/share/fastfetch-tweak-tool/ff_gui.py` — enum/switch helpers, expanded `_appearance_tab`, `_spin_row` registration, `build()` registry init, `_reload_widgets` resync.
+
 ## 2026.06.22
 
 ### What Changed
