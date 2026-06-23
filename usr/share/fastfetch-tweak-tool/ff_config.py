@@ -241,6 +241,17 @@ def list_modules():
     return sorted(set(names), key=_natural_key)
 
 
+def list_module_descriptions():
+    """Return a dict mapping lowercase module type name → its one-line description."""
+    descs = {}
+    for line in _run_fastfetch(["--list-modules", "autocompletion"]).splitlines():
+        name, sep, desc = line.partition(":")
+        name = name.strip().lower()
+        if name and sep:
+            descs[name] = desc.strip()
+    return descs
+
+
 def list_logos():
     """Return a sorted list of built-in logo names from fastfetch (names may contain spaces)."""
     names = []

@@ -4,6 +4,28 @@ All notable changes to fastfetch-tweak-tool are documented here.
 
 ## 2026.06.23
 
+### Module browser with descriptions
+- The Modules tab is no longer a bare list of 75 cryptic type names. The **Add module**
+  picker is now **searchable** and shows a **live one-line description** of the selected
+  module beneath it (e.g. `terminalfont` → "Print the font name and size used by the
+  current terminal"), and every row in the **Shown modules** list carries the same
+  description as a **hover tooltip**.
+- Descriptions for **all 75 modules** come straight from fastfetch
+  (`--list-modules autocompletion` emits `Name:Description`), so they are **self-maintaining**
+  — new fastfetch releases add modules with no edits here, and nothing is hand-authored to
+  drift out of date.
+- **Guided special modules.** `separator` joined `break` / `custom` / `command` as a
+  repeatable module (it stays in the picker after being added, and the description notes
+  "can be added multiple times"), so layout separators can be placed between sections.
+- **Technical:** `ff_config.list_module_descriptions()` parses the CLI into a
+  `{name: description}` dict; `ff_logos.module_descriptions()` caches it (cleared by
+  `catalog.clear()` after a fastfetch install). In `ff_gui.py` the add-module combo became
+  `_searchable_dropdown`, a wrapping `add_module_desc` label updates on `notify::selected`
+  + every combo refresh (`_update_add_module_desc`), and `_rebuild_modules_list` sets a
+  per-row `set_tooltip_text`. Missing descriptions fall back to empty (no error when
+  fastfetch is absent). Verified: 75 descriptions parse, cache matches, ruff clean, module
+  compiles + imports.
+
 ### New bundled default config
 - Replaced the shipped Kiro default (`data/fastfetch/config.jsonc`, the "Kiro default"
   button + empty-config fallback) with Erik's current boxed layout: the truecolor Kiro **K**

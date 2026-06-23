@@ -26,6 +26,13 @@ def modules():
     return _cache["modules"]
 
 
+def module_descriptions():
+    """Return the cached {module name: one-line description} map."""
+    if "module_desc" not in _cache:
+        _cache["module_desc"] = ff_config.list_module_descriptions()
+    return _cache["module_desc"]
+
+
 def clear():
     """Drop all cached catalogs (call after installing fastfetch)."""
     _cache.clear()

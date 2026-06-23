@@ -55,7 +55,7 @@ _LOGO_TYPE_LABELS = {
 }
 
 # Module types that may legitimately appear more than once — never filtered from the picker.
-_REPEATABLE_MODULES = {"break", "custom", "command"}
+_REPEATABLE_MODULES = {"break", "custom", "command", "separator"}
 
 
 # ── Small helpers ────────────────────────────────────────────────────────────
@@ -274,13 +274,17 @@ def _modules_tab(window):
     box.append(_scrolled(window.modules_list))
 
     add_row = _row()
-    window.add_module_combo = Gtk.DropDown.new_from_strings(["(none)"])
+    window.add_module_combo = _searchable_dropdown(["(none)"])
     window.add_module_combo.set_hexpand(True)
+    window.add_module_combo.connect("notify::selected", lambda _d, _p: _update_add_module_desc(window))
     btn_add = Gtk.Button(label="Add module")
     btn_add.connect("clicked", lambda _w: _add_module(window))
     add_row.append(window.add_module_combo)
     add_row.append(btn_add)
     box.append(add_row)
+    window.add_module_desc = _label("", css_class="info-label", wrap=True)
+    window.add_module_desc.set_margin_start(10)
+    box.append(window.add_module_desc)
     _refresh_add_module_combo(window)
 
     window.module_options_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
@@ -312,7 +316,11 @@ def _rebuild_modules_list(window):
         line.append(grip)
         name = cfg.module_type(entry) or "(unknown)"
         suffix = "  ⚙" if isinstance(entry, dict) and cfg.module_options(entry) else ""
-        line.append(_label(name + suffix, css_class="detail-name"))
+        name_lbl = _label(name + suffix, css_class="detail-name")
+        desc = catalog.module_descriptions().get(name)
+        if desc:
+            name_lbl.set_tooltip_text(desc)
+        line.append(name_lbl)
         spacer = Gtk.Box()
         spacer.set_hexpand(True)
         line.append(spacer)
@@ -389,6 +397,20 @@ def _refresh_add_module_combo(window):
         return
     window.add_module_names = _available_modules(window)
     combo.set_model(Gtk.StringList.new(window.add_module_names or ["(all added)"]))
+    _update_add_module_desc(window)
+
+
+def _update_add_module_desc(window):
+    label = getattr(window, "add_module_desc", None)
+    if label is None:
+        return
+    names = getattr(window, "add_module_names", None)
+    index = window.add_module_combo.get_selected()
+    name = names[index] if names and 0 <= index < len(names) else ""
+    desc = catalog.module_descriptions().get(name, "")
+    if desc and name in _REPEATABLE_MODULES:
+        desc += "  ·  can be added multiple times"
+    label.set_text(desc)
 
 
 def _add_module(window):
