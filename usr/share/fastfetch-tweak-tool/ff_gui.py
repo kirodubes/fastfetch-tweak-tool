@@ -155,10 +155,15 @@ def build(window, ff_version):
     ver_text = f"fastfetch v{short}" if short[:1].isdigit() else f"fastfetch {short}"
     lbl_version = _label(ver_text, css_class="info-label")
     lbl_version.set_valign(Gtk.Align.CENTER)
+    btn_support = Gtk.Button(label="♥ Support")
+    btn_support.set_tooltip_text("Support Kiro's development")
+    btn_support.add_css_class("support-button")
+    btn_support.connect("clicked", lambda _w: _show_support_dialog(window))
     btn_quit = Gtk.Button(label="Quit")
     btn_quit.connect("clicked", lambda _w: window.close())
     header.append(title)
     header.append(lbl_version)
+    header.append(btn_support)
     header.append(btn_quit)
     root.append(header)
     root.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
@@ -193,6 +198,53 @@ def build(window, ff_version):
     window.set_child(root)
 
     _refresh_preview(window)
+
+
+# Funding channels — canonical handles from kiro-website .github/FUNDING.yml
+# (GitHub Sponsors first: ~100% payout). Keep in sync if those change.
+_FUNDING = [
+    ("GitHub Sponsors", "https://github.com/sponsors/erikdubois", "best value — almost all goes to the project"),
+    ("Ko-fi", "https://ko-fi.com/erikdubois", "buy a coffee — one-off tip"),
+    ("Patreon", "https://www.patreon.com/kiroproject", "membership tiers + perks"),
+    ("YouTube membership", "https://www.youtube.com/@ErikDubois/join", "join on YouTube"),
+    ("PayPal", "https://www.paypal.me/erikdubois", "direct one-off"),
+]
+
+
+def _open_url(parent, url):
+    Gtk.UriLauncher.new(url).launch(parent, None, None)
+
+
+def _show_support_dialog(window):
+    dlg = Gtk.Window(title="Support Kiro", transient_for=window, modal=True)
+    dlg.set_default_size(440, -1)
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+    for m in ("start", "end", "top", "bottom"):
+        getattr(box, f"set_margin_{m}")(18)
+
+    box.append(_label("<b>Support Kiro</b>", markup=True))
+    box.append(_label(
+        "Kiro and its tools are built by one person, for the community — and kept free. "
+        "If Fastfetch Tweak Tool saves you time, a little support keeps the work going. "
+        "Thank you for being here.",
+        wrap=True, max_chars=52, css_class="info-label"))
+
+    for name, url, note in _FUNDING:
+        btn = Gtk.Button()
+        content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        content.append(_label(f"<b>{name}</b>", markup=True))
+        content.append(_label(note, css_class="info-label"))
+        btn.set_child(content)
+        btn.connect("clicked", lambda _w, u=url: _open_url(dlg, u))
+        box.append(btn)
+
+    close = Gtk.Button(label="Close")
+    close.set_halign(Gtk.Align.END)
+    close.connect("clicked", lambda _w: dlg.close())
+    box.append(close)
+
+    dlg.set_child(box)
+    dlg.present()
 
 
 def _short_version(version):

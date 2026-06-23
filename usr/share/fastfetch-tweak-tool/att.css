@@ -23,3 +23,11 @@ label.detail-name {
 .theme-list row:selected {
     background-color: alpha(@accent_bg_color, 0.3);
 }
+
+.support-button {
+    color: #e0567a;
+}
+
+.support-button:hover {
+    background-color: alpha(#e0567a, 0.18);
+}

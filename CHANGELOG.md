@@ -4,6 +4,16 @@ All notable changes to fastfetch-tweak-tool are documented here.
 
 ## 2026.06.23
 
+### Support button
+- Added a tasteful **♥ Support** button to the header (next to Quit) that opens a small
+  **Support Kiro** dialog: a warm one-liner plus a button per funding channel — **GitHub
+  Sponsors** (first; ~100% payout), **Ko-fi**, **Patreon**, **YouTube membership**, **PayPal**
+  — each opening in the browser via `Gtk.UriLauncher`. Discoverable but never naggy (no
+  launch-time popup), in keeping with the free-project / volunteer-time doctrine.
+- Links are the canonical handles from the website's `.github/FUNDING.yml` (`erikdubois`
+  Sponsors/Ko-fi/PayPal, `kiroproject` Patreon), kept in a single `_FUNDING` list with a
+  note to re-sync if they change. The ♥ gets a subtle rose accent via `att.css`.
+
 ### Nerd Font icon picker for Key icon + Key label
 - The **Key icon** *and* **Key label** fields (every module's curated options) now pair their
   free entry with a **searchable dropdown of ~246 curated Nerd Font icons** (cpu, gpu, memory,
