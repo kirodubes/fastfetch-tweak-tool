@@ -17,6 +17,16 @@ CONFIG_PATH = os.path.expanduser("~/.config/fastfetch/config.jsonc")
 BACKUP_PATH = os.path.expanduser("~/.config/fastfetch/config.jsonc.ftt-bak")
 PREFS_PATH = os.path.expanduser("~/.config/fastfetch-tweak-tool/prefs.json")
 
+# User presets live in a real fastfetch data path, so they also show up in
+# `fastfetch --list-presets` and are usable directly via `fastfetch -c <name>`.
+USER_PRESET_DIR = os.path.expanduser("~/.local/share/fastfetch/presets")
+_PRESET_SEARCH_DIRS = [
+    USER_PRESET_DIR,
+    os.path.expanduser("~/.config/fastfetch/presets"),
+    "/usr/local/share/fastfetch/presets",
+    "/usr/share/fastfetch/presets",
+]
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 KIRO_DEFAULT = os.path.join(BASE_DIR, "data", "fastfetch", "config.jsonc")
 
@@ -252,6 +262,49 @@ def list_presets():
         if name.endswith(".jsonc"):
             names.append(name[: -len(".jsonc")])
     return sorted(set(names), key=_natural_key)
+
+
+# ── User presets / import / export ───────────────────────────────────────────
+
+
+def resolve_preset_path(name):
+    """Return the first existing <dir>/<name>.jsonc across the preset search dirs, or ''."""
+    for directory in _PRESET_SEARCH_DIRS:
+        path = os.path.join(directory, f"{name}.jsonc")
+        if os.path.isfile(path):
+            return path
+    return ""
+
+
+def sanitize_preset_name(name):
+    """Return a filesystem-safe preset name (no path separators), or '' if empty."""
+    safe = re.sub(r"[^A-Za-z0-9._-]", "-", name.strip()).strip("-.")
+    return safe
+
+
+def save_user_preset(name, model):
+    """Write the model as a user preset; return the sanitized name, or '' if name is empty."""
+    safe = sanitize_preset_name(name)
+    if not safe:
+        return ""
+    os.makedirs(USER_PRESET_DIR, exist_ok=True)
+    with open(os.path.join(USER_PRESET_DIR, f"{safe}.jsonc"), "w", encoding="utf-8") as f:
+        f.write(serialize(model))
+    log.log_success(f"Saved user preset: {safe}")
+    return safe
+
+
+def export_config(model, path):
+    """Write the model to an arbitrary path (Export)."""
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(serialize(model))
+    log.log_success(f"Exported config to {path}")
+
+
+def read_model_file(path):
+    """Read a .jsonc file into a model dict (Import); raises on invalid JSON."""
+    with open(path, "r", encoding="utf-8") as f:
+        return json.loads(strip_jsonc(f.read()))
 
 
 # ── Preferences ──────────────────────────────────────────────────────────────

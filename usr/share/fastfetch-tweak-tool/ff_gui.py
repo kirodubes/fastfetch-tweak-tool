@@ -33,6 +33,7 @@ _COLORS = [
     "default", "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
     "1", "2", "3", "4", "5", "6", "9", "10", "11", "12", "13", "14",
 ]
+_CUSTOM_COLOR = "custom…"  # dropdown sentinel: reveals the hex/SGR entry + colour picker
 
 # "pokemon" is a UI-only pseudo-type: it maps to fastfetch's real "file" type (see _TYPE_ALIAS),
 # detected on reload by the source path. The model never stores "pokemon".
@@ -472,13 +473,13 @@ def _curated_row(window, index, options, key, kind, label):
         )
         line.append(sw)
     elif kind == "color":
-        combo = _color_combo(
+        widget, _set = _color_editor(
             value,
             lambda v: _set_option_value(window, index, key, v) if v else _del_option(window, index, key),
         )
-        combo.set_hexpand(True)
-        combo.set_halign(Gtk.Align.START)
-        line.append(combo)
+        widget.set_hexpand(True)
+        widget.set_halign(Gtk.Align.START)
+        line.append(widget)
     else:
         ent = Gtk.Entry()
         ent.set_hexpand(True)
@@ -850,25 +851,85 @@ def _switch_setting_row(window, label, path):
     return line
 
 
-def _color_combo(value, on_change):
-    """Return a DropDown over _COLORS; on_change(color_or_None) fires on selection."""
-    combo = Gtk.DropDown.new_from_strings(_COLORS)
-    current = str(value or "default")
-    if current in _COLORS:
-        combo.set_selected(_COLORS.index(current))
-    combo.connect(
-        "notify::selected",
-        lambda d, _p: on_change(None if _COLORS[d.get_selected()] == "default" else _COLORS[d.get_selected()]),
-    )
-    return combo
+def _rgba_to_hex(rgba):
+    return "#%02x%02x%02x" % (round(rgba.red * 255), round(rgba.green * 255), round(rgba.blue * 255))
+
+
+def _color_editor(value, on_change):
+    """Return (widget, set_value): named-colour dropdown + GTK picker + free hex/SGR entry.
+
+    fastfetch accepts named colours, hex (#rrggbb), and raw SGR (e.g. 38;5;208 / 38;2;r;g;b).
+    on_change(colour_or_None) fires on any change; set_value(colour_or_None) updates the widget
+    without emitting (used on reload).
+    """
+    names = _COLORS + [_CUSTOM_COLOR]
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+    dropdown = Gtk.DropDown.new_from_strings(names)
+    entry = Gtk.Entry()
+    entry.set_placeholder_text("#hex / SGR")
+    entry.set_max_width_chars(12)
+    button = Gtk.ColorDialogButton.new(Gtk.ColorDialog())
+    state = {"guard": True}
+
+    def current_value():
+        sel = names[dropdown.get_selected()]
+        if sel == _CUSTOM_COLOR:
+            return entry.get_text().strip() or None
+        return None if sel == "default" else sel
+
+    def emit():
+        if not state["guard"]:
+            on_change(current_value())
+
+    def set_value(v):
+        state["guard"] = True
+        text = "" if v is None else str(v)
+        if text == "" or text == "default":
+            dropdown.set_selected(_COLORS.index("default"))
+            entry.set_visible(False)
+        elif text in _COLORS:
+            dropdown.set_selected(_COLORS.index(text))
+            entry.set_visible(False)
+        else:
+            dropdown.set_selected(names.index(_CUSTOM_COLOR))
+            entry.set_text(text)
+            entry.set_visible(True)
+            rgba = Gdk.RGBA()
+            if text.startswith("#") and rgba.parse(text):
+                button.set_rgba(rgba)
+        state["guard"] = False
+
+    def on_dropdown(_d, _p):
+        entry.set_visible(names[dropdown.get_selected()] == _CUSTOM_COLOR)
+        emit()
+
+    def on_button(_b, _p):
+        if state["guard"]:
+            return
+        state["guard"] = True
+        dropdown.set_selected(names.index(_CUSTOM_COLOR))
+        entry.set_text(_rgba_to_hex(button.get_rgba()))
+        entry.set_visible(True)
+        state["guard"] = False
+        on_change(current_value())
+
+    dropdown.connect("notify::selected", on_dropdown)
+    entry.connect("activate", lambda _e: emit())
+    button.connect("notify::rgba", on_button)
+    set_value(value)
+
+    box.append(dropdown)
+    box.append(button)
+    box.append(entry)
+    return box, set_value
 
 
 def _color_row(window, label, path):
     line = _row()
     line.append(_label(label + ":"))
-    combo = _color_combo(_get_path(window, path), lambda v: _set_path(window, path, v))
-    window.color_combos[path] = combo
-    line.append(combo)
+    widget, set_value = _color_editor(_get_path(window, path), lambda v: _set_path(window, path, v))
+    window.color_combos[path] = set_value
+    line.append(widget)
     return line
 
 
@@ -1497,6 +1558,27 @@ def _presets_tab(window):
     quick.append(btn_restore)
     box.append(quick)
 
+    box.append(_label("<b>Your presets</b> — save the current editor as a reusable preset, "
+                      "or share it via export/import", markup=True, wrap=True, max_chars=60))
+    save_row = _row()
+    window.user_preset_name = Gtk.Entry()
+    window.user_preset_name.set_placeholder_text("preset name")
+    window.user_preset_name.set_hexpand(True)
+    btn_save = Gtk.Button(label="Save current as preset")
+    btn_save.connect("clicked", lambda _w: _save_user_preset(window))
+    save_row.append(window.user_preset_name)
+    save_row.append(btn_save)
+    box.append(save_row)
+
+    io_row = _row()
+    btn_export = Gtk.Button(label="Export…")
+    btn_export.connect("clicked", lambda _w: _export_config(window))
+    btn_import = Gtk.Button(label="Import…")
+    btn_import.connect("clicked", lambda _w: _import_config(window))
+    io_row.append(btn_export)
+    io_row.append(btn_import)
+    box.append(io_row)
+
     return box
 
 
@@ -1527,10 +1609,6 @@ def _raw_tab(window):
     return box
 
 
-def _preset_path(name):
-    return f"/usr/share/fastfetch/presets/{name}.jsonc"
-
-
 def _load_preset(window):
     presets = catalog.presets()
     if not presets:
@@ -1541,15 +1619,70 @@ def _load_preset(window):
 def _load_preset_named(window, name):
     import json
 
-    path = _preset_path(name)
-    if not os.path.isfile(path):
-        _notify(window, f"Preset file not found: {path}")
+    path = cfg.resolve_preset_path(name)
+    if not path:
+        _notify(window, f"Preset not found: {name}")
         return
     with open(path, "r", encoding="utf-8") as f:
         window.model = _normalize_model(json.loads(cfg.strip_jsonc(f.read())))
     _reload_widgets(window)
     _refresh_preview(window)
     _notify(window, f"Loaded preset: {name}")
+
+
+def _refresh_presets(window):
+    """Invalidate the preset cache and repopulate the dropdown + gallery."""
+    catalog.clear()
+    names = catalog.presets() or ["(none)"]
+    window.preset_combo.set_model(Gtk.StringList.new(names))
+    if hasattr(window, "gallery_flow"):
+        _populate_gallery(window)
+
+
+def _save_user_preset(window):
+    saved = cfg.save_user_preset(window.user_preset_name.get_text(), window.model)
+    if not saved:
+        _notify(window, "Enter a preset name first")
+        return
+    window.user_preset_name.set_text("")
+    _refresh_presets(window)
+    _notify(window, f"Saved preset: {saved}")
+
+
+def _export_config(window):
+    dialog = Gtk.FileDialog()
+    dialog.set_initial_name("config.jsonc")
+
+    def done(d, result):
+        try:
+            file = d.save_finish(result)
+        except GLib.Error:
+            return
+        cfg.export_config(window.model, file.get_path())
+        _notify(window, f"Exported to {file.get_path()}")
+
+    dialog.save(window, None, done)
+
+
+def _import_config(window):
+    dialog = Gtk.FileDialog()
+
+    def done(d, result):
+        try:
+            file = d.open_finish(result)
+        except GLib.Error:
+            return
+        try:
+            raw = cfg.read_model_file(file.get_path())
+        except Exception as e:
+            _notify(window, f"Import failed: {e}")
+            return
+        window.model = _normalize_model(raw)
+        _reload_widgets(window)
+        _refresh_preview(window)
+        _notify(window, f"Imported {file.get_path()}")
+
+    dialog.open(window, None, done)
 
 
 # ── Preset gallery ───────────────────────────────────────────────────────────
@@ -1628,8 +1761,11 @@ def _preset_is_small(name):
     """True if the preset renders fastfetch's small (compact) logo."""
     import json
 
+    path = cfg.resolve_preset_path(name)
+    if not path:
+        return False
     try:
-        with open(_preset_path(name), encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             logo = (json.loads(cfg.strip_jsonc(f.read())) or {}).get("logo")
     except Exception:
         return False
@@ -1988,10 +2124,8 @@ def _reload_widgets(window):
         cur_pos = str((window.model.get("logo") or {}).get("position", "left"))
         if cur_pos in _LOGO_POSITIONS:
             window.logo_position.set_selected(_LOGO_POSITIONS.index(cur_pos))
-    for path, combo in getattr(window, "color_combos", {}).items():
-        current = str(_get_path(window, path) or "default")
-        if current in _COLORS:
-            combo.set_selected(_COLORS.index(current))
+    for path, set_value in getattr(window, "color_combos", {}).items():
+        set_value(_get_path(window, path))
     for path, combo, vals in getattr(window, "enum_combos", []):
         cur = _get_path(window, path)
         combo.set_selected(vals.index(cur) if cur in vals else 0)

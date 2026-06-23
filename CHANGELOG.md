@@ -45,9 +45,37 @@ All notable changes to fastfetch-tweak-tool are documented here.
   reloads) and an end-to-end fastfetch run exercising every new key — `fastfetch --config`
   exits 0 and applies the values (e.g. SI prefix renders "GB", `key.type:both` shows icons).
 
+### Save / export / import user presets
+- The Start / Presets tab gained a **Your presets** section: **Save current as preset**
+  (name entry → button), **Export…**, and **Import…**. Saved presets are written to
+  `~/.local/share/fastfetch/presets/<name>.jsonc` — a real fastfetch data path, so they
+  immediately appear in the tool's preset dropdown **and** the Preset Gallery (with a
+  "no preview yet" placeholder), and are usable directly via `fastfetch -c <name>`.
+- **Technical:** verified `fastfetch --list-presets` scans that directory before building
+  on it. New `ff_config` helpers: `save_user_preset` (sanitized name), `resolve_preset_path`
+  (searches user → `~/.config` → `/usr/local/share` → `/usr/share`, replacing the old
+  hardcoded `/usr/share` path — built-in presets like `examples/2` still load, regression-
+  tested), `export_config`, `read_model_file`. Export/Import use `Gtk.FileDialog`
+  save/open. Gallery's `_preset_is_small` and the dropdown refresh (`catalog.clear()` +
+  `set_model`) updated to match.
+
+### Real color picker
+- The named-colour dropdown is now a composite **colour editor** wherever a colour is set
+  (Appearance tab + every per-module `keyColor`/`outputColor`): named dropdown **+ a GTK
+  colour picker** (`Gtk.ColorDialogButton`, emits `#rrggbb`) **+ a free entry** for hex or
+  raw SGR (256-colour `38;5;N`, truecolor `38;2;r;g;b`) — all formats verified accepted by
+  fastfetch 2.64.2.
+- **Technical:** `_color_combo` replaced by `_color_editor(value, on_change) -> (widget,
+  set_value)`. Construction sets all three sub-widgets under a guard so building a row never
+  spuriously mutates the model; the entry fires on **`activate`** (not `changed`) so adding
+  a key in a curated row can't destroy the entry mid-type via the options-panel rebuild.
+  `color_combos` now stores the `set_value` closure and `_reload_widgets` calls it, so
+  reload/preset-load re-syncs custom colours too.
+
 ### Files Modified
 - `usr/share/fastfetch-tweak-tool/ff_options.py` — `keyWidth` in UNIVERSAL; 15 new MODULE_OPTIONS entries.
-- `usr/share/fastfetch-tweak-tool/ff_gui.py` — enum/switch helpers, expanded `_appearance_tab`, `_spin_row` registration, `build()` registry init, `_reload_widgets` resync.
+- `usr/share/fastfetch-tweak-tool/ff_config.py` — `USER_PRESET_DIR`/search dirs, `resolve_preset_path`, `save_user_preset`, `sanitize_preset_name`, `export_config`, `read_model_file`.
+- `usr/share/fastfetch-tweak-tool/ff_gui.py` — enum/switch helpers + expanded `_appearance_tab` + reload registries (#2/#4); `_color_editor` composite colour widget (#3); Your-presets UI + save/export/import helpers + `resolve_preset_path` wiring (#1).
 
 ## 2026.06.22
 
