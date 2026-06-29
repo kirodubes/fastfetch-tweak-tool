@@ -2,6 +2,13 @@
 
 All notable changes to fastfetch-tweak-tool are documented here.
 
+## 2026.06.29
+
+### Added to the new "Kiro Apps" menu
+- Appended `X-Kiro-Apps;` to `usr/share/applications/fastfetch-tweak-tool.desktop` so
+  it appears in the new Kiro Apps launcher folder. Non-destructive — still shows under
+  Settings/System.
+
 ## 2026.06.23
 
 ### Support button
