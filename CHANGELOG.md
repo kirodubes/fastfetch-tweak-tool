@@ -2,6 +2,28 @@
 
 All notable changes to fastfetch-tweak-tool are documented here.
 
+## 2026.10.17
+
+### What Changed
+- New **Fastfetch default** button on the Start tab, next to Kiro default: it takes fastfetch back to its own
+  look with the distro logo (Arch logo on Arch and KiroTux) by removing `config.jsonc`. The current config is
+  backed up first, so **Restore backup** brings it back.
+- Without a config the editor now shows fastfetch's real default modules instead of an empty list. It opens that
+  way on KiroTux too, which ships no fastfetch config.
+
+### Technical Details
+- `ff_config.use_fastfetch_default()` runs the usual `backup_config()` and then removes `config.jsonc`. A second
+  click finds no config and leaves the backup alone. "No config" is no editor state you could Apply, so unlike the
+  other Start-tab buttons this one acts at once. The intro text and the button tooltip say so.
+- `ff_config.builtin_default_model()` runs `fastfetch --gen-config <tmp>` in a temporary folder and parses the
+  result (only `$schema` plus the module list, so the logo stays automatic). `read_config()` uses it when no
+  config exists, and falls back to the empty model if fastfetch is missing or the output is unusable.
+- Tested in a scratch `HOME`: remove after backup, a second click keeps the backup, the editor model holds the 29
+  default modules, and Restore puts the old config back byte for byte. The button was checked visually on a Kiro VM.
+
+### Files Modified
+- `usr/share/fastfetch-tweak-tool/ff_config.py`, `usr/share/fastfetch-tweak-tool/ff_gui.py`
+
 ## 2026.09.28
 
 ### What Changed

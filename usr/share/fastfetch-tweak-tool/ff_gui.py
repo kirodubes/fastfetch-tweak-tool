@@ -1671,7 +1671,9 @@ def _presets_tab(window):
         "<b>Start here</b> — load an example preset or the Kiro default, watch the live "
         "preview, then tweak it on the Modules and Logo &amp; Appearance tabs. Nothing is "
         "written until you Apply — and before applying we always save a backup of your "
-        "current config to <tt>config.jsonc.ftt-bak</tt>, so you can Restore backup any time.",
+        "current config to <tt>config.jsonc.ftt-bak</tt>, so you can Restore backup any time. "
+        "<b>Fastfetch default</b> is the exception: it removes your config at once (after the "
+        "same backup), so fastfetch goes back to its own look with your distro logo.",
         markup=True, wrap=True, max_chars=60)
     box.append(intro)
 
@@ -1689,9 +1691,14 @@ def _presets_tab(window):
     quick = _row()
     btn_kiro = Gtk.Button(label="Kiro default")
     btn_kiro.connect("clicked", lambda _w: _load_kiro(window))
+    btn_ff_default = Gtk.Button(label="Fastfetch default")
+    btn_ff_default.set_tooltip_text("Back up and remove config.jsonc right away: fastfetch shows its own "
+                                    "default look with your distro logo. Restore backup brings yours back.")
+    btn_ff_default.connect("clicked", lambda _w: _use_fastfetch_default(window))
     btn_restore = Gtk.Button(label="Restore backup")
     btn_restore.connect("clicked", lambda _w: _restore(window))
     quick.append(btn_kiro)
+    quick.append(btn_ff_default)
     quick.append(btn_restore)
     box.append(quick)
 
@@ -1997,6 +2004,18 @@ def _load_kiro(window):
     _reload_widgets(window)
     _refresh_preview(window)
     _notify(window, "Loaded Kiro default")
+
+
+def _use_fastfetch_default(window):
+    # "no config" can't be expressed as an editor state to Apply, so this one writes immediately
+    cfg.use_fastfetch_default()
+    window.model = _normalize_model(cfg.read_config())
+    _reload_widgets(window)
+    _refresh_preview(window)
+    _refresh_current_logo_label(window)
+    if hasattr(window, "raw_view"):
+        window.raw_view.get_buffer().set_text(cfg.serialize(window.model))
+    _notify(window, "Back to fastfetch's own default — config removed, Restore backup brings it back")
 
 
 def _restore(window):

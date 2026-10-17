@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import subprocess
+import tempfile
 
 import log
 
@@ -85,8 +86,8 @@ def _empty_model():
 def read_config():
     """Read config.jsonc into a model dict, or a sensible empty model if missing/invalid."""
     if not os.path.isfile(CONFIG_PATH):
-        log.log_warn("No fastfetch config found — using empty model")
-        return _empty_model()
+        log.log_info("No fastfetch config — showing fastfetch's own default")
+        return builtin_default_model()
     try:
         with open(CONFIG_PATH, "r", encoding="utf-8") as f:
             data = json.loads(strip_jsonc(f.read()))
@@ -160,6 +161,35 @@ def restore_backup():
     shutil.copy2(BACKUP_PATH, CONFIG_PATH)
     log.log_success(f"Restored from backup: {BACKUP_PATH}")
     return True
+
+
+def builtin_default_model():
+    """Return fastfetch's built-in default (what it shows without a config), or an empty model."""
+    with tempfile.TemporaryDirectory() as tmp:
+        path = os.path.join(tmp, "default.jsonc")
+        _run_fastfetch(["--gen-config", path])
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.loads(strip_jsonc(f.read()))
+        except (OSError, ValueError) as e:
+            log.debug_print(f"fastfetch --gen-config unusable: {e}")
+            return _empty_model()
+    if not isinstance(data, dict):
+        return _empty_model()
+    data.setdefault("logo", {})
+    data.setdefault("display", {})
+    data.setdefault("modules", [])
+    return data
+
+
+def use_fastfetch_default():
+    """Back up and remove config.jsonc so fastfetch falls back to its own default (distro logo)."""
+    backup_config()
+    if os.path.isfile(CONFIG_PATH):
+        os.remove(CONFIG_PATH)
+        log.log_success(f"Removed {CONFIG_PATH} — fastfetch now uses its own default")
+    else:
+        log.log_info("No config.jsonc — fastfetch already uses its own default")
 
 
 def reset_to_kiro_default():
