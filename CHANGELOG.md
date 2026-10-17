@@ -5,6 +5,10 @@ All notable changes to fastfetch-tweak-tool are documented here.
 ## 2026.10.17
 
 ### What Changed
+- On fish, "Run at shell startup" now writes `status is-interactive; and fastfetch` instead of a bare `fastfetch`.
+  Fish reads config.fish for every shell, including non-interactive ones (scp, rsync, `ssh host command`), so
+  fastfetch output broke file copies. Bash and zsh keep the plain line. An old bare line is upgraded on the next
+  write.
 - New **Fastfetch default** button on the Start tab, next to Kiro default: it takes fastfetch back to its own
   look with the distro logo (Arch logo on Arch and KiroTux) by removing `config.jsonc`. The current config is
   backed up first, so **Restore backup** brings it back.
@@ -12,6 +16,9 @@ All notable changes to fastfetch-tweak-tool are documented here.
   way on KiroTux too, which ships no fastfetch config.
 
 ### Technical Details
+- `ff_install.FISH_INTERACTIVE` prefixes the line when the rc is `config.fish`. `_without_fish_guard()` lets
+  `startup_state()` and `write_startup()` recognize the guarded, plain and commented forms. This is the same form
+  archlinux-tweak-tool writes, so each tool reads the other's line (tested both ways on a scratch config.fish).
 - `ff_config.use_fastfetch_default()` runs the usual `backup_config()` and then removes `config.jsonc`. A second
   click finds no config and leaves the backup alone. "No config" is no editor state you could Apply, so unlike the
   other Start-tab buttons this one acts at once. The intro text and the button tooltip say so.
@@ -22,7 +29,8 @@ All notable changes to fastfetch-tweak-tool are documented here.
   default modules, and Restore puts the old config back byte for byte. The button was checked visually on a Kiro VM.
 
 ### Files Modified
-- `usr/share/fastfetch-tweak-tool/ff_config.py`, `usr/share/fastfetch-tweak-tool/ff_gui.py`
+- `usr/share/fastfetch-tweak-tool/ff_config.py`, `usr/share/fastfetch-tweak-tool/ff_gui.py`,
+  `usr/share/fastfetch-tweak-tool/ff_install.py`
 
 ## 2026.09.28
 

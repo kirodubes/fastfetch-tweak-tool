@@ -13,6 +13,8 @@ import log
 
 PACMAN_CONF = "/etc/pacman.conf"
 REPORTING_HEADER = "# reporting tools"
+# fish reads config.fish for every shell, also scp/rsync over SSH: fastfetch output there breaks them
+FISH_INTERACTIVE = "status is-interactive; and "
 
 _TERMINALS = [
     ("alacritty", ["-e"]),
@@ -47,6 +49,11 @@ def shell_rc_path():
     return None
 
 
+def _without_fish_guard(line):
+    text = line.strip()
+    return text[len(FISH_INTERACTIVE):] if text.startswith(FISH_INTERACTIVE) else text
+
+
 def startup_state(rc=None):
     """Return (enabled, lolcat) for the fastfetch line in the shell rc."""
     rc = rc or shell_rc_path()
@@ -54,7 +61,7 @@ def startup_state(rc=None):
         return False, False
     with open(rc, "r", encoding="utf-8") as f:
         for line in f:
-            stripped = line.strip()
+            stripped = _without_fish_guard(line)
             if stripped.startswith("fastfetch"):
                 return True, "lolcat" in stripped
     return False, False
@@ -70,6 +77,8 @@ def write_startup(enabled, lolcat, rc=None):
     new_line = "#fastfetch"
     if enabled:
         new_line = "fastfetch | lolcat" if lolcat else "fastfetch"
+        if rc.endswith("config.fish"):
+            new_line = FISH_INTERACTIVE + new_line
 
     lines = []
     if os.path.isfile(rc):
@@ -90,7 +99,7 @@ def write_startup(enabled, lolcat, rc=None):
             (
                 i
                 for i in range(header_idx, len(lines))
-                if lines[i].strip().startswith(("fastfetch", "#fastfetch"))
+                if _without_fish_guard(lines[i]).startswith(("fastfetch", "#fastfetch"))
             ),
             -1,
         )
