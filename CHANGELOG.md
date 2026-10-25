@@ -2,6 +2,18 @@
 
 All notable changes to fastfetch-tweak-tool are documented here.
 
+## 2026.10.25
+
+### What Changed
+- Starting the Fastfetch Tweak Tool while it is open brings its window to the front instead of opening a second window.
+
+### Technical Details
+- GTK keeps one instance per `application_id`, so a second launch runs the activate handler again in the running app. It now presents `get_active_window()` when there is one. Same fix as ATT, ohmychadwm-tweak-tool and the KiroTux premium apps. Tested on a test box (Xvfb, own D-Bus session). Second launch: old 2 windows, new 1.
+
+### Files Modified
+- `usr/share/fastfetch-tweak-tool/fastfetch-tweak-tool.py`
+- `CHANGELOG.md`
+
 ## 2026.10.17
 
 ### What Changed

@@ -38,7 +38,8 @@ class FastfetchTweakApp(Gtk.Application):
         self.connect("activate", self.on_activate)
 
     def on_activate(self, _app):
-        window = Main(self)
+        # A second launch activates this running instance again: raise its window, don't add a second one
+        window = self.get_active_window() or Main(self)
         window.present()
 
 
