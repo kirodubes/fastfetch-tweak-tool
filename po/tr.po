@@ -1,0 +1,1333 @@
+# Turkish translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fastfetch-tweak-tool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 15:56+0100\n"
+"PO-Revision-Date: 2026-10-31 00:00+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:39
+msgid "custom…"
+msgstr "özel…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:48
+msgid "Big ASCII"
+msgstr "Büyük ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:49
+msgid "Small ASCII"
+msgstr "Küçük ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:50
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "None"
+msgstr "Yok"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:51
+msgid "Text file"
+msgstr "Metin dosyası"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:52
+msgid "Pokémon"
+msgstr "Pokémon"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:53
+msgid "Kiro art"
+msgstr "Kiro çizimleri"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:54
+msgid "Inline text"
+msgstr "Satır içi metin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:55
+msgid "Sixel image"
+msgstr "Sixel görseli"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:56
+msgid "Kitty image"
+msgstr "Kitty görseli"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:57
+msgid "Chafa image"
+msgstr "Chafa görseli"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Left"
+msgstr "Sol"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Right"
+msgstr "Sağ"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Top"
+msgstr "Üst"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:162
+msgid "♥ Support"
+msgstr "♥ Destekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:163
+msgid "Support Kiro's development"
+msgstr "Kiro'nun geliştirilmesini destekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:166
+msgid "Quit"
+msgstr "Çıkın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:186
+msgid "Start / Presets"
+msgstr "Başlangıç / hazır ayarlar"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:187
+msgid "Preset Gallery"
+msgstr "Hazır ayar galerisi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:188
+msgid "Modules"
+msgstr "Modüller"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:189
+msgid "Logo"
+msgstr "Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:190
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:191
+msgid "Install & Enable"
+msgstr "Yükleyin ve etkinleştirin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:192
+msgid "Raw"
+msgstr "Ham"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:214
+#, python-brace-format
+msgid "System ({language})"
+msgstr "Sistem ({language})"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:217
+msgid "Language"
+msgstr "Dil"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:222
+msgid "Restart now"
+msgstr "Şimdi yeniden başlatın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:228
+msgid "Saved. The app shows the new language when it starts again."
+msgstr "Kaydedildi. Uygulama yeniden başladığında yeni dili gösterir."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:245
+msgid "Best value: almost all goes to the project"
+msgstr "En iyi seçenek: neredeyse tamamı projeye gider"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:246
+msgid "Buy a coffee: one-off tip"
+msgstr "Kahve ısmarlayın: tek seferlik destek"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:247
+msgid "Membership tiers and perks"
+msgstr "Üyelik seviyeleri ve avantajlar"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:248
+msgid "Join on YouTube"
+msgstr "YouTube'da katılın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:249
+msgid "Direct one-off"
+msgstr "Doğrudan tek seferlik destek"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:258
+msgid "Support Kiro"
+msgstr "Kiro'yu destekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:264
+msgid "<b>Support Kiro</b>"
+msgstr "<b>Kiro'yu Destekleyin</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:266
+msgid ""
+"Kiro and its tools are built by one person for the community and kept free. "
+"If Fastfetch Tweak Tool saves you time, a little support keeps the work "
+"going. Thank you for being here."
+msgstr "Kiro ve araçları topluluk için tek kişi tarafından geliştiriliyor ve ücretsiz sunuluyor. Fastfetch Tweak Tool size zaman kazandırıyorsa, küçük bir destek çalışmanın sürmesine yardımcı olur. Burada olduğunuz için teşekkürler."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:280
+msgid "Close"
+msgstr "Kapatın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:335
+msgid "Ready"
+msgstr "Hazır"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:339
+msgid "Reload"
+msgstr "Yeniden yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:341
+msgid "Refresh preview"
+msgstr "Önizlemeyi yenileyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:343
+msgid "Apply"
+msgstr "Uygulayın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:358
+msgid ""
+"<b>Shown modules</b> — order matches output; select a row to edit options"
+msgstr "<b>Gösterilen modüller</b>: sıralama çıktıyla aynıdır; seçenekleri düzenlemek için bir satır seçin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:368
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:769
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:795
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:807
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:824
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1742
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1844
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2335
+msgid "(none)"
+msgstr "(yok)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:371
+msgid "Add module"
+msgstr "Modül ekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:382
+msgid "<b>Options for selected module</b>"
+msgstr "<b>Seçili modülün seçenekleri</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:384
+msgid ""
+"<span foreground='#e8820c'><b>↵ Press Enter in a text field to apply it.</"
+"b></span> Switches and colour pickers apply instantly."
+msgstr "<span foreground='#e8820c'><b>↵ Değeri uygulamak için metin alanında Enter tuşuna basın.</b></span> Anahtarlar ve renk seçiciler anında uygulanır."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:406
+msgid "Drag to reorder"
+msgstr "Sıralamak için sürükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:435
+msgid "↧ drop here to move to the end"
+msgstr "↧ sona taşımak için buraya bırakın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:477
+#, python-brace-format
+msgid "Moved {module} to position {position}"
+msgstr "{module}, {position}. sıraya taşındı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:495
+msgid "(all added)"
+msgstr "(hepsi eklendi)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:508
+msgid "can be added multiple times"
+msgstr "birden çok kez eklenebilir"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:523
+#, python-brace-format
+msgid "Added module: {module}"
+msgstr "Eklenen modül: {module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:533
+#, python-brace-format
+msgid "Removed module: {module}"
+msgstr "Kaldırılan modül: {module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:546
+msgid "<b>Common</b>"
+msgstr "<b>Genel</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:553
+#, python-brace-format
+msgid "<b>{module} options</b>"
+msgstr "<b>{module} seçenekleri</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:560
+msgid "Advanced (raw keys)"
+msgstr "Gelişmiş (ham anahtarlar)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:567
+msgid "Option key (e.g. percent, separator)"
+msgstr "Seçenek anahtarı (ör. percent, separator)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:569
+msgid "Value (true/false/number/text)"
+msgstr "Değer (true/false/sayı/metin)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:570
+msgid "Add option"
+msgstr "Seçenek ekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:712
+#, python-brace-format
+msgid "Set {key} to {value}"
+msgstr "{key} değeri {value} olarak ayarlandı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:744
+msgid "<b>Logo</b>"
+msgstr "<b>Logo</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:747
+msgid "Type:"
+msgstr "Tür:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:761
+msgid "🎲 Random"
+msgstr "🎲 Rastgele"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:762
+msgid "Pick a random logo: built-in, Pokémon or Kiro art"
+msgstr "Rastgele bir logo seçin: yerleşik, Pokémon veya Kiro çizimleri"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:768
+msgid "Built-in logo:"
+msgstr "Yerleşik logo:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:781
+msgid "Bundled image:"
+msgstr "Paketle gelen görsel:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:783
+msgid "(none bundled)"
+msgstr "(paketle gelen görsel yok)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:794
+msgid "Custom image:"
+msgstr "Özel görsel:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:797
+msgid "Choose file…"
+msgstr "Dosya seçin…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:806
+msgid "Pokémon:"
+msgstr "Pokémon:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "large"
+msgstr "büyük"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "small"
+msgstr "küçük"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:812
+msgid "Shiny"
+msgstr "Parlak"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:814
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:827
+msgid "Use"
+msgstr "Kullanın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:822
+msgid "Kiro art:"
+msgstr "Kiro çizimleri:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:834
+msgid "Inline text (ASCII art stored in the config):"
+msgstr "Satır içi metin (ASCII sanatı yapılandırmada saklanır):"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:837
+msgid "Text:"
+msgstr "Metin:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:840
+msgid "Type text, then Generate"
+msgstr "Metni yazın, ardından “Oluşturun” seçeneğini seçin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:846
+msgid "Tool:"
+msgstr "Araç:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:850
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1287
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1289
+msgid "Font:"
+msgstr "Yazı tipi:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:855
+msgid "Rainbow"
+msgstr "Gökkuşağı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:857
+msgid "Generate"
+msgstr "Oluşturun"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:860
+msgid "Insert Kiro figlet"
+msgstr "Kiro figlet çıktısını ekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:886
+msgid "Logo position:"
+msgstr "Logo konumu:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:897
+msgid "Logo width"
+msgstr "Logo genişliği"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:898
+msgid "Logo height"
+msgstr "Logo yüksekliği"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:899
+msgid "Logo padding top"
+msgstr "Logo üst boşluğu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:900
+msgid "Logo padding left"
+msgstr "Logo sol boşluğu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:908
+msgid ""
+"<b>Logo type — where the logo comes from:</b>\n"
+"• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked "
+"in “Built-in logo”.\n"
+"• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+"• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” "
+"row.\n"
+"• <b>Kiro art</b>: a bundled Kiro ASCII/ANSI logo, picked in the “Kiro art” "
+"row.\n"
+"• <b>Inline text</b>: ASCII art typed or generated in the box, stored in the "
+"config.\n"
+"• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render an image, picked in "
+"“Bundled image” or “Custom image”.\n"
+"• <b>None</b>: no logo.\n"
+"Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows without a "
+"background box.\n"
+"Tip: real images (Sixel/Kitty) need a graphics-capable terminal — kitty, "
+"Ghostty, Konsole, WezTerm or foot. <b>Alacritty shows no images</b>; use "
+"<b>Chafa</b> there (the image is rendered as coloured text)."
+msgstr "<b>Logo türü: logonun kaynağı</b>:\n• <b>Büyük ASCII</b> / <b>Küçük ASCII</b>: fastfetch içinde yerleşik logolar; “Yerleşik logo” satırından seçilir.\n• <b>Metin dosyası</b>: kendi ASCII sanatı metin dosyanız; “Özel görsel” satırından seçilir.\n• <b>Pokémon</b>: pokemon-colorscripts içindeki bir karakter; “Pokémon” satırından seçilir.\n• <b>Kiro çizimleri</b>: paketle gelen Kiro ASCII/ANSI logosu; “Kiro çizimleri” satırından seçilir.\n• <b>Satır içi metin</b>: alana yazılan veya oluşturulan ve yapılandırmada saklanan ASCII sanatı.\n• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: “Paketle gelen görsel” veya “Özel görsel” satırından seçilen bir görseli işler.\n• <b>Yok</b>: logo yok.\nİpucu: logonun arka plan kutusu olmadan görünmesi için saydam bir <b>PNG</b> kullanın (JPG değil).\nİpucu: gerçek görseller (Sixel/Kitty) için kitty, Ghostty, Konsole, WezTerm veya foot gibi grafik destekli bir terminal gerekir. <b>Alacritty görsel göstermez</b>; görseli renkli metin olarak işlemek için <b>Chafa</b> kullanın."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Celsius"
+msgstr "Santigrat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Fahrenheit"
+msgstr "Fahrenhayt"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Kelvin"
+msgstr "Kelvin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:930
+msgid "IEC — 1024 (KiB)"
+msgstr "IEC: 1024 (KiB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:931
+msgid "SI — 1000 (kB)"
+msgstr "SI: 1000 (kB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:932
+msgid "JEDEC — 1024 (KB)"
+msgstr "JEDEC: 1024 (KB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Both"
+msgstr "İkisi de"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Icon"
+msgstr "Simge"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Text"
+msgstr "Metin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "green"
+msgstr "yeşil"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "red"
+msgstr "kırmızı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "yellow"
+msgstr "sarı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:948
+msgid "<b>Appearance</b>"
+msgstr "<b>Görünüm</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:951
+msgid "Separator:"
+msgstr "Ayırıcı:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:961
+#: usr/share/fastfetch-tweak-tool/ff_options.py:17
+msgid "Key color"
+msgstr "Anahtar rengi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:962
+msgid "Title color"
+msgstr "Başlık rengi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:963
+#: usr/share/fastfetch-tweak-tool/ff_options.py:20
+msgid "Output color"
+msgstr "Çıktı rengi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:964
+msgid "Separator color"
+msgstr "Ayırıcı rengi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:965
+msgid "Bright ANSI colors"
+msgstr "Parlak ANSI renkleri"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:967
+msgid "<b>Key style</b>"
+msgstr "<b>Anahtar stili</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:968
+msgid "Key width"
+msgstr "Anahtar genişliği"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:969
+msgid "Key style"
+msgstr "Anahtar stili"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:970
+msgid "Key left padding"
+msgstr "Anahtar sol boşluğu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:972
+msgid "<b>Sizes &amp; temperature</b>"
+msgstr "<b>Boyutlar ve sıcaklık</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:973
+msgid "Size binary prefix"
+msgstr "Boyut ikili öneki"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:974
+msgid "Largest size unit"
+msgstr "En büyük boyut birimi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:975
+msgid "Temperature unit"
+msgstr "Sıcaklık birimi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:977
+msgid "<b>Threshold colors</b>"
+msgstr "<b>Eşik renkleri</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:978
+msgid "Colour percentages and temperatures by severity."
+msgstr "Yüzdeleri ve sıcaklıkları önem derecesine göre renklendirir."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:980
+#, python-brace-format
+msgid "Percent {state}"
+msgstr "Yüzde {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:983
+#, python-brace-format
+msgid "Temperature {state}"
+msgstr "Sıcaklık {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1008
+msgid "Default"
+msgstr "Varsayılan"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1056
+msgid "#hex / SGR"
+msgstr "#hex / SGR"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1142
+msgid "the chaotic-aur or cachyos repo"
+msgstr "chaotic-aur veya cachyos deposu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+msgid "Built-in"
+msgstr "Yerleşik"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+#, python-brace-format
+msgid "Built-in — {logo}"
+msgstr "Yerleşik: {logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1189
+msgid "inline text"
+msgstr "satır içi metin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1196
+#, python-brace-format
+msgid "{label} — {detail}"
+msgstr "{label}: {detail}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1204
+#, python-brace-format
+msgid "In use: {summary}"
+msgstr "Kullanımda: {summary}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1291
+msgid "Cowfile:"
+msgstr "Cowfile:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1314
+#, python-brace-format
+msgid "Insert Kiro {tool}"
+msgstr "Kiro {tool} ekleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1317
+#, python-brace-format
+msgid ""
+"<span foreground=\"#e8820c\">{tool} not installed — install it on the "
+"Install &amp; Enable tab</span>"
+msgstr "<span foreground=\"#e8820c\">{tool} yüklü değil. “Yükleyin ve etkinleştirin” sekmesinden yükleyin.</span>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1331
+#, python-brace-format
+msgid "{tool} not installed — install it on the Install & Enable tab"
+msgstr "{tool} yüklü değil. Yükleyin ve etkinleştirin sekmesinden yükleyin."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1354
+#, python-brace-format
+msgid "Failed to run {tool}: {error}"
+msgstr "{tool} çalıştırılamadı: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1386
+#, python-brace-format
+msgid "Random logo: {logo}"
+msgstr "Rastgele logo: {logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1429
+msgid ""
+"chafa not installed — install it on the Install & Enable tab to render image "
+"logos"
+msgstr "chafa yüklü değil. Görsel logoları işlemek için Yükleyin ve etkinleştirin sekmesinden yükleyin."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1431
+#, python-brace-format
+msgid "Logo type: {type}"
+msgstr "Logo türü: {type}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1468
+#, python-brace-format
+msgid "Pokémon logo: {name}"
+msgstr "Pokémon logosu: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1483
+#, python-brace-format
+msgid "Kiro art: {name}"
+msgstr "Kiro çizimleri: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1496
+#, python-brace-format
+msgid "Logo image: {name}"
+msgstr "Logo görseli: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1529
+msgid "<b>Fastfetch</b>"
+msgstr "<b>Fastfetch</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1535
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1618
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1713
+msgid "<b>installed</b>"
+msgstr "<b>yüklü</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1537
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1588
+msgid "Install"
+msgstr "Yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1539
+msgid "Remove"
+msgstr "Kaldırın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1549
+msgid "<b>Shell startup</b>"
+msgstr "<b>Kabuk başlangıcı</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+#, python-brace-format
+msgid "Target: {path}"
+msgstr "Hedef: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+msgid "no shell rc found"
+msgstr "kabuk rc dosyası bulunamadı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1554
+msgid "Run fastfetch on shell startup"
+msgstr "Kabuk başlangıcında fastfetch'i çalıştırın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1556
+msgid "Pipe through lolcat (rainbow)"
+msgstr "Çıktıyı lolcat üzerinden geçirin (gökkuşağı)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1560
+msgid "<b>Optional features</b>"
+msgstr "<b>İsteğe bağlı özellikler</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1564
+msgid "image logos as ASCII art"
+msgstr "görsel logolarını ASCII sanatı olarak gösterme"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1565
+msgid "sixel / kitty image logos"
+msgstr "Sixel / Kitty görsel logoları"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1566
+msgid "generate ASCII-art text logos"
+msgstr "ASCII sanatı metin logoları oluşturma"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1567
+msgid "fancy ASCII-art text logos"
+msgstr "süslü ASCII sanatı metin logoları"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1568
+msgid "speech-bubble text logos"
+msgstr "konuşma balonu metin logoları"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1569
+msgid "robot text logos"
+msgstr "robot metin logoları"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1570
+msgid "Pokémon logos"
+msgstr "Pokémon logoları"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1571
+msgid "rainbow output pipe"
+msgstr "gökkuşağı çıktısı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1572
+msgid "external-display brightness"
+msgstr "harici ekran parlaklığı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1575
+#, python-brace-format
+msgid "{package} — {description}"
+msgstr "{package}: {description}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1594
+msgid "<b>Privacy</b>"
+msgstr "<b>Gizlilik</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1596
+msgid "Omit public IP module from saved config"
+msgstr "publicip modülünü kaydedilen yapılandırmadan çıkarın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1600
+msgid ""
+"When on, Apply writes config.jsonc without the publicip module, so your real "
+"IP cannot leak from your config, for example while recording or sharing your "
+"screen."
+msgstr ""
+"Açık olduğunda “Uygulayın”, config.jsonc dosyasını publicip modülü olmadan "
+"yazar. Böylece örneğin kayıt veya ekran paylaşımı sırasında gerçek IP "
+"adresiniz yapılandırmadan sızmaz."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1612
+msgid "Public IP will be omitted from the saved config"
+msgstr "Genel IP adresi kaydedilen yapılandırmaya eklenmeyecek"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1613
+msgid "Public IP will be written to the saved config"
+msgstr "Genel IP adresi kaydedilecek yapılandırmaya yazılacak"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1653
+msgid "Install fastfetch first"
+msgstr "Önce fastfetch'i yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup disabled"
+msgstr "Kabuk başlangıcı devre dışı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup enabled"
+msgstr "Kabuk başlangıcı etkin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe disabled"
+msgstr "lolcat aktarımı devre dışı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe enabled"
+msgstr "lolcat aktarımı etkin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1672
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1688
+msgid "Already installed"
+msgstr "Zaten yüklü"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1675
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1695
+#, python-brace-format
+msgid "Installing {package}…"
+msgstr "{package} yükleniyor…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1680
+msgid "Not installed"
+msgstr "Yüklü değil"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1683
+#, python-brace-format
+msgid "Removing {package}…"
+msgstr "{package} kaldırılıyor…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+#, python-brace-format
+msgid "Needs {repository}"
+msgstr "{repository} deposu gerekiyor"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+msgid "Not available in your repositories"
+msgstr "Depolarınızda mevcut değil"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1717
+msgid "Package operation finished"
+msgstr "Paket işlemi tamamlandı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1731
+msgid ""
+"<b>Start here</b> — load an example preset or the Kiro default, watch the "
+"live preview, then tweak it on the Modules and Logo &amp; Appearance tabs. "
+"Nothing is written until you Apply — and before applying we always save a "
+"backup of your current config to <tt>config.jsonc.ftt-bak</tt>, so you can "
+"Restore backup any time. <b>Fastfetch default</b> is the exception: it "
+"removes your config at once (after the same backup), so fastfetch goes back "
+"to its own look with your distro logo."
+msgstr ""
+"<b>Buradan başlayın</b>: örnek bir hazır ayar veya Kiro varsayılanını "
+"yükleyin, canlı önizlemeyi izleyin ve ardından Modüller ile Logo ve görünüm "
+"sekmelerinde düzenleyin. “Uygulayın” seçeneğini seçene kadar hiçbir şey "
+"yazılmaz. Uygulamadan önce mevcut yapılandırmanızın yedeği her zaman <tt>"
+"config.jsonc.ftt-bak</tt> konumuna kaydedilir; böylece yedeği istediğiniz "
+"zaman geri yükleyebilirsiniz. <b>Fastfetch varsayılanı</b> bunun "
+"istisnasıdır: aynı yedekleme işleminden sonra yapılandırmanızı hemen "
+"kaldırır ve fastfetch'i dağıtım logonuzla kendi varsayılan görünümüne "
+"döndürür."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1740
+msgid "<b>Presets</b> — load into the editor, then Apply"
+msgstr ""
+"<b>Hazır ayarlar</b>: düzenleyiciye yükleyin, ardından “Uygulayın” "
+"seçeneğini seçin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1745
+msgid "Load preset"
+msgstr "Hazır ayarı yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1752
+msgid "Kiro default"
+msgstr "Kiro varsayılanı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1754
+msgid "Fastfetch default"
+msgstr "Fastfetch varsayılanı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1755
+msgid ""
+"Back up and remove config.jsonc right away: fastfetch shows its own default "
+"look with your distro logo. Restore backup brings yours back."
+msgstr "config.jsonc dosyasını hemen yedekleyip kaldırır: fastfetch dağıtımınızın logosuyla kendi varsayılan görünümünü gösterir. Kendi yapılandırmanızı geri getirmek için yedeği geri yükleyin."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1758
+msgid "Restore backup"
+msgstr "Yedeği geri yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1765
+msgid ""
+"<b>Your presets</b> — save the current editor as a reusable preset, or share "
+"it via export/import"
+msgstr "<b>Hazır ayarlarınız</b>: düzenleyicideki mevcut durumu yeniden kullanılabilir bir hazır ayar olarak kaydedin veya dışa/içe aktarma yoluyla paylaşın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1768
+#, python-brace-format
+msgid ""
+"Saved to <tt>{path}/</tt> — they appear in the list above and load anywhere "
+"with <tt>fastfetch -c &lt;name&gt;</tt>"
+msgstr "<tt>{path}/</tt> konumuna kaydedildi: yukarıdaki listede görünür ve her yerde <tt>fastfetch -c &lt;name&gt;</tt> ile yüklenebilir"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1773
+msgid "Preset name"
+msgstr "Hazır ayar adı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1775
+msgid "Save current as preset"
+msgstr "Mevcut durumu hazır ayar olarak kaydedin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1782
+msgid "Export…"
+msgstr "Dışa aktarın…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1784
+msgid "Import…"
+msgstr "İçe aktarın…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1802
+msgid "<b>Raw config.jsonc</b> — edits here preserve comments"
+msgstr "<b>Ham config.jsonc</b>: buradaki düzenlemeler yorumları korur"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1809
+msgid "Reload from file"
+msgstr "Dosyadan yeniden yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1811
+msgid "Validate & save raw"
+msgstr "Ham yapılandırmayı doğrulayın ve kaydedin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1832
+#, python-brace-format
+msgid "Preset not found: {name}"
+msgstr "Hazır ayar bulunamadı: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1838
+#, python-brace-format
+msgid "Loaded preset: {name}"
+msgstr "Yüklenen hazır ayar: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1853
+msgid "Enter a preset name first"
+msgstr "Önce hazır ayar adını girin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1857
+#, python-brace-format
+msgid "Saved to {path}"
+msgstr "{path} konumuna kaydedildi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1870
+#, python-brace-format
+msgid "Exported to {path}"
+msgstr "Dışa aktarılan konum: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1886
+#, python-brace-format
+msgid "Import failed: {error}"
+msgstr "İçe aktarma başarısız: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1891
+#, python-brace-format
+msgid "Imported {path}"
+msgstr "İçe aktarıldı: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1912
+msgid ""
+"<b>Preset gallery</b> — a real screenshot of each preset. Click <b>Load</b> "
+"to pull one into the editor; nothing is written until you Apply."
+msgstr ""
+"<b>Hazır ayar galerisi</b>: her hazır ayarın gerçek ekran görüntüsü. Birini "
+"düzenleyiciye almak için <b>Yükleyin</b> seçeneğini seçin; “Uygulayın” "
+"seçeneğini seçene kadar hiçbir şey yazılmaz."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1917
+msgid "Refresh"
+msgstr "Yenileyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1918
+msgid "Re-scan the preview-image folder after capturing new screenshots"
+msgstr "Yeni ekran görüntülerini aldıktan sonra önizleme görselleri klasörünü yeniden tarayın"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1926
+msgid "Logo:"
+msgstr "Logo:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1927
+msgid "All"
+msgstr "Tümü"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1929
+msgid "Normal"
+msgstr "Normal"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1931
+msgid "Small"
+msgstr "Küçük"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2002
+msgid "No presets found."
+msgstr "Hazır ayar bulunamadı."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2005
+msgid ""
+"No preview images yet — run <tt>tools/capture-preset-previews.sh</tt> in a "
+"VM, drop the <tt>.png</tt>s into <tt>images/preset_previews/</tt>, then "
+"Refresh."
+msgstr "Henüz önizleme görseli yok. Bir sanal makinede <tt>tools/capture-preset-previews.sh</tt> komutunu çalıştırın, <tt>.png</tt> dosyalarını <tt>images/preset_previews/</tt> içine bırakın ve yenileyin."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2009
+#, python-brace-format
+msgid ""
+"{count} preview image is available for {total} presets; {normal} presets use "
+"a normal logo and {small} use a small logo"
+msgid_plural ""
+"{count} preview images are available for {total} presets; {normal} presets "
+"use normal logos and {small} use small logos"
+msgstr[0] "{total} hazır ayar için {count} önizleme görseli kullanılabilir; {normal} hazır ayar normal, {small} ise küçük logo kullanır"
+msgstr[1] "{total} hazır ayar için {count} önizleme görseli kullanılabilir; {normal} hazır ayar normal, {small} ise küçük logo kullanır"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2044
+msgid "No preview yet"
+msgstr "Henüz önizleme yok"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2056
+msgid "Load"
+msgstr "Yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2070
+msgid "Loaded Kiro default"
+msgstr "Kiro varsayılanı yüklendi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2082
+msgid ""
+"Back to fastfetch's own default — config removed, Restore backup brings it "
+"back"
+msgstr "fastfetch kendi varsayılanına döndü: yapılandırma kaldırıldı; geri getirmek için yedeği geri yükleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2088
+msgid "Restored from backup"
+msgstr "Yedekten geri yüklendi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2090
+msgid "No backup to restore"
+msgstr "Geri yüklenecek yedek yok"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2095
+msgid "Raw view reloaded from file"
+msgstr "Ham görünüm dosyadan yeniden yüklendi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2103
+#, python-brace-format
+msgid "Invalid JSON — not saved: {error}"
+msgstr "Geçersiz JSON, kaydedilmedi: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2109
+msgid "Raw config saved"
+msgstr "Ham yapılandırma kaydedildi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2143
+msgid "<b>Live preview</b>"
+msgstr "<b>Canlı önizleme</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2147
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Show public IP"
+msgstr "Genel IP adresini gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2150
+msgid ""
+"Public IP is hidden in the preview by default — reveal it only when you are "
+"not sharing your screen or recording."
+msgstr "Genel IP adresi önizlemede varsayılan olarak gizlidir. Yalnızca ekranınızı paylaşmıyor veya kayıt yapmıyorken gösterin."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2183
+msgid "vte4 not installed — preview disabled."
+msgstr "vte4 yüklü değil; önizleme devre dışı."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2184
+msgid "Preview in terminal"
+msgstr "Terminalde önizleme"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2203
+msgid "(hidden — click ‘Show public IP’)"
+msgstr "(gizli; “Genel IP adresini gösterin” seçeneğine tıklayın)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Hide public IP"
+msgstr "Genel IP adresini gizleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2227
+msgid "Reveal your public IP in the preview?"
+msgstr "Genel IP adresiniz önizlemede gösterilsin mi?"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2229
+msgid ""
+"Your real public IP address will be fetched and shown in the live preview. "
+"Do not do this while sharing your screen or recording — it would expose your "
+"IP. It is hidden again the next time you open the tool."
+msgstr "Gerçek genel IP adresiniz alınarak canlı önizlemede gösterilir. IP adresinizi açığa çıkaracağından ekran paylaşırken veya kayıt yaparken bunu yapmayın. Aracı bir sonraki açışınızda yeniden gizlenir."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Cancel"
+msgstr "İptal"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Reveal public IP"
+msgstr "Genel IP adresini gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2257
+msgid "fastfetch not installed — preview unavailable"
+msgstr "fastfetch yüklü değil; önizleme kullanılamıyor"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2287
+msgid "fastfetch not installed"
+msgstr "fastfetch yüklü değil"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2304
+msgid "Configuration applied (public IP module omitted)"
+msgstr "Yapılandırma uygulandı (publicip modülü çıkarıldı)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2306
+msgid "Configuration applied"
+msgstr "Yapılandırma uygulandı"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2314
+msgid "Reloaded from config.jsonc"
+msgstr "config.jsonc dosyasından yeniden yüklendi"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:15
+msgid "Key label"
+msgstr "Anahtar etiketi"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:16
+msgid "Key icon"
+msgstr "Anahtar simgesi"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:18
+msgid "Key width (0 = off)"
+msgstr "Anahtar genişliği (0 = kapalı)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:19
+msgid "Format"
+msgstr "Biçim"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:27
+#: usr/share/fastfetch-tweak-tool/ff_options.py:32
+#: usr/share/fastfetch-tweak-tool/ff_options.py:45
+#: usr/share/fastfetch-tweak-tool/ff_options.py:76
+msgid "Show temperature"
+msgstr "Sıcaklığı gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:28
+msgid "Show P/E core count"
+msgstr "P/E çekirdek sayısını gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:29
+msgid "Temp sensor"
+msgstr "Sıcaklık sensörü"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:33
+msgid "Driver-specific info"
+msgstr "Sürücüye özgü bilgiler"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:34
+msgid "Hide type (integrated/discrete)"
+msgstr "Türü gizleyin (tümleşik/ayrık)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:37
+msgid "Show regular volumes"
+msgstr "Normal birimleri gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:38
+msgid "Show external volumes"
+msgstr "Harici birimleri gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:39
+msgid "Show hidden volumes"
+msgstr "Gizli birimleri gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:40
+msgid "Show read-only volumes"
+msgstr "Salt okunur birimleri gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:41
+msgid "Use available (not free) space"
+msgstr "Boş değil, kullanılabilir alanı kullanın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:42
+msgid "Folders (':'-separated)"
+msgstr "Klasörler (':' ile ayrılmış)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:48
+msgid "Show IPv4"
+msgstr "IPv4'ü gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:49
+msgid "Show IPv6"
+msgstr "IPv6'yı gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:50
+msgid "Show MAC"
+msgstr "MAC adresini gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:51
+#: usr/share/fastfetch-tweak-tool/ff_options.py:96
+#: usr/share/fastfetch-tweak-tool/ff_options.py:122
+msgid "Compact (one line)"
+msgstr "Kompakt (tek satır)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:52
+#: usr/share/fastfetch-tweak-tool/ff_options.py:80
+msgid "Default route only"
+msgstr "Yalnızca varsayılan rota"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:53
+#: usr/share/fastfetch-tweak-tool/ff_options.py:79
+msgid "Interface name prefix"
+msgstr "Arayüz adı öneki"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:56
+msgid "Separate swap from memory"
+msgstr "Swap alanını bellekten ayırın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:59
+msgid "Detect plugins"
+msgstr "Eklentileri algılayın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:62
+msgid "Use fully-qualified hostname"
+msgstr "Tam nitelikli ana bilgisayar adını kullanın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:65
+msgid "Command text"
+msgstr "Komut metni"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:66
+msgid "Shell"
+msgstr "Kabuk"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:67
+msgid "Parameter"
+msgstr "Parametre"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:68
+msgid "Use stderr instead of stdout"
+msgstr "stdout yerine stderr kullanın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:69
+msgid "Run in parallel"
+msgstr "Paralel çalıştırın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:70
+msgid "Split output into lines"
+msgstr "Çıktıyı satırlara bölün"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:73
+msgid "Name prefix filter"
+msgstr "Ad öneki filtresi"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:74
+msgid "Hide virtual disks"
+msgstr "Sanal diskleri gizleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:75
+msgid "Hide unused disks"
+msgstr "Kullanılmayan diskleri gizleyin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:81
+#: usr/share/fastfetch-tweak-tool/ff_options.py:105
+msgid "Detect total I/O"
+msgstr "Toplam G/Ç'yi algılayın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:82
+#: usr/share/fastfetch-tweak-tool/ff_options.py:106
+#: usr/share/fastfetch-tweak-tool/ff_options.py:110
+msgid "Sample wait time (ms)"
+msgstr "Örnekleme bekleme süresi (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:85
+msgid "Location"
+msgstr "Konum"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:86
+#: usr/share/fastfetch-tweak-tool/ff_options.py:91
+msgid "Timeout (ms)"
+msgstr "Zaman aşımı (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:87
+msgid "wttr.in format string"
+msgstr "wttr.in biçim dizesi"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:90
+msgid "Custom URL"
+msgstr "Özel URL"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:92
+msgid "Use IPv6"
+msgstr "IPv6 kullanın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:95
+msgid "Decimal places"
+msgstr "Ondalık basamak sayısı"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:99
+msgid "Compact type"
+msgstr "Kompakt tür"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:100
+msgid "Precise refresh rate"
+msgstr "Kesin yenileme hızı"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:101
+msgid "Sort order"
+msgstr "Sıralama düzeni"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:104
+msgid "Device name prefix"
+msgstr "Cihaz adı öneki"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:109
+msgid "Per-core usage"
+msgstr "Çekirdek başına kullanım"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:113
+msgid "Split per GPU"
+msgstr "GPU'ya göre ayırın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:114
+msgid "Use Vulkan"
+msgstr "Vulkan kullanın"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:115
+msgid "Show type"
+msgstr "Türü gösterin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:118
+msgid "DDC/CI sleep (ms)"
+msgstr "DDC/CI bekleme süresi (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:119
+msgid "Compact"
+msgstr "Kompakt"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:123
+msgid "Current user only"
+msgstr "Yalnızca geçerli kullanıcı"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:126
+msgid "Sound device type"
+msgstr "Ses aygıtı türü"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:129
+msgid "Combine duplicate managers"
+msgstr "Yinelenen yöneticileri birleştirin"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:132
+msgid "Show disconnected devices"
+msgstr "Bağlantısı kesilmiş aygıtları gösterin"
+
+#: po/fastfetch-tweak-tool.desktop.in:2
+msgid "Fastfetch Tweak Tool"
+msgstr "Fastfetch Tweak Tool"
+
+#: po/fastfetch-tweak-tool.desktop.in:3
+msgid "System Info Configuration Tool"
+msgstr "Sistem bilgisi yapılandırma aracı"
+
+#: po/fastfetch-tweak-tool.desktop.in:5
+msgid "Configure Fastfetch: modules, logo, colors, and shell startup"
+msgstr "Fastfetch'i yapılandırın: modüller, logo, renkler ve kabuk başlangıcı"
+
+#: po/fastfetch-tweak-tool.desktop.in:11
+msgid "fastfetch;neofetch;system;info;logo;module;tweak"
+msgstr "fastfetch;neofetch;system;info;logo;module;tweak;sistem;bilgi;logo;modül;ayar"

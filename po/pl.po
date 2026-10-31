@@ -1,0 +1,1320 @@
+# Polish translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fastfetch-tweak-tool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 15:56+0100\n"
+"PO-Revision-Date: 2026-10-31 00:00+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Polish\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:39
+msgid "custom…"
+msgstr "Niestandardowe…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:48
+msgid "Big ASCII"
+msgstr "Duży ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:49
+msgid "Small ASCII"
+msgstr "Mały ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:50
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "None"
+msgstr "Brak"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:51
+msgid "Text file"
+msgstr "Plik tekstowy"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:52
+msgid "Pokémon"
+msgstr "Pokémon"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:53
+msgid "Kiro art"
+msgstr "Grafika Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:54
+msgid "Inline text"
+msgstr "Tekst wbudowany"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:55
+msgid "Sixel image"
+msgstr "Obraz Sixel"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:56
+msgid "Kitty image"
+msgstr "Obraz Kitty"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:57
+msgid "Chafa image"
+msgstr "Obraz Chafa"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Left"
+msgstr "Lewo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Right"
+msgstr "Prawo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Top"
+msgstr "Góra"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:162
+msgid "♥ Support"
+msgstr "♥ Wesprzyj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:163
+msgid "Support Kiro's development"
+msgstr "Wesprzyj rozwój Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:166
+msgid "Quit"
+msgstr "Zakończ"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:186
+msgid "Start / Presets"
+msgstr "Start / Presety"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:187
+msgid "Preset Gallery"
+msgstr "Galeria presetów"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:188
+msgid "Modules"
+msgstr "Moduły"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:189
+msgid "Logo"
+msgstr "Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:190
+msgid "Appearance"
+msgstr "Wygląd"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:191
+msgid "Install & Enable"
+msgstr "Instalacja i włączanie"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:192
+msgid "Raw"
+msgstr "Surowy"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:214
+#, python-brace-format
+msgid "System ({language})"
+msgstr "Systemowy ({language})"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:217
+msgid "Language"
+msgstr "Język"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:222
+msgid "Restart now"
+msgstr "Uruchom ponownie"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:228
+msgid "Saved. The app shows the new language when it starts again."
+msgstr "Zapisano. Aplikacja pokaże nowy język przy następnym uruchomieniu."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:245
+msgid "Best value: almost all goes to the project"
+msgstr "Najlepszy sposób: prawie całość trafia do projektu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:246
+msgid "Buy a coffee: one-off tip"
+msgstr "Postaw kawę: jednorazowy datek"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:247
+msgid "Membership tiers and perks"
+msgstr "Poziomy członkostwa i korzyści"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:248
+msgid "Join on YouTube"
+msgstr "Dołącz na YouTube"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:249
+msgid "Direct one-off"
+msgstr "Bezpośredni jednorazowy datek"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:258
+msgid "Support Kiro"
+msgstr "Wesprzyj Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:264
+msgid "<b>Support Kiro</b>"
+msgstr "<b>Wesprzyj Kiro</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:266
+msgid ""
+"Kiro and its tools are built by one person for the community and kept free. "
+"If Fastfetch Tweak Tool saves you time, a little support keeps the work "
+"going. Thank you for being here."
+msgstr "Kiro i jego narzędzia tworzy jedna osoba dla społeczności i udostępnia je bezpłatnie. Jeśli Fastfetch Tweak Tool oszczędza Ci czas, niewielkie wsparcie pozwoli kontynuować pracę. Dziękujemy, że jesteś z nami."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:280
+msgid "Close"
+msgstr "Zamknij"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:335
+msgid "Ready"
+msgstr "Gotowe"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:339
+msgid "Reload"
+msgstr "Wczytaj ponownie"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:341
+msgid "Refresh preview"
+msgstr "Odśwież podgląd"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:343
+msgid "Apply"
+msgstr "Zastosuj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:358
+msgid ""
+"<b>Shown modules</b> — order matches output; select a row to edit options"
+msgstr "<b>Wyświetlane moduły</b>: kolejność odpowiada wynikowi; wybierz wiersz, aby edytować opcje"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:368
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:769
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:795
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:807
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:824
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1742
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1844
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2335
+msgid "(none)"
+msgstr "(brak)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:371
+msgid "Add module"
+msgstr "Dodaj moduł"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:382
+msgid "<b>Options for selected module</b>"
+msgstr "<b>Opcje wybranego modułu</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:384
+msgid ""
+"<span foreground='#e8820c'><b>↵ Press Enter in a text field to apply it.</"
+"b></span> Switches and colour pickers apply instantly."
+msgstr "<span foreground='#e8820c'><b>↵ Naciśnij Enter w polu tekstowym, aby zastosować.</b></span> Przełączniki i wybór kolorów działają od razu."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:406
+msgid "Drag to reorder"
+msgstr "Przeciągnij, aby zmienić kolejność"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:435
+msgid "↧ drop here to move to the end"
+msgstr "↧ upuść tutaj, aby przenieść na koniec"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:477
+#, python-brace-format
+msgid "Moved {module} to position {position}"
+msgstr "Przeniesiono {module} na pozycję {position}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:495
+msgid "(all added)"
+msgstr "(wszystkie dodane)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:508
+msgid "can be added multiple times"
+msgstr "można dodawać wielokrotnie"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:523
+#, python-brace-format
+msgid "Added module: {module}"
+msgstr "Dodano moduł: {module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:533
+#, python-brace-format
+msgid "Removed module: {module}"
+msgstr "Usunięto moduł: {module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:546
+msgid "<b>Common</b>"
+msgstr "<b>Ogólne</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:553
+#, python-brace-format
+msgid "<b>{module} options</b>"
+msgstr "<b>Opcje {module}</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:560
+msgid "Advanced (raw keys)"
+msgstr "Zaawansowane (surowe klucze)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:567
+msgid "Option key (e.g. percent, separator)"
+msgstr "Klucz opcji (np. percent, separator)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:569
+msgid "Value (true/false/number/text)"
+msgstr "Wartość (true/false/liczba/tekst)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:570
+msgid "Add option"
+msgstr "Dodaj opcję"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:712
+#, python-brace-format
+msgid "Set {key} to {value}"
+msgstr "Ustaw {key} na {value}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:744
+msgid "<b>Logo</b>"
+msgstr "<b>Logo</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:747
+msgid "Type:"
+msgstr "Typ:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:761
+msgid "🎲 Random"
+msgstr "🎲 Losowe"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:762
+msgid "Pick a random logo: built-in, Pokémon or Kiro art"
+msgstr "Wybierz losowe logo: wbudowane, Pokémon lub grafika Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:768
+msgid "Built-in logo:"
+msgstr "Wbudowane logo:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:781
+msgid "Bundled image:"
+msgstr "Dołączony obraz:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:783
+msgid "(none bundled)"
+msgstr "(brak dołączonego obrazu)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:794
+msgid "Custom image:"
+msgstr "Własny obraz:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:797
+msgid "Choose file…"
+msgstr "Wybierz plik…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:806
+msgid "Pokémon:"
+msgstr "Pokémon:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "large"
+msgstr "duży"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "small"
+msgstr "mały"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:812
+msgid "Shiny"
+msgstr "Błyszczący"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:814
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:827
+msgid "Use"
+msgstr "Użyj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:822
+msgid "Kiro art:"
+msgstr "Grafika Kiro:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:834
+msgid "Inline text (ASCII art stored in the config):"
+msgstr "Tekst wbudowany (grafika ASCII zapisana w konfiguracji):"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:837
+msgid "Text:"
+msgstr "Tekst:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:840
+msgid "Type text, then Generate"
+msgstr "Wpisz tekst, a następnie wybierz Generuj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:846
+msgid "Tool:"
+msgstr "Narzędzie:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:850
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1287
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1289
+msgid "Font:"
+msgstr "Czcionka:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:855
+msgid "Rainbow"
+msgstr "Tęczowe"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:857
+msgid "Generate"
+msgstr "Generuj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:860
+msgid "Insert Kiro figlet"
+msgstr "Wstaw figlet Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:886
+msgid "Logo position:"
+msgstr "Położenie logo:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:897
+msgid "Logo width"
+msgstr "Szerokość logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:898
+msgid "Logo height"
+msgstr "Wysokość logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:899
+msgid "Logo padding top"
+msgstr "Górny odstęp logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:900
+msgid "Logo padding left"
+msgstr "Lewy odstęp logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:908
+msgid ""
+"<b>Logo type — where the logo comes from:</b>\n"
+"• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked "
+"in “Built-in logo”.\n"
+"• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+"• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” "
+"row.\n"
+"• <b>Kiro art</b>: a bundled Kiro ASCII/ANSI logo, picked in the “Kiro art” "
+"row.\n"
+"• <b>Inline text</b>: ASCII art typed or generated in the box, stored in the "
+"config.\n"
+"• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render an image, picked in "
+"“Bundled image” or “Custom image”.\n"
+"• <b>None</b>: no logo.\n"
+"Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows without a "
+"background box.\n"
+"Tip: real images (Sixel/Kitty) need a graphics-capable terminal — kitty, "
+"Ghostty, Konsole, WezTerm or foot. <b>Alacritty shows no images</b>; use "
+"<b>Chafa</b> there (the image is rendered as coloured text)."
+msgstr "<b>Typ logo: skąd pochodzi logo:</b>\n• <b>Duży ASCII</b> / <b>Mały ASCII</b>: logo wbudowane w fastfetch, wybierane w „Wbudowane logo”.\n• <b>Plik tekstowy</b>: własny plik tekstowy z grafiką ASCII, wybierany w „Własny obraz”.\n• <b>Pokémon</b>: stworek z pokemon-colorscripts, wybierany w wierszu „Pokémon”.\n• <b>Grafika Kiro</b>: dołączone logo ASCII/ANSI Kiro, wybierane w wierszu „Grafika Kiro”.\n• <b>Tekst wbudowany</b>: grafika ASCII wpisana lub wygenerowana w polu i zapisana w konfiguracji.\n• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: wyświetlanie obrazu wybranego w „Dołączony obraz” lub „Własny obraz”.\n• <b>Brak</b>: bez logo.\nWskazówka: użyj przezroczystego pliku <b>PNG</b> (nie JPG), aby logo wyświetlało się bez tła.\nWskazówka: prawdziwe obrazy (Sixel/Kitty) wymagają terminala obsługującego grafikę, np. kitty, Ghostty, Konsole, WezTerm lub foot. <b>Alacritty nie wyświetla obrazów</b>; użyj tam <b>Chafa</b> (obraz będzie renderowany jako kolorowy tekst)."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Celsius"
+msgstr "Celsjusz"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Kelvin"
+msgstr "Kelwin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:930
+msgid "IEC — 1024 (KiB)"
+msgstr "IEC: 1024 (KiB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:931
+msgid "SI — 1000 (kB)"
+msgstr "SI: 1000 (kB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:932
+msgid "JEDEC — 1024 (KB)"
+msgstr "JEDEC: 1024 (KB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Both"
+msgstr "Oba"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Icon"
+msgstr "Ikona"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Text"
+msgstr "Tekst"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "green"
+msgstr "zielony"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "red"
+msgstr "czerwony"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "yellow"
+msgstr "żółty"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:948
+msgid "<b>Appearance</b>"
+msgstr "<b>Wygląd</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:951
+msgid "Separator:"
+msgstr "Separator:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:961
+#: usr/share/fastfetch-tweak-tool/ff_options.py:17
+msgid "Key color"
+msgstr "Kolor klucza"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:962
+msgid "Title color"
+msgstr "Kolor tytułu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:963
+#: usr/share/fastfetch-tweak-tool/ff_options.py:20
+msgid "Output color"
+msgstr "Kolor wyniku"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:964
+msgid "Separator color"
+msgstr "Kolor separatora"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:965
+msgid "Bright ANSI colors"
+msgstr "Jasne kolory ANSI"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:967
+msgid "<b>Key style</b>"
+msgstr "<b>Styl klucza</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:968
+msgid "Key width"
+msgstr "Szerokość klucza"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:969
+msgid "Key style"
+msgstr "Styl klucza"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:970
+msgid "Key left padding"
+msgstr "Lewe wcięcie klucza"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:972
+msgid "<b>Sizes &amp; temperature</b>"
+msgstr "<b>Rozmiary i temperatura</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:973
+msgid "Size binary prefix"
+msgstr "Prefiks binarny rozmiaru"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:974
+msgid "Largest size unit"
+msgstr "Największa jednostka rozmiaru"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:975
+msgid "Temperature unit"
+msgstr "Jednostka temperatury"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:977
+msgid "<b>Threshold colors</b>"
+msgstr "<b>Kolory progowe</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:978
+msgid "Colour percentages and temperatures by severity."
+msgstr "Kolory procentów i temperatury zależne od poziomu."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:980
+#, python-brace-format
+msgid "Percent {state}"
+msgstr "Procenty: {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:983
+#, python-brace-format
+msgid "Temperature {state}"
+msgstr "Temperatura: {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1008
+msgid "Default"
+msgstr "Domyślne"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1056
+msgid "#hex / SGR"
+msgstr "#hex / SGR"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1142
+msgid "the chaotic-aur or cachyos repo"
+msgstr "repozytorium chaotic-aur lub cachyos"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+msgid "Built-in"
+msgstr "Wbudowane"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+#, python-brace-format
+msgid "Built-in — {logo}"
+msgstr "Wbudowane: {logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1189
+msgid "inline text"
+msgstr "tekst wbudowany"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1196
+#, python-brace-format
+msgid "{label} — {detail}"
+msgstr "{label}: {detail}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1204
+#, python-brace-format
+msgid "In use: {summary}"
+msgstr "Używane: {summary}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1291
+msgid "Cowfile:"
+msgstr "Plik cow:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1314
+#, python-brace-format
+msgid "Insert Kiro {tool}"
+msgstr "Wstaw Kiro {tool}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1317
+#, python-brace-format
+msgid ""
+"<span foreground=\"#e8820c\">{tool} not installed — install it on the "
+"Install &amp; Enable tab</span>"
+msgstr "<span foreground=\"#e8820c\">{tool} nie jest zainstalowane. Zainstaluj je na karcie Instalacja i włączanie.</span>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1331
+#, python-brace-format
+msgid "{tool} not installed — install it on the Install & Enable tab"
+msgstr "{tool} nie jest zainstalowane. Zainstaluj je na karcie Instalacja i włączanie."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1354
+#, python-brace-format
+msgid "Failed to run {tool}: {error}"
+msgstr "Nie udało się uruchomić {tool}: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1386
+#, python-brace-format
+msgid "Random logo: {logo}"
+msgstr "Losowe logo: {logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1429
+msgid ""
+"chafa not installed — install it on the Install & Enable tab to render image "
+"logos"
+msgstr "chafa nie jest zainstalowane. Zainstaluj je na karcie Instalacja i włączanie, aby wyświetlać obrazy jako logo."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1431
+#, python-brace-format
+msgid "Logo type: {type}"
+msgstr "Typ logo: {type}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1468
+#, python-brace-format
+msgid "Pokémon logo: {name}"
+msgstr "Logo Pokémon: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1483
+#, python-brace-format
+msgid "Kiro art: {name}"
+msgstr "Grafika Kiro: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1496
+#, python-brace-format
+msgid "Logo image: {name}"
+msgstr "Obraz logo: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1529
+msgid "<b>Fastfetch</b>"
+msgstr "<b>Fastfetch</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1535
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1618
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1713
+msgid "<b>installed</b>"
+msgstr "<b>zainstalowany</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1537
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1588
+msgid "Install"
+msgstr "Zainstaluj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1539
+msgid "Remove"
+msgstr "Usuń"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1549
+msgid "<b>Shell startup</b>"
+msgstr "<b>Uruchamianie powłoki</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+#, python-brace-format
+msgid "Target: {path}"
+msgstr "Cel: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+msgid "no shell rc found"
+msgstr "nie znaleziono pliku konfiguracyjnego powłoki"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1554
+msgid "Run fastfetch on shell startup"
+msgstr "Uruchamiaj fastfetch przy starcie powłoki"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1556
+msgid "Pipe through lolcat (rainbow)"
+msgstr "Przepuszczaj wynik przez lolcat (tęczowe kolory)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1560
+msgid "<b>Optional features</b>"
+msgstr "<b>Funkcje opcjonalne</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1564
+msgid "image logos as ASCII art"
+msgstr "obrazy jako grafika ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1565
+msgid "sixel / kitty image logos"
+msgstr "obrazy Sixel / Kitty"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1566
+msgid "generate ASCII-art text logos"
+msgstr "generowanie tekstowych logo ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1567
+msgid "fancy ASCII-art text logos"
+msgstr "ozdobne tekstowe logo ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1568
+msgid "speech-bubble text logos"
+msgstr "tekstowe logo w dymku"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1569
+msgid "robot text logos"
+msgstr "tekstowe logo robota"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1570
+msgid "Pokémon logos"
+msgstr "loga Pokémon"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1571
+msgid "rainbow output pipe"
+msgstr "tęczowe kolory przez potok"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1572
+msgid "external-display brightness"
+msgstr "jasność zewnętrznego ekranu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1575
+#, python-brace-format
+msgid "{package} — {description}"
+msgstr "{package}: {description}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1594
+msgid "<b>Privacy</b>"
+msgstr "<b>Prywatność</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1596
+msgid "Omit public IP module from saved config"
+msgstr "Pomiń moduł publicip w zapisywanej konfiguracji"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1600
+msgid ""
+"When on, Apply writes config.jsonc without the publicip module, so your real "
+"IP cannot leak from your config, for example while recording or sharing your "
+"screen."
+msgstr "Gdy ta opcja jest włączona, Zastosuj zapisuje config.jsonc bez modułu publicip, dzięki czemu Twój prawdziwy adres IP nie wycieknie z konfiguracji, na przykład podczas nagrywania lub udostępniania ekranu."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1612
+msgid "Public IP will be omitted from the saved config"
+msgstr "Publiczny adres IP zostanie pominięty w zapisanej konfiguracji"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1613
+msgid "Public IP will be written to the saved config"
+msgstr "Publiczny adres IP zostanie zapisany w konfiguracji"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1653
+msgid "Install fastfetch first"
+msgstr "Najpierw zainstaluj fastfetch"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup disabled"
+msgstr "Wyłączono uruchamianie fastfetch przy starcie powłoki"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup enabled"
+msgstr "Włączono uruchamianie fastfetch przy starcie powłoki"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe disabled"
+msgstr "Potok lolcat wyłączony"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe enabled"
+msgstr "Potok lolcat włączony"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1672
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1688
+msgid "Already installed"
+msgstr "Już zainstalowano"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1675
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1695
+#, python-brace-format
+msgid "Installing {package}…"
+msgstr "Instalowanie {package}…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1680
+msgid "Not installed"
+msgstr "Nie zainstalowano"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1683
+#, python-brace-format
+msgid "Removing {package}…"
+msgstr "Usuwanie {package}…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+#, python-brace-format
+msgid "Needs {repository}"
+msgstr "Wymaga repozytorium {repository}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+msgid "Not available in your repositories"
+msgstr "Niedostępne w skonfigurowanych repozytoriach"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1717
+msgid "Package operation finished"
+msgstr "Operacja na pakiecie zakończona"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1731
+msgid ""
+"<b>Start here</b> — load an example preset or the Kiro default, watch the "
+"live preview, then tweak it on the Modules and Logo &amp; Appearance tabs. "
+"Nothing is written until you Apply — and before applying we always save a "
+"backup of your current config to <tt>config.jsonc.ftt-bak</tt>, so you can "
+"Restore backup any time. <b>Fastfetch default</b> is the exception: it "
+"removes your config at once (after the same backup), so fastfetch goes back "
+"to its own look with your distro logo."
+msgstr "<b>Zacznij tutaj</b>: wczytaj przykładowy preset lub domyślną konfigurację Kiro, obejrzyj podgląd na żywo, a potem dostosuj ustawienia na kartach Moduły oraz Logo i wygląd. Nic nie zostanie zapisane przed wybraniem Zastosuj, a przed zastosowaniem zawsze tworzymy kopię bieżącej konfiguracji w <tt>config.jsonc.ftt-bak</tt>, więc w każdej chwili możesz przywrócić kopię. Wyjątkiem jest <b>Domyślna konfiguracja Fastfetch</b>: usuwa ona konfigurację od razu (po wykonaniu takiej samej kopii), aby fastfetch wrócił do własnego wyglądu z logo dystrybucji."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1740
+msgid "<b>Presets</b> — load into the editor, then Apply"
+msgstr "<b>Presety</b>: wczytaj do edytora, a potem wybierz Zastosuj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1745
+msgid "Load preset"
+msgstr "Wczytaj preset"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1752
+msgid "Kiro default"
+msgstr "Domyślny Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1754
+msgid "Fastfetch default"
+msgstr "Domyślna konfiguracja Fastfetch"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1755
+msgid ""
+"Back up and remove config.jsonc right away: fastfetch shows its own default "
+"look with your distro logo. Restore backup brings yours back."
+msgstr "Od razu utwórz kopię zapasową i usuń config.jsonc: fastfetch pokaże własny domyślny wygląd z logo dystrybucji. Przywróć kopię, aby odzyskać swoją konfigurację."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1758
+msgid "Restore backup"
+msgstr "Przywróć kopię zapasową"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1765
+msgid ""
+"<b>Your presets</b> — save the current editor as a reusable preset, or share "
+"it via export/import"
+msgstr ""
+"<b>Twoje presety</b>: zapisz bieżącą konfigurację jako preset do ponownego "
+"użycia lub udostępnij go przez eksport/import"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1768
+#, python-brace-format
+msgid ""
+"Saved to <tt>{path}/</tt> — they appear in the list above and load anywhere "
+"with <tt>fastfetch -c &lt;name&gt;</tt>"
+msgstr "Zapisano w <tt>{path}/</tt>. Presety pojawią się na powyższej liście i można je wczytać w dowolnym miejscu poleceniem <tt>fastfetch -c &lt;name&gt;</tt>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1773
+msgid "Preset name"
+msgstr "Nazwa presetu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1775
+msgid "Save current as preset"
+msgstr "Zapisz bieżący jako preset"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1782
+msgid "Export…"
+msgstr "Eksportuj…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1784
+msgid "Import…"
+msgstr "Importuj…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1802
+msgid "<b>Raw config.jsonc</b> — edits here preserve comments"
+msgstr "<b>Surowy config.jsonc</b>: edycje tutaj zachowują komentarze"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1809
+msgid "Reload from file"
+msgstr "Wczytaj ponownie z pliku"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1811
+msgid "Validate & save raw"
+msgstr "Sprawdź i zapisz surowy plik"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1832
+#, python-brace-format
+msgid "Preset not found: {name}"
+msgstr "Nie znaleziono presetu: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1838
+#, python-brace-format
+msgid "Loaded preset: {name}"
+msgstr "Wczytano preset: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1853
+msgid "Enter a preset name first"
+msgstr "Najpierw wpisz nazwę presetu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1857
+#, python-brace-format
+msgid "Saved to {path}"
+msgstr "Zapisano w: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1870
+#, python-brace-format
+msgid "Exported to {path}"
+msgstr "Wyeksportowano do: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1886
+#, python-brace-format
+msgid "Import failed: {error}"
+msgstr "Import nie powiódł się: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1891
+#, python-brace-format
+msgid "Imported {path}"
+msgstr "Zaimportowano {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1912
+msgid ""
+"<b>Preset gallery</b> — a real screenshot of each preset. Click <b>Load</b> "
+"to pull one into the editor; nothing is written until you Apply."
+msgstr "<b>Galeria presetów</b>: prawdziwy zrzut ekranu każdego presetu. Kliknij <b>Wczytaj</b>, aby wczytać preset do edytora; nic nie zostanie zapisane przed wybraniem Zastosuj."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1917
+msgid "Refresh"
+msgstr "Odśwież"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1918
+msgid "Re-scan the preview-image folder after capturing new screenshots"
+msgstr "Ponownie przeskanuj folder obrazów podglądu po wykonaniu nowych zrzutów ekranu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1926
+msgid "Logo:"
+msgstr "Logo:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1927
+msgid "All"
+msgstr "Wszystkie"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1929
+msgid "Normal"
+msgstr "Normalny"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1931
+msgid "Small"
+msgstr "Mały"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2002
+msgid "No presets found."
+msgstr "Nie znaleziono presetów."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2005
+msgid ""
+"No preview images yet — run <tt>tools/capture-preset-previews.sh</tt> in a "
+"VM, drop the <tt>.png</tt>s into <tt>images/preset_previews/</tt>, then "
+"Refresh."
+msgstr "Brak podglądów. Uruchom <tt>tools/capture-preset-previews.sh</tt> w maszynie wirtualnej, skopiuj pliki <tt>.png</tt> do <tt>images/preset_previews/</tt>, a potem wybierz Odśwież."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2009
+#, python-brace-format
+msgid ""
+"{count} preview image is available for {total} presets; {normal} presets use "
+"a normal logo and {small} use a small logo"
+msgid_plural ""
+"{count} preview images are available for {total} presets; {normal} presets "
+"use normal logos and {small} use small logos"
+msgstr[0] "{count} obraz podglądu jest dostępny dla {total} presetów; {normal} presetów używa zwykłego logo, a {small} małego logo"
+msgstr[1] "{count} obrazy podglądu są dostępne dla {total} presetów; {normal} presety używają zwykłych logotypów, a {small} małych logotypów"
+msgstr[2] "{count} obrazów podglądu jest dostępnych dla {total} presetów; {normal} presetów używa zwykłych logotypów, a {small} małych logotypów"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2044
+msgid "No preview yet"
+msgstr "Brak podglądu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2056
+msgid "Load"
+msgstr "Wczytaj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2070
+msgid "Loaded Kiro default"
+msgstr "Wczytano domyślną konfigurację Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2082
+msgid ""
+"Back to fastfetch's own default — config removed, Restore backup brings it "
+"back"
+msgstr "Przywrócono domyślny wygląd fastfetch. Usunięto konfigurację, a kopię zapasową można przywrócić."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2088
+msgid "Restored from backup"
+msgstr "Przywrócono kopię zapasową"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2090
+msgid "No backup to restore"
+msgstr "Brak kopii zapasowej do przywrócenia"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2095
+msgid "Raw view reloaded from file"
+msgstr "Ponownie wczytano widok surowy z pliku"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2103
+#, python-brace-format
+msgid "Invalid JSON — not saved: {error}"
+msgstr "Nieprawidłowy JSON. Nie zapisano: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2109
+msgid "Raw config saved"
+msgstr "Zapisano surową konfigurację"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2143
+msgid "<b>Live preview</b>"
+msgstr "<b>Podgląd na żywo</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2147
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Show public IP"
+msgstr "Pokaż publiczny adres IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2150
+msgid ""
+"Public IP is hidden in the preview by default — reveal it only when you are "
+"not sharing your screen or recording."
+msgstr "Publiczny adres IP jest domyślnie ukryty w podglądzie. Ujawnij go tylko wtedy, gdy nie udostępniasz ekranu ani nie nagrywasz."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2183
+msgid "vte4 not installed — preview disabled."
+msgstr "vte4 nie jest zainstalowane. Podgląd wyłączony."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2184
+msgid "Preview in terminal"
+msgstr "Podgląd w terminalu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2203
+msgid "(hidden — click ‘Show public IP’)"
+msgstr "(ukryty. Kliknij „Pokaż publiczny adres IP”)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Hide public IP"
+msgstr "Ukryj publiczny adres IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2227
+msgid "Reveal your public IP in the preview?"
+msgstr "Ujawnić publiczny adres IP w podglądzie?"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2229
+msgid ""
+"Your real public IP address will be fetched and shown in the live preview. "
+"Do not do this while sharing your screen or recording — it would expose your "
+"IP. It is hidden again the next time you open the tool."
+msgstr "Twój prawdziwy publiczny adres IP zostanie pobrany i wyświetlony w podglądzie na żywo. Nie rób tego podczas udostępniania ekranu ani nagrywania, ponieważ ujawnisz swój adres IP. Zostanie ponownie ukryty przy następnym uruchomieniu narzędzia."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Reveal public IP"
+msgstr "Ujawnij publiczny adres IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2257
+msgid "fastfetch not installed — preview unavailable"
+msgstr "fastfetch nie jest zainstalowane. Podgląd jest niedostępny."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2287
+msgid "fastfetch not installed"
+msgstr "fastfetch nie jest zainstalowane"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2304
+msgid "Configuration applied (public IP module omitted)"
+msgstr "Zastosowano konfigurację (pominięto moduł publicip)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2306
+msgid "Configuration applied"
+msgstr "Zastosowano konfigurację"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2314
+msgid "Reloaded from config.jsonc"
+msgstr "Wczytano ponownie z config.jsonc"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:15
+msgid "Key label"
+msgstr "Etykieta klucza"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:16
+msgid "Key icon"
+msgstr "Ikona klucza"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:18
+msgid "Key width (0 = off)"
+msgstr "Szerokość klucza (0 = wyłączone)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:19
+msgid "Format"
+msgstr "Format"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:27
+#: usr/share/fastfetch-tweak-tool/ff_options.py:32
+#: usr/share/fastfetch-tweak-tool/ff_options.py:45
+#: usr/share/fastfetch-tweak-tool/ff_options.py:76
+msgid "Show temperature"
+msgstr "Pokaż temperaturę"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:28
+msgid "Show P/E core count"
+msgstr "Pokaż liczbę rdzeni P/E"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:29
+msgid "Temp sensor"
+msgstr "Czujnik temperatury"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:33
+msgid "Driver-specific info"
+msgstr "Informacje zależne od sterownika"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:34
+msgid "Hide type (integrated/discrete)"
+msgstr "Ukryj typ (zintegrowany/dyskretny)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:37
+msgid "Show regular volumes"
+msgstr "Pokaż zwykłe woluminy"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:38
+msgid "Show external volumes"
+msgstr "Pokaż woluminy zewnętrzne"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:39
+msgid "Show hidden volumes"
+msgstr "Pokaż ukryte woluminy"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:40
+msgid "Show read-only volumes"
+msgstr "Pokaż woluminy tylko do odczytu"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:41
+msgid "Use available (not free) space"
+msgstr "Użyj dostępnego (nie wolnego) miejsca"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:42
+msgid "Folders (':'-separated)"
+msgstr "Foldery (oddzielone „:”)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:48
+msgid "Show IPv4"
+msgstr "Pokaż IPv4"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:49
+msgid "Show IPv6"
+msgstr "Pokaż IPv6"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:50
+msgid "Show MAC"
+msgstr "Pokaż MAC"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:51
+#: usr/share/fastfetch-tweak-tool/ff_options.py:96
+#: usr/share/fastfetch-tweak-tool/ff_options.py:122
+msgid "Compact (one line)"
+msgstr "Kompaktowo (jeden wiersz)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:52
+#: usr/share/fastfetch-tweak-tool/ff_options.py:80
+msgid "Default route only"
+msgstr "Tylko trasa domyślna"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:53
+#: usr/share/fastfetch-tweak-tool/ff_options.py:79
+msgid "Interface name prefix"
+msgstr "Prefiks nazwy interfejsu"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:56
+msgid "Separate swap from memory"
+msgstr "Oddziel swap od pamięci"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:59
+msgid "Detect plugins"
+msgstr "Wykrywaj wtyczki"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:62
+msgid "Use fully-qualified hostname"
+msgstr "Używaj pełnej nazwy hosta"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:65
+msgid "Command text"
+msgstr "Tekst polecenia"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:66
+msgid "Shell"
+msgstr "Powłoka"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:67
+msgid "Parameter"
+msgstr "Parametr"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:68
+msgid "Use stderr instead of stdout"
+msgstr "Używaj stderr zamiast stdout"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:69
+msgid "Run in parallel"
+msgstr "Uruchamiaj równolegle"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:70
+msgid "Split output into lines"
+msgstr "Podziel wynik na wiersze"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:73
+msgid "Name prefix filter"
+msgstr "Filtr prefiksu nazwy"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:74
+msgid "Hide virtual disks"
+msgstr "Ukryj dyski wirtualne"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:75
+msgid "Hide unused disks"
+msgstr "Ukryj nieużywane dyski"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:81
+#: usr/share/fastfetch-tweak-tool/ff_options.py:105
+msgid "Detect total I/O"
+msgstr "Wykrywaj całkowite operacje wejścia/wyjścia"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:82
+#: usr/share/fastfetch-tweak-tool/ff_options.py:106
+#: usr/share/fastfetch-tweak-tool/ff_options.py:110
+msgid "Sample wait time (ms)"
+msgstr "Czas oczekiwania na próbkę (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:85
+msgid "Location"
+msgstr "Lokalizacja"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:86
+#: usr/share/fastfetch-tweak-tool/ff_options.py:91
+msgid "Timeout (ms)"
+msgstr "Limit czasu (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:87
+msgid "wttr.in format string"
+msgstr "Ciąg formatu wttr.in"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:90
+msgid "Custom URL"
+msgstr "Własny URL"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:92
+msgid "Use IPv6"
+msgstr "Użyj IPv6"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:95
+msgid "Decimal places"
+msgstr "Miejsca dziesiętne"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:99
+msgid "Compact type"
+msgstr "Typ kompaktowy"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:100
+msgid "Precise refresh rate"
+msgstr "Dokładna częstotliwość odświeżania"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:101
+msgid "Sort order"
+msgstr "Kolejność sortowania"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:104
+msgid "Device name prefix"
+msgstr "Prefiks nazwy urządzenia"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:109
+msgid "Per-core usage"
+msgstr "Użycie każdego rdzenia"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:113
+msgid "Split per GPU"
+msgstr "Podziel według GPU"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:114
+msgid "Use Vulkan"
+msgstr "Użyj Vulkan"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:115
+msgid "Show type"
+msgstr "Pokaż typ"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:118
+msgid "DDC/CI sleep (ms)"
+msgstr "Opóźnienie DDC/CI (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:119
+msgid "Compact"
+msgstr "Kompaktowo"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:123
+msgid "Current user only"
+msgstr "Tylko bieżący użytkownik"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:126
+msgid "Sound device type"
+msgstr "Typ urządzenia dźwiękowego"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:129
+msgid "Combine duplicate managers"
+msgstr "Połącz zduplikowane menedżery"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:132
+msgid "Show disconnected devices"
+msgstr "Pokaż odłączone urządzenia"
+
+#: po/fastfetch-tweak-tool.desktop.in:2
+msgid "Fastfetch Tweak Tool"
+msgstr "Fastfetch Tweak Tool"
+
+#: po/fastfetch-tweak-tool.desktop.in:3
+msgid "System Info Configuration Tool"
+msgstr "Narzędzie konfiguracji informacji o systemie"
+
+#: po/fastfetch-tweak-tool.desktop.in:5
+msgid "Configure Fastfetch: modules, logo, colors, and shell startup"
+msgstr "Konfiguruj Fastfetch: moduły, logo, kolory i uruchamianie powłoki"
+
+#: po/fastfetch-tweak-tool.desktop.in:11
+msgid "fastfetch;neofetch;system;info;logo;module;tweak"
+msgstr "fastfetch;neofetch;system;info;logo;module;tweak;konfiguracja;system;informacje;logo;moduł;dostosowanie"

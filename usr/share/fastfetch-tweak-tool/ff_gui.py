@@ -4,6 +4,7 @@ import os
 import random
 import shutil
 import subprocess
+import sys
 import threading
 
 import gi
@@ -21,10 +22,12 @@ except (ImportError, ValueError, Exception):
     _VTE_AVAILABLE = False
 
 import ff_config as cfg  # noqa: E402
+import ff_i18n as i18n  # noqa: E402
 import ff_install as install  # noqa: E402
 import ff_logos as catalog  # noqa: E402
 import ff_options as ffopts  # noqa: E402
 import log  # noqa: E402
+from ff_i18n import N_, _, ngettext  # noqa: E402
 
 PREVIEW_PATH = os.path.expanduser("~/.cache/fastfetch-tweak-tool/preview.jsonc")
 
@@ -33,7 +36,7 @@ _COLORS = [
     "default", "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
     "1", "2", "3", "4", "5", "6", "9", "10", "11", "12", "13", "14",
 ]
-_CUSTOM_COLOR = "custom…"  # dropdown sentinel: reveals the hex/SGR entry + colour picker
+_CUSTOM_COLOR = N_("custom…")  # dropdown sentinel: reveals the hex/SGR entry + colour picker
 
 # "pokemon" is a UI-only pseudo-type: it maps to fastfetch's real "file" type (see _TYPE_ALIAS),
 # detected on reload by the source path. The model never stores "pokemon".
@@ -42,17 +45,18 @@ _TYPE_ALIAS = {"pokemon": "file", "kiroart": "file"}
 
 # Human-friendly labels shown in the Type dropdown; the config value stays the raw key.
 _LOGO_TYPE_LABELS = {
-    "builtin": "Big ASCII",
-    "small": "Small ASCII",
-    "none": "None",
-    "file": "Text file",
-    "pokemon": "Pokémon",
-    "kiroart": "Kiro art",
-    "data": "Inline text",
-    "sixel": "Sixel image",
-    "kitty": "Kitty image",
-    "chafa": "Chafa image",
+    "builtin": N_("Big ASCII"),
+    "small": N_("Small ASCII"),
+    "none": N_("None"),
+    "file": N_("Text file"),
+    "pokemon": N_("Pokémon"),
+    "kiroart": N_("Kiro art"),
+    "data": N_("Inline text"),
+    "sixel": N_("Sixel image"),
+    "kitty": N_("Kitty image"),
+    "chafa": N_("Chafa image"),
 }
+_LOGO_POSITIONS = [("left", N_("Left")), ("top", N_("Top")), ("right", N_("Right"))]
 
 # Module types that may legitimately appear more than once — never filtered from the picker.
 _REPEATABLE_MODULES = {"break", "custom", "command", "separator"}
@@ -106,7 +110,7 @@ def _row(spacing=8):
 
 
 def _notify(window, message):
-    log.log_info(message)
+    log.log_info("Status message shown")
     if hasattr(window, "status_label"):
         window.status_label.set_text(message)
 
@@ -155,17 +159,21 @@ def build(window, ff_version):
     ver_text = f"fastfetch v{short}" if short[:1].isdigit() else f"fastfetch {short}"
     lbl_version = _label(ver_text, css_class="info-label")
     lbl_version.set_valign(Gtk.Align.CENTER)
-    btn_support = Gtk.Button(label="♥ Support")
-    btn_support.set_tooltip_text("Support Kiro's development")
+    btn_support = Gtk.Button(label=_("♥ Support"))
+    btn_support.set_tooltip_text(_("Support Kiro's development"))
     btn_support.add_css_class("support-button")
     btn_support.connect("clicked", lambda _w: _show_support_dialog(window))
-    btn_quit = Gtk.Button(label="Quit")
+    btn_quit = Gtk.Button(label=_("Quit"))
     btn_quit.connect("clicked", lambda _w: window.close())
+    language_dropdown, language_note, btn_restart = _language_controls()
     header.append(title)
     header.append(lbl_version)
+    header.append(language_dropdown)
+    header.append(btn_restart)
     header.append(btn_support)
     header.append(btn_quit)
     root.append(header)
+    root.append(language_note)
     root.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
 
     split = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL)
@@ -175,13 +183,13 @@ def build(window, ff_version):
     notebook = Gtk.Notebook()
     notebook.set_hexpand(True)
     notebook.set_size_request(280, -1)
-    notebook.append_page(_presets_tab(window), _label("Start / Presets"))
-    notebook.append_page(_preset_gallery_tab(window), _label("Preset Gallery"))
-    notebook.append_page(_modules_tab(window), _label("Modules"))
-    notebook.append_page(_logo_tab(window), _label("Logo"))
-    notebook.append_page(_appearance_tab(window), _label("Appearance"))
-    notebook.append_page(_install_tab(window), _label("Install & Enable"))
-    notebook.append_page(_raw_tab(window), _label("Raw"))
+    notebook.append_page(_presets_tab(window), _label(_("Start / Presets")))
+    notebook.append_page(_preset_gallery_tab(window), _label(_("Preset Gallery")))
+    notebook.append_page(_modules_tab(window), _label(_("Modules")))
+    notebook.append_page(_logo_tab(window), _label(_("Logo")))
+    notebook.append_page(_appearance_tab(window), _label(_("Appearance")))
+    notebook.append_page(_install_tab(window), _label(_("Install & Enable")))
+    notebook.append_page(_raw_tab(window), _label(_("Raw")))
 
     split.set_start_child(notebook)
     split.set_end_child(_preview_pane(window))
@@ -200,14 +208,45 @@ def build(window, ff_version):
     _refresh_preview(window)
 
 
+def _language_controls():
+    """Build the language selector and restart button for the header."""
+    codes = [None, *i18n.available()]
+    labels = [_("System ({language})").format(language=i18n.name(i18n.SYSTEM))]
+    labels.extend(i18n.name(code) for code in codes[1:])
+    dropdown = Gtk.DropDown.new_from_strings(labels)
+    dropdown.set_tooltip_text(_("Language"))
+    dropdown.set_selected(codes.index(i18n.chosen()))
+
+    note = _label("")
+    note.set_visible(False)
+    restart = Gtk.Button(label=_("Restart now"), visible=False)
+
+    def on_language_changed(_dropdown, _pspec):
+        code = codes[dropdown.get_selected()]
+        i18n.save_choice(code)
+        changed = (code or i18n.SYSTEM) != (i18n.ACTIVE or i18n.SYSTEM)
+        note.set_text(_("Saved. The app shows the new language when it starts again.") if changed else "")
+        note.set_visible(changed)
+        restart.set_visible(changed)
+
+    def on_restart(_widget):
+        argv = [sys.executable, os.path.abspath(sys.argv[0]), *sys.argv[1:]]
+        i18n.restore_environment()
+        os.execv(sys.executable, argv)
+
+    dropdown.connect("notify::selected", on_language_changed)
+    restart.connect("clicked", on_restart)
+    return dropdown, note, restart
+
+
 # Funding channels — canonical handles from kiro-website .github/FUNDING.yml
 # (GitHub Sponsors first: ~100% payout). Keep in sync if those change.
 _FUNDING = [
-    ("GitHub Sponsors", "https://github.com/sponsors/erikdubois", "best value — almost all goes to the project"),
-    ("Ko-fi", "https://ko-fi.com/erikdubois", "buy a coffee — one-off tip"),
-    ("Patreon", "https://www.patreon.com/kiroproject", "membership tiers + perks"),
-    ("YouTube membership", "https://www.youtube.com/@ErikDubois/join", "join on YouTube"),
-    ("PayPal", "https://www.paypal.me/erikdubois", "direct one-off"),
+    ("GitHub Sponsors", "https://github.com/sponsors/erikdubois", _("Best value: almost all goes to the project")),
+    ("Ko-fi", "https://ko-fi.com/erikdubois", _("Buy a coffee: one-off tip")),
+    ("Patreon", "https://www.patreon.com/kiroproject", _("Membership tiers and perks")),
+    ("YouTube membership", "https://www.youtube.com/@ErikDubois/join", _("Join on YouTube")),
+    ("PayPal", "https://www.paypal.me/erikdubois", _("Direct one-off")),
 ]
 
 
@@ -216,17 +255,17 @@ def _open_url(parent, url):
 
 
 def _show_support_dialog(window):
-    dlg = Gtk.Window(title="Support Kiro", transient_for=window, modal=True)
+    dlg = Gtk.Window(title=_("Support Kiro"), transient_for=window, modal=True)
     dlg.set_default_size(440, -1)
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
     for m in ("start", "end", "top", "bottom"):
         getattr(box, f"set_margin_{m}")(18)
 
-    box.append(_label("<b>Support Kiro</b>", markup=True))
+    box.append(_label(_("<b>Support Kiro</b>"), markup=True))
     box.append(_label(
-        "Kiro and its tools are built by one person, for the community — and kept free. "
-        "If Fastfetch Tweak Tool saves you time, a little support keeps the work going. "
-        "Thank you for being here.",
+        _("Kiro and its tools are built by one person for the community and kept free. "
+          "If Fastfetch Tweak Tool saves you time, a little support keeps the work going. "
+          "Thank you for being here."),
         wrap=True, max_chars=52, css_class="info-label"))
 
     for name, url, note in _FUNDING:
@@ -238,7 +277,7 @@ def _show_support_dialog(window):
         btn.connect("clicked", lambda _w, u=url: _open_url(dlg, u))
         box.append(btn)
 
-    close = Gtk.Button(label="Close")
+    close = Gtk.Button(label=_("Close"))
     close.set_halign(Gtk.Align.END)
     close.connect("clicked", lambda _w: dlg.close())
     box.append(close)
@@ -293,15 +332,15 @@ def _action_bar(window):
     bar.set_margin_top(6)
     bar.set_margin_bottom(6)
 
-    window.status_label = _label("Ready", css_class="info-label")
+    window.status_label = _label(_("Ready"), css_class="info-label")
     window.status_label.set_hexpand(True)
     bar.append(window.status_label)
 
-    btn_reload = Gtk.Button(label="Reload")
+    btn_reload = Gtk.Button(label=_("Reload"))
     btn_reload.connect("clicked", lambda _w: _reload(window))
-    btn_preview = Gtk.Button(label="Refresh preview")
+    btn_preview = Gtk.Button(label=_("Refresh preview"))
     btn_preview.connect("clicked", lambda _w: _refresh_preview(window))
-    btn_apply = Gtk.Button(label="Apply")
+    btn_apply = Gtk.Button(label=_("Apply"))
     btn_apply.add_css_class("suggested-action")
     btn_apply.connect("clicked", lambda _w: _apply(window))
 
@@ -316,7 +355,7 @@ def _action_bar(window):
 
 def _modules_tab(window):
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-    box.append(_label("<b>Shown modules</b> — order matches output; select a row to edit options",
+    box.append(_label(_("<b>Shown modules</b> — order matches output; select a row to edit options"),
                       markup=True))
 
     window.modules_list = Gtk.ListBox()
@@ -326,10 +365,10 @@ def _modules_tab(window):
     box.append(_scrolled(window.modules_list))
 
     add_row = _row()
-    window.add_module_combo = _searchable_dropdown(["(none)"])
+    window.add_module_combo = _searchable_dropdown([_("(none)")])
     window.add_module_combo.set_hexpand(True)
     window.add_module_combo.connect("notify::selected", lambda _d, _p: _update_add_module_desc(window))
-    btn_add = Gtk.Button(label="Add module")
+    btn_add = Gtk.Button(label=_("Add module"))
     btn_add.connect("clicked", lambda _w: _add_module(window))
     add_row.append(window.add_module_combo)
     add_row.append(btn_add)
@@ -340,10 +379,10 @@ def _modules_tab(window):
     _refresh_add_module_combo(window)
 
     window.module_options_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-    box.append(_label("<b>Options for selected module</b>", markup=True))
+    box.append(_label(_("<b>Options for selected module</b>"), markup=True))
     box.append(_label(
-        "<span foreground='#e8820c'><b>↵ Press Enter in a text field to apply it.</b></span> "
-        "Switches and colour pickers apply instantly.", markup=True))
+        _("<span foreground='#e8820c'><b>↵ Press Enter in a text field to apply it.</b></span> "
+          "Switches and colour pickers apply instantly."), markup=True))
     box.append(window.module_options_box)
 
     _rebuild_modules_list(window)
@@ -364,7 +403,7 @@ def _rebuild_modules_list(window):
         row = Gtk.ListBoxRow()
         line = _row()
         grip = _label("⠿", css_class="info-label")
-        grip.set_tooltip_text("Drag to reorder")
+        grip.set_tooltip_text(_("Drag to reorder"))
         line.append(grip)
         name = cfg.module_type(entry) or "(unknown)"
         suffix = "  ⚙" if isinstance(entry, dict) and cfg.module_options(entry) else ""
@@ -393,7 +432,7 @@ def _rebuild_modules_list(window):
 def _drop_sentinel(window):
     row = Gtk.ListBoxRow()
     row.set_selectable(False)
-    hint = _label("↧ drop here to move to the end", css_class="info-label")
+    hint = _label(_("↧ drop here to move to the end"), css_class="info-label")
     hint.set_margin_start(10)
     hint.set_margin_top(2)
     hint.set_margin_bottom(2)
@@ -433,7 +472,12 @@ def _on_module_drop(window, source_index, target_index):
     mods.insert(target_index, item)
     _rebuild_modules_list(window)
     _clear_box(window.module_options_box)
-    _notify(window, f"Moved {cfg.module_type(item)} to position {target_index + 1}")
+    _notify(
+        window,
+        _("Moved {module} to position {position}").format(
+            module=cfg.module_type(item), position=target_index + 1
+        ),
+    )
     return True
 
 
@@ -448,7 +492,7 @@ def _refresh_add_module_combo(window):
     if combo is None:
         return
     window.add_module_names = _available_modules(window)
-    combo.set_model(Gtk.StringList.new(window.add_module_names or ["(all added)"]))
+    combo.set_model(Gtk.StringList.new(window.add_module_names or [_("(all added)")]))
     _update_add_module_desc(window)
 
 
@@ -461,7 +505,7 @@ def _update_add_module_desc(window):
     name = names[index] if names and 0 <= index < len(names) else ""
     desc = catalog.module_descriptions().get(name, "")
     if desc and name in _REPEATABLE_MODULES:
-        desc += "  ·  can be added multiple times"
+        desc += "  ·  " + _("can be added multiple times")
     label.set_text(desc)
 
 
@@ -476,7 +520,7 @@ def _add_module(window):
     window.model["modules"].append(name)
     _rebuild_modules_list(window)
     _refresh_add_module_combo(window)
-    _notify(window, f"Added module: {name}")
+    _notify(window, _("Added module: {module}").format(module=name))
 
 
 def _remove_module(window, index):
@@ -486,7 +530,7 @@ def _remove_module(window, index):
         _rebuild_modules_list(window)
         _refresh_add_module_combo(window)
         _clear_box(window.module_options_box)
-        _notify(window, f"Removed module: {removed}")
+        _notify(window, _("Removed module: {module}").format(module=removed))
 
 
 def _show_module_options(window):
@@ -499,29 +543,31 @@ def _show_module_options(window):
     mtype = cfg.module_type(entry)
     options = cfg.module_options(entry)
 
-    window.module_options_box.append(_label("<b>Common</b>", markup=True))
+    window.module_options_box.append(_label(_("<b>Common</b>"), markup=True))
     for key, kind, label in ffopts.UNIVERSAL:
         window.module_options_box.append(_curated_row(window, index, options, key, kind, label))
 
     type_opts = ffopts.MODULE_OPTIONS.get(mtype, [])
     if type_opts:
-        window.module_options_box.append(_label(f"<b>{mtype} options</b>", markup=True))
+        window.module_options_box.append(
+            _label(_("<b>{module} options</b>").format(module=mtype), markup=True)
+        )
         for key, kind, label in type_opts:
             window.module_options_box.append(_curated_row(window, index, options, key, kind, label))
 
     curated = ffopts.curated_keys(mtype)
     extra = {k: v for k, v in options.items() if k not in curated}
-    expander = Gtk.Expander(label="Advanced (raw keys)")
+    expander = Gtk.Expander(label=_("Advanced (raw keys)"))
     adv = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
     for key, value in extra.items():
         adv.append(_option_row(window, index, key, value))
 
     add = _row()
     key_entry = Gtk.Entry()
-    key_entry.set_placeholder_text("option key (e.g. percent, separator)")
+    key_entry.set_placeholder_text(_("Option key (e.g. percent, separator)"))
     val_entry = Gtk.Entry()
-    val_entry.set_placeholder_text("value (true/false/number/text)")
-    btn = Gtk.Button(label="Add option")
+    val_entry.set_placeholder_text(_("Value (true/false/number/text)"))
+    btn = Gtk.Button(label=_("Add option"))
     btn.connect("clicked", lambda _w: _add_option(window, index, key_entry, val_entry))
     add.append(key_entry)
     add.append(val_entry)
@@ -533,7 +579,7 @@ def _show_module_options(window):
 
 def _curated_row(window, index, options, key, kind, label):
     line = _row()
-    line.append(_label(label + ":"))
+    line.append(_label(_(label) + ":"))
     value = options.get(key)
     if kind == "bool":
         sw = Gtk.Switch()
@@ -663,7 +709,7 @@ def _set_option(window, index, key, text):
         return
     entry = _ensure_object_module(window, index)
     entry[key] = _text_to_value(text)
-    _notify(window, f"Set {key} = {text}")
+    _notify(window, _("Set {key} to {value}").format(key=key, value=text))
 
 
 def _set_option_value(window, index, key, value):
@@ -695,11 +741,11 @@ def _logo_tab(window):
     box.set_margin_end(6)
     box.set_margin_top(6)
 
-    box.append(_label("<b>Logo</b>", markup=True))
+    box.append(_label(_("<b>Logo</b>"), markup=True))
 
     type_row = _row()
-    type_row.append(_label("Type:"))
-    window.logo_type = Gtk.DropDown.new_from_strings([_LOGO_TYPE_LABELS[t] for t in _LOGO_TYPES])
+    type_row.append(_label(_("Type:")))
+    window.logo_type = Gtk.DropDown.new_from_strings([_(_LOGO_TYPE_LABELS[t]) for t in _LOGO_TYPES])
     current_type = _ui_logo_type(window.model.get("logo"))
     if current_type in _LOGO_TYPES:
         window.logo_type.set_selected(_LOGO_TYPES.index(current_type))
@@ -712,15 +758,15 @@ def _logo_tab(window):
     type_spacer = Gtk.Box()
     type_spacer.set_hexpand(True)
     type_row.append(type_spacer)
-    btn_random = Gtk.Button(label="🎲 Random")
-    btn_random.set_tooltip_text("Pick a random logo — built-in, Pokémon or Kiro art")
+    btn_random = Gtk.Button(label=_("🎲 Random"))
+    btn_random.set_tooltip_text(_("Pick a random logo: built-in, Pokémon or Kiro art"))
     btn_random.connect("clicked", lambda _w: _random_logo(window))
     type_row.append(btn_random)
     box.append(type_row)
 
     logo_row = _row()
-    logo_row.append(_label("Built-in logo:"))
-    logos = catalog.logos() or ["(none)"]
+    logo_row.append(_label(_("Built-in logo:")))
+    logos = catalog.logos() or [_("(none)")]
     window.logo_source = _searchable_dropdown(logos)
     window.logo_source.set_hexpand(True)
     src = str((window.model.get("logo") or {}).get("source", ""))
@@ -732,9 +778,9 @@ def _logo_tab(window):
     box.append(logo_row)
 
     bundled_row = _row()
-    bundled_row.append(_label("Bundled image:"))
+    bundled_row.append(_label(_("Bundled image:")))
     window.logo_bundled_names = _bundled_logo_images()
-    window.logo_bundled = _searchable_dropdown(window.logo_bundled_names or ["(none bundled)"])
+    window.logo_bundled = _searchable_dropdown(window.logo_bundled_names or [_("(none bundled)")])
     window.logo_bundled.set_hexpand(True)
     cur_base = os.path.basename(str((window.model.get("logo") or {}).get("source", "")))
     if cur_base in window.logo_bundled_names:
@@ -745,10 +791,10 @@ def _logo_tab(window):
     box.append(bundled_row)
 
     file_row = _row()
-    file_row.append(_label("Custom image:"))
-    window.logo_file_label = _label("(none)", css_class="info-label")
+    file_row.append(_label(_("Custom image:")))
+    window.logo_file_label = _label(_("(none)"), css_class="info-label")
     window.logo_file_label.set_hexpand(True)
-    btn_file = Gtk.Button(label="Choose file…")
+    btn_file = Gtk.Button(label=_("Choose file…"))
     btn_file.connect("clicked", lambda _w: _choose_logo_file(window))
     file_row.append(window.logo_file_label)
     file_row.append(btn_file)
@@ -757,15 +803,15 @@ def _logo_tab(window):
 
     window.pokemon_names = _pokemon_names()
     poke_row = _row()
-    poke_row.append(_label("Pokémon:"))
-    window.pokemon_dd = _searchable_dropdown(window.pokemon_names or ["(none)"])
+    poke_row.append(_label(_("Pokémon:")))
+    window.pokemon_dd = _searchable_dropdown(window.pokemon_names or [_("(none)")])
     window.pokemon_dd.set_hexpand(True)
     poke_row.append(window.pokemon_dd)
-    window.pokemon_size = Gtk.DropDown.new_from_strings(_POKEMON_SIZES)
+    window.pokemon_size = Gtk.DropDown.new_from_strings([_("small"), _("large")])
     poke_row.append(window.pokemon_size)
-    window.pokemon_shiny = Gtk.CheckButton(label="Shiny")
+    window.pokemon_shiny = Gtk.CheckButton(label=_("Shiny"))
     poke_row.append(window.pokemon_shiny)
-    btn_poke = Gtk.Button(label="Use")
+    btn_poke = Gtk.Button(label=_("Use"))
     btn_poke.connect("clicked", lambda _w: _set_logo_pokemon(window))
     poke_row.append(btn_poke)
     window.pokemon_row = poke_row
@@ -773,45 +819,45 @@ def _logo_tab(window):
     _refresh_pokemon_controls(window)
 
     art_row = _row()
-    art_row.append(_label("Kiro art:"))
+    art_row.append(_label(_("Kiro art:")))
     window.kiroart_names = _kiro_art_names()
-    window.kiroart_dd = _searchable_dropdown(window.kiroart_names or ["(none)"])
+    window.kiroart_dd = _searchable_dropdown(window.kiroart_names or [_("(none)")])
     window.kiroart_dd.set_hexpand(True)
     art_row.append(window.kiroart_dd)
-    btn_art = Gtk.Button(label="Use")
+    btn_art = Gtk.Button(label=_("Use"))
     btn_art.connect("clicked", lambda _w: _set_logo_kiroart(window))
     art_row.append(btn_art)
     window.kiroart_row = art_row
     box.append(art_row)
 
     inline_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-    inline_row.append(_label("Inline text (ASCII art stored in the config):"))
+    inline_row.append(_label(_("Inline text (ASCII art stored in the config):")))
 
     text_row = _row()
-    text_row.append(_label("Text:"))
+    text_row.append(_label(_("Text:")))
     window.gen_entry = Gtk.Entry()
     window.gen_entry.set_hexpand(True)
-    window.gen_entry.set_placeholder_text("Type text, then Generate")
+    window.gen_entry.set_placeholder_text(_("Type text, then Generate"))
     window.gen_entry.connect("activate", lambda _e: _generate_text(window))
     text_row.append(window.gen_entry)
     inline_row.append(text_row)
 
     gen_bar = _row()
-    gen_bar.append(_label("Tool:"))
+    gen_bar.append(_label(_("Tool:")))
     window.gen_tool = Gtk.DropDown.new_from_strings(_TEXT_TOOLS)
     window.gen_tool.connect("notify::selected", lambda _d, _p: _refresh_gen_controls(window))
     gen_bar.append(window.gen_tool)
-    window.gen_variant_label = _label("Font:")
+    window.gen_variant_label = _label(_("Font:"))
     gen_bar.append(window.gen_variant_label)
     window.gen_variant_names = _figlet_fonts()
     window.gen_variant = _searchable_dropdown(window.gen_variant_names)
     gen_bar.append(window.gen_variant)
-    window.gen_rainbow = Gtk.CheckButton(label="Rainbow")
+    window.gen_rainbow = Gtk.CheckButton(label=_("Rainbow"))
     gen_bar.append(window.gen_rainbow)
-    window.gen_btn = Gtk.Button(label="Generate")
+    window.gen_btn = Gtk.Button(label=_("Generate"))
     window.gen_btn.connect("clicked", lambda _w: _generate_text(window))
     gen_bar.append(window.gen_btn)
-    window.gen_kiro_btn = Gtk.Button(label="Insert Kiro figlet")
+    window.gen_kiro_btn = Gtk.Button(label=_("Insert Kiro figlet"))
     window.gen_kiro_btn.connect("clicked", lambda _w: _generate_text(window, "Kiro"))
     gen_bar.append(window.gen_kiro_btn)
     inline_row.append(gen_bar)
@@ -837,39 +883,40 @@ def _logo_tab(window):
     box.append(inline_row)
 
     pos_row = _row()
-    pos_row.append(_label("Logo position:"))
-    window.logo_position = Gtk.DropDown.new_from_strings(_LOGO_POSITIONS)
+    pos_row.append(_label(_("Logo position:")))
+    position_values = [value for value, _label in _LOGO_POSITIONS]
+    window.logo_position = Gtk.DropDown.new_from_strings([_(label) for _value, label in _LOGO_POSITIONS])
     cur_pos = str((window.model.get("logo") or {}).get("position", "left"))
-    if cur_pos in _LOGO_POSITIONS:
-        window.logo_position.set_selected(_LOGO_POSITIONS.index(cur_pos))
+    if cur_pos in position_values:
+        window.logo_position.set_selected(position_values.index(cur_pos))
     window.logo_position.connect("notify::selected", lambda _d, _p: _set_logo_position(window))
     pos_row.append(window.logo_position)
 
     window.logo_dim_rows = [
         pos_row,
-        _spin_row(window, "Logo width", ("logo", "width"), 0, 200),
-        _spin_row(window, "Logo height", ("logo", "height"), 0, 200),
-        _spin_row(window, "Logo padding top", ("logo", "padding", "top"), 0, 50),
-        _spin_row(window, "Logo padding left", ("logo", "padding", "left"), 0, 50),
+        _spin_row(window, _("Logo width"), ("logo", "width"), 0, 200),
+        _spin_row(window, _("Logo height"), ("logo", "height"), 0, 200),
+        _spin_row(window, _("Logo padding top"), ("logo", "padding", "top"), 0, 50),
+        _spin_row(window, _("Logo padding left"), ("logo", "padding", "left"), 0, 50),
     ]
     for row in window.logo_dim_rows:
         box.append(row)
 
     _apply_logo_type_state(window)
 
-    help_text = (
+    help_text = _(
         "<b>Logo type — where the logo comes from:</b>\n"
         "• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked in “Built-in logo”.\n"
         "• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
         "• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” row.\n"
         "• <b>Kiro art</b>: a bundled Kiro ASCII/ANSI logo, picked in the “Kiro art” row.\n"
-        "• <b>Inline text</b>: ASCII art typed/generated into the box, stored in the config.\n"
-        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render a real image, picked in “Bundled image” or “Custom image”.\n"
-        "• <b>None</b>: no logo at all.\n"
-        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows with no background box.\n"
+        "• <b>Inline text</b>: ASCII art typed or generated in the box, stored in the config.\n"
+        "• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render an image, picked in “Bundled image” or “Custom image”.\n"
+        "• <b>None</b>: no logo.\n"
+        "Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows without a background box.\n"
         "Tip: real images (Sixel/Kitty) need a graphics-capable terminal — kitty, Ghostty, "
-        "Konsole, WezTerm, foot. <b>Alacritty shows no images</b>; use <b>Chafa</b> there (image "
-        "rendered as coloured text)."
+        "Konsole, WezTerm or foot. <b>Alacritty shows no images</b>; use <b>Chafa</b> there "
+        "(the image is rendered as coloured text)."
     )
     help_label = _label(help_text, css_class="info-label", markup=True, wrap=True, max_chars=60)
     help_label.set_margin_top(12)
@@ -878,10 +925,17 @@ def _logo_tab(window):
     return _scrolled(box)
 
 
-_TEMPUNIT_CHOICES = [("C", "Celsius"), ("F", "Fahrenheit"), ("K", "Kelvin")]
-_BINPREFIX_CHOICES = [("iec", "IEC — 1024 (KiB)"), ("si", "SI — 1000 (kB)"), ("jedec", "JEDEC — 1024 (KB)")]
+_TEMPUNIT_CHOICES = [("C", N_("Celsius")), ("F", N_("Fahrenheit")), ("K", N_("Kelvin"))]
+_BINPREFIX_CHOICES = [
+    ("iec", N_("IEC — 1024 (KiB)")),
+    ("si", N_("SI — 1000 (kB)")),
+    ("jedec", N_("JEDEC — 1024 (KB)")),
+]
 _MAXPREFIX_CHOICES = [(p, p) for p in ("B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")]
-_KEY_TYPE_CHOICES = [("none", "None"), ("string", "Text"), ("icon", "Icon"), ("both", "Both")]
+_KEY_TYPE_CHOICES = [
+    ("none", N_("None")), ("string", N_("Text")), ("icon", N_("Icon")), ("both", N_("Both"))
+]
+_COLOR_STATES = [("green", N_("green")), ("yellow", N_("yellow")), ("red", N_("red"))]
 
 
 def _appearance_tab(window):
@@ -891,10 +945,10 @@ def _appearance_tab(window):
     box.set_margin_end(6)
     box.set_margin_top(6)
 
-    box.append(_label("<b>Appearance</b>", markup=True))
+    box.append(_label(_("<b>Appearance</b>"), markup=True))
 
     sep_row = _row()
-    sep_row.append(_label("Separator:"))
+    sep_row.append(_label(_("Separator:")))
     window.separator_entry = Gtk.Entry()
     window.separator_entry.set_text(str((window.model.get("display") or {}).get("separator", ": ")))
     window.separator_entry.set_hexpand(True)
@@ -904,28 +958,30 @@ def _appearance_tab(window):
     sep_row.append(window.separator_entry)
     box.append(sep_row)
 
-    box.append(_color_row(window, "Key color", ("display", "color", "keys")))
-    box.append(_color_row(window, "Title color", ("display", "color", "title")))
-    box.append(_color_row(window, "Output color", ("display", "color", "output")))
-    box.append(_color_row(window, "Separator color", ("display", "color", "separator")))
-    box.append(_switch_setting_row(window, "Bright ANSI colors", ("display", "brightColor")))
+    box.append(_color_row(window, _("Key color"), ("display", "color", "keys")))
+    box.append(_color_row(window, _("Title color"), ("display", "color", "title")))
+    box.append(_color_row(window, _("Output color"), ("display", "color", "output")))
+    box.append(_color_row(window, _("Separator color"), ("display", "color", "separator")))
+    box.append(_switch_setting_row(window, _("Bright ANSI colors"), ("display", "brightColor")))
 
-    box.append(_label("<b>Key style</b>", markup=True))
-    box.append(_spin_row(window, "Key width", ("display", "key", "width"), 0, 60))
-    box.append(_enum_setting_row(window, "Key style", ("display", "key", "type"), _KEY_TYPE_CHOICES))
-    box.append(_spin_row(window, "Key left padding", ("display", "key", "paddingLeft"), 0, 20))
+    box.append(_label(_("<b>Key style</b>"), markup=True))
+    box.append(_spin_row(window, _("Key width"), ("display", "key", "width"), 0, 60))
+    box.append(_enum_setting_row(window, _("Key style"), ("display", "key", "type"), _KEY_TYPE_CHOICES))
+    box.append(_spin_row(window, _("Key left padding"), ("display", "key", "paddingLeft"), 0, 20))
 
-    box.append(_label("<b>Sizes &amp; temperature</b>", markup=True))
-    box.append(_enum_setting_row(window, "Size binary prefix", ("display", "size", "binaryPrefix"), _BINPREFIX_CHOICES))
-    box.append(_enum_setting_row(window, "Largest size unit", ("display", "size", "maxPrefix"), _MAXPREFIX_CHOICES))
-    box.append(_enum_setting_row(window, "Temperature unit", ("display", "temp", "unit"), _TEMPUNIT_CHOICES))
+    box.append(_label(_("<b>Sizes &amp; temperature</b>"), markup=True))
+    box.append(_enum_setting_row(window, _("Size binary prefix"), ("display", "size", "binaryPrefix"), _BINPREFIX_CHOICES))
+    box.append(_enum_setting_row(window, _("Largest size unit"), ("display", "size", "maxPrefix"), _MAXPREFIX_CHOICES))
+    box.append(_enum_setting_row(window, _("Temperature unit"), ("display", "temp", "unit"), _TEMPUNIT_CHOICES))
 
-    box.append(_label("<b>Threshold colors</b>", markup=True))
-    box.append(_label("Colour percentages and temperatures by severity.", css_class="dim-label"))
-    for state in ("green", "yellow", "red"):
-        box.append(_color_row(window, f"Percent {state}", ("display", "percent", "color", state)))
-    for state in ("green", "yellow", "red"):
-        box.append(_color_row(window, f"Temp {state}", ("display", "temp", "color", state)))
+    box.append(_label(_("<b>Threshold colors</b>"), markup=True))
+    box.append(_label(_("Colour percentages and temperatures by severity."), css_class="dim-label"))
+    for state, label in _COLOR_STATES:
+        box.append(_color_row(window, _("Percent {state}").format(state=_(label)),
+                              ("display", "percent", "color", state)))
+    for state, label in _COLOR_STATES:
+        box.append(_color_row(window, _("Temperature {state}").format(state=_(label)),
+                              ("display", "temp", "color", state)))
 
     return _scrolled(box)
 
@@ -949,7 +1005,7 @@ def _spin_row(window, label, path, low, high):
 def _enum_combo(value, choices, on_change):
     """Return a DropDown over choices=[(value, label), ...] with a leading '(default)' clearing the key."""
     vals = [None] + [v for v, _label in choices]
-    combo = Gtk.DropDown.new_from_strings(["(default)"] + [label for _v, label in choices])
+    combo = Gtk.DropDown.new_from_strings([_("Default")] + [_(label) for _v, label in choices])
     if value in vals:
         combo.set_selected(vals.index(value))
     combo.connect("notify::selected", lambda d, _p: on_change(vals[d.get_selected()]))
@@ -995,9 +1051,9 @@ def _color_editor(value, on_change):
     """
     names = _COLORS + [_CUSTOM_COLOR]
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-    dropdown = Gtk.DropDown.new_from_strings(names)
+    dropdown = Gtk.DropDown.new_from_strings([_(name) if name == _CUSTOM_COLOR else name for name in names])
     entry = Gtk.Entry()
-    entry.set_placeholder_text("#hex / SGR")
+    entry.set_placeholder_text(_("#hex / SGR"))
     entry.set_max_width_chars(12)
     button = Gtk.ColorDialogButton.new(Gtk.ColorDialog())
     state = {"guard": True}
@@ -1075,9 +1131,6 @@ _FILE_LOGO_TYPES = {"file", "sixel", "kitty", "chafa"}
 _INLINE_LOGO_TYPES = {"data"}
 _IMAGE_LOGO_TYPES = {"sixel", "kitty", "chafa"}
 _LOGO_IMG_EXTS = (".png", ".jpg", ".jpeg", ".svg", ".gif", ".bmp")
-_LOGO_POSITIONS = ["left", "top", "right"]  # fastfetch logo.position (no "bottom")
-
-
 _FIGLET_FONT_DIR = "/usr/share/figlet/fonts"
 _COWFILE_DIR = "/usr/share/cowsay/cows"
 _TEXT_TOOLS = ["figlet", "toilet", "cowsay", "botsay"]  # ASCII-art text generators
@@ -1086,7 +1139,7 @@ _POKEMON_SIZES = ["small", "large"]
 
 # Optional packages that aren't in the base Arch repos — what to tell the user if missing.
 _OPTIONAL_REPO_HINT = {
-    "pokemon-colorscripts-git": "the chaotic-aur or cachyos repo",
+    "pokemon-colorscripts-git": N_("the chaotic-aur or cachyos repo"),
 }
 
 
@@ -1126,28 +1179,30 @@ def _ui_logo_type(logo):
 def _logo_summary(logo):
     """One-line description of the active logo for the 'in use' indicator."""
     if isinstance(logo, str):
-        return f"Built-in — {logo}" if logo else "Built-in"
+        return _("Built-in — {logo}").format(logo=logo) if logo else _("Built-in")
     logo = logo or {}
     ui = _ui_logo_type(logo)
-    label = _LOGO_TYPE_LABELS.get(ui, ui)
+    label = _(_LOGO_TYPE_LABELS.get(ui, ui))
     real = str(logo.get("type", "builtin"))
     src = str(logo.get("source", ""))
     if real == "data":
-        detail = "inline text"
+        detail = _("inline text")
     elif real in ("builtin", "small"):
         detail = src
     elif src:
         detail = os.path.basename(src)
     else:
         detail = ""
-    return f"{label} — {detail}" if detail else label
+    return _("{label} — {detail}").format(label=label, detail=detail) if detail else label
 
 
 def _refresh_current_logo_label(window):
     """Update the dim 'in use' label next to Type from the on-disk config."""
     if not hasattr(window, "logo_current_label"):
         return
-    window.logo_current_label.set_text(f"in use: {_logo_summary(cfg.read_config().get('logo'))}")
+    window.logo_current_label.set_text(
+        _("In use: {summary}").format(summary=_logo_summary(cfg.read_config().get("logo")))
+    )
 
 
 def _bundled_logo_images():
@@ -1229,11 +1284,11 @@ def _set_logo_inline(window, buffer):
 def _gen_variants(tool):
     """Return (label, variant-list) for the given text tool; botsay has no variants."""
     if tool == "figlet":
-        return "Font:", _figlet_fonts()
+        return _("Font:"), _figlet_fonts()
     if tool == "toilet":
-        return "Font:", _toilet_fonts()
+        return _("Font:"), _toilet_fonts()
     if tool == "cowsay":
-        return "Cowfile:", _cowfiles()
+        return _("Cowfile:"), _cowfiles()
     return "", []
 
 
@@ -1256,10 +1311,12 @@ def _refresh_gen_controls(window):
     window.gen_rainbow.set_sensitive(ok and bool(shutil.which("lolcat")))
     window.gen_btn.set_sensitive(ok)
     window.gen_kiro_btn.set_sensitive(ok)
-    window.gen_kiro_btn.set_label(f"Insert Kiro {tool}")
+    window.gen_kiro_btn.set_label(_("Insert Kiro {tool}").format(tool=tool))
     window.gen_hint.set_visible(not ok)
     window.gen_hint.set_markup(
-        f'<span foreground="#e8820c">{tool} not installed — install it on the Install &amp; Enable tab</span>')
+        _('<span foreground="#e8820c">{tool} not installed — install it on the Install &amp; Enable tab</span>')
+        .format(tool=tool)
+    )
     return False
 
 
@@ -1269,7 +1326,10 @@ def _generate_text(window, override=None):
         return
     tool = _TEXT_TOOLS[window.gen_tool.get_selected()]
     if not shutil.which(tool):
-        _notify(window, f"{tool} not installed — install it on the Install & Enable tab")
+        _notify(
+            window,
+            _("{tool} not installed — install it on the Install & Enable tab").format(tool=tool),
+        )
         return
     font = window.gen_variant_names[window.gen_variant.get_selected()]
     if tool == "figlet":
@@ -1291,7 +1351,7 @@ def _generate_text(window, override=None):
                 art = subprocess.run(["lolcat", "-f"], input=art, capture_output=True, text=True, timeout=10).stdout
             GLib.idle_add(_apply_generated, window, art)
         except (OSError, subprocess.SubprocessError) as exc:
-            GLib.idle_add(_notify, window, f"{tool} failed: {exc}")
+            GLib.idle_add(_notify, window, _("Failed to run {tool}: {error}").format(tool=tool, error=exc))
 
     threading.Thread(target=work, daemon=True).start()
 
@@ -1323,7 +1383,7 @@ def _random_logo(window):
         logo["source"] = src
         window.logo_source.set_selected(logos.index(src))
         window.logo_type.set_selected(_LOGO_TYPES.index("builtin"))
-        _notify(window, f"Random logo: {src}")
+        _notify(window, _("Random logo: {logo}").format(logo=src))
     elif kind == "pokemon":
         window.pokemon_shiny.set_active(random.randrange(8) == 0)
         window.pokemon_dd.set_selected(random.randrange(len(window.pokemon_names)))
@@ -1334,7 +1394,7 @@ def _random_logo(window):
 
 
 def _set_logo_position(window):
-    window.model.setdefault("logo", {})["position"] = _LOGO_POSITIONS[window.logo_position.get_selected()]
+    window.model.setdefault("logo", {})["position"] = _LOGO_POSITIONS[window.logo_position.get_selected()][0]
 
 
 def _sync_source_for_type(window, value):
@@ -1366,9 +1426,9 @@ def _set_logo_type(window):
         _sync_source_for_type(window, value)
     _apply_logo_type_state(window)
     if value == "chafa" and not shutil.which("chafa"):
-        _notify(window, "chafa not installed — install it on the Install & Enable tab to render image logos")
+        _notify(window, _("chafa not installed — install it on the Install & Enable tab to render image logos"))
     else:
-        _notify(window, f"Logo type: {_LOGO_TYPE_LABELS[value]}")
+        _notify(window, _("Logo type: {type}").format(type=_(_LOGO_TYPE_LABELS[value])))
 
 
 def _set_logo_source(window):
@@ -1405,7 +1465,7 @@ def _set_logo_pokemon(window):
     logo["source"] = _pokemon_path(window)
     logo["type"] = "file"
     window.logo_type.set_selected(_LOGO_TYPES.index("pokemon"))
-    _notify(window, f"Pokémon logo: {name}")
+    _notify(window, _("Pokémon logo: {name}").format(name=name))
 
 
 def _kiro_art_path(window):
@@ -1420,7 +1480,7 @@ def _set_logo_kiroart(window):
     logo["source"] = _kiro_art_path(window)
     logo["type"] = "file"
     window.logo_type.set_selected(_LOGO_TYPES.index("kiroart"))
-    _notify(window, f"Kiro art: {name}")
+    _notify(window, _("Kiro art: {name}").format(name=name))
 
 
 def _set_logo_bundled(window):
@@ -1433,7 +1493,7 @@ def _set_logo_bundled(window):
     if str(logo.get("type", "")) not in _IMAGE_LOGO_TYPES:
         logo["type"] = "chafa"
         window.logo_type.set_selected(_LOGO_TYPES.index("chafa"))
-    _notify(window, f"Logo image: {name}")
+    _notify(window, _("Logo image: {name}").format(name=name))
 
 
 def _choose_logo_file(window):
@@ -1466,17 +1526,17 @@ def _install_tab(window):
 
     window.flash_gen = {}
 
-    box.append(_label("<b>Fastfetch</b>", markup=True))
+    box.append(_label(_("<b>Fastfetch</b>"), markup=True))
     ff_row = _row()
     installed = cfg.fastfetch_installed()
     window.ff_msg = _label("")
     spacer = Gtk.Box()
     spacer.set_hexpand(True)
-    window.ff_installed = _label("<b>installed</b>" if installed else "", markup=True,
+    window.ff_installed = _label(_("<b>installed</b>") if installed else "", markup=True,
                                  css_class="info-label")
-    btn_install = Gtk.Button(label="Install")
+    btn_install = Gtk.Button(label=_("Install"))
     btn_install.connect("clicked", lambda _w: _install_fastfetch(window))
-    btn_remove = Gtk.Button(label="Remove")
+    btn_remove = Gtk.Button(label=_("Remove"))
     btn_remove.add_css_class("destructive-action")
     btn_remove.connect("clicked", lambda _w: _remove_fastfetch(window))
     ff_row.append(window.ff_msg)
@@ -1486,33 +1546,33 @@ def _install_tab(window):
     ff_row.append(btn_remove)
     box.append(ff_row)
 
-    box.append(_label("<b>Shell startup</b>", markup=True))
+    box.append(_label(_("<b>Shell startup</b>"), markup=True))
     rc = install.shell_rc_path()
-    box.append(_label(f"Target: {rc or 'no shell rc found'}", css_class="info-label"))
+    box.append(_label(_("Target: {path}").format(path=rc or _("no shell rc found")), css_class="info-label"))
 
     enabled, lolcat = install.startup_state()
-    window.startup_switch = _switch_row(box, "Run fastfetch on shell startup", enabled,
+    window.startup_switch = _switch_row(box, _("Run fastfetch on shell startup"), enabled,
                                         lambda active: _toggle_startup(window, active))
-    window.lolcat_switch = _switch_row(box, "Pipe through lolcat (rainbow)", lolcat,
+    window.lolcat_switch = _switch_row(box, _("Pipe through lolcat (rainbow)"), lolcat,
                                        lambda active: _toggle_lolcat(window, active))
     window.lolcat_switch.set_sensitive(enabled)
 
-    box.append(_label("<b>Optional features</b>", markup=True))
+    box.append(_label(_("<b>Optional features</b>"), markup=True))
     window.optional_status = {}
     window.optional_msg = {}
     for pkg, desc in (
-        ("chafa", "image logos as ASCII art"),
-        ("imagemagick", "sixel / kitty image logos"),
-        ("figlet", "generate ASCII-art text logos"),
-        ("toilet", "fancy ASCII-art text logos"),
-        ("cowsay", "speech-bubble text logos"),
-        ("botsay", "robot text logos"),
-        ("pokemon-colorscripts-git", "Pokémon logos"),
-        ("lolcat", "rainbow output pipe"),
-        ("ddcutil", "external-display brightness"),
+        ("chafa", N_("image logos as ASCII art")),
+        ("imagemagick", N_("sixel / kitty image logos")),
+        ("figlet", N_("generate ASCII-art text logos")),
+        ("toilet", N_("fancy ASCII-art text logos")),
+        ("cowsay", N_("speech-bubble text logos")),
+        ("botsay", N_("robot text logos")),
+        ("pokemon-colorscripts-git", N_("Pokémon logos")),
+        ("lolcat", N_("rainbow output pipe")),
+        ("ddcutil", N_("external-display brightness")),
     ):
         opt = _row()
-        opt.append(_label(f"{pkg} — {desc}"))
+        opt.append(_label(_("{package} — {description}").format(package=pkg, description=_(desc))))
         sp1 = Gtk.Box()
         sp1.set_hexpand(True)
         opt.append(sp1)
@@ -1525,20 +1585,20 @@ def _install_tab(window):
         status = _label("", css_class="info-label")
         window.optional_status[pkg] = status
         opt.append(status)
-        btn = Gtk.Button(label="Install")
+        btn = Gtk.Button(label=_("Install"))
         btn.connect("clicked", lambda _w, p=pkg: _install_optional(window, p))
         opt.append(btn)
         box.append(opt)
     _refresh_optional_status(window)
 
-    box.append(_label("<b>Privacy</b>", markup=True))
+    box.append(_label(_("<b>Privacy</b>"), markup=True))
     window.hide_ip_switch = _switch_row(
-        box, "Omit public IP module from saved config",
+        box, _("Omit public IP module from saved config"),
         getattr(window, "hide_public_ip", True),
         lambda active: _toggle_hide_public_ip(window, active))
     box.append(_label(
-        "When on, Apply writes config.jsonc without the publicip module, so your real IP "
-        "can't leak from your config — e.g. while recording or sharing your screen.",
+        _("When on, Apply writes config.jsonc without the publicip module, so your real IP "
+          "cannot leak from your config, for example while recording or sharing your screen."),
         css_class="info-label", wrap=True, max_chars=60))
 
     return _scrolled(box)
@@ -1549,13 +1609,13 @@ def _toggle_hide_public_ip(window, active):
     prefs = cfg.load_prefs()
     prefs["hide_public_ip"] = active
     cfg.save_prefs(prefs)
-    _notify(window, "Public IP will be omitted from saved config" if active
-            else "Public IP will be written to saved config")
+    _notify(window, _("Public IP will be omitted from the saved config") if active
+            else _("Public IP will be written to the saved config"))
 
 
 def _refresh_optional_status(window):
     for pkg, label in getattr(window, "optional_status", {}).items():
-        label.set_markup("<b>installed</b>" if install.package_installed(pkg) else "")
+        label.set_markup(_("<b>installed</b>") if install.package_installed(pkg) else "")
 
 
 def _flash_message(window, key, label, text):
@@ -1590,49 +1650,49 @@ def _switch_row(box, label, active, callback):
 
 def _toggle_startup(window, active):
     if not cfg.fastfetch_installed() and active:
-        _notify(window, "Install fastfetch first")
+        _notify(window, _("Install fastfetch first"))
         window.startup_switch.set_active(False)
         return
     if not active and window.lolcat_switch.get_active():
         window.lolcat_switch.set_active(False)  # lolcat makes no sense without startup → follow off
     install.write_startup(active, window.lolcat_switch.get_active())
     window.lolcat_switch.set_sensitive(active)
-    _notify(window, f"Shell startup {'enabled' if active else 'disabled'}")
+    _notify(window, _("Shell startup enabled") if active else _("Shell startup disabled"))
 
 
 def _toggle_lolcat(window, active):
     if active and not install.installed_fastfetch_package():
         pass
     install.write_startup(window.startup_switch.get_active(), active)
-    _notify(window, f"lolcat pipe {'enabled' if active else 'disabled'}")
+    _notify(window, _("lolcat pipe enabled") if active else _("lolcat pipe disabled"))
 
 
 def _install_fastfetch(window):
     if cfg.fastfetch_installed():
-        _flash_message(window, "fastfetch", window.ff_msg, "already installed")
+        _flash_message(window, "fastfetch", window.ff_msg, _("Already installed"))
         return
     pkg = install.pick_fastfetch_package()
-    _run_pkg_op(window, install.install_package, pkg, f"Installing {pkg}…")
+    _run_pkg_op(window, install.install_package, pkg, _("Installing {package}…").format(package=pkg))
 
 
 def _remove_fastfetch(window):
     if not cfg.fastfetch_installed():
-        _flash_message(window, "fastfetch", window.ff_msg, "not installed")
+        _flash_message(window, "fastfetch", window.ff_msg, _("Not installed"))
         return
     pkg = install.installed_fastfetch_package() or "fastfetch"
-    _run_pkg_op(window, install.remove_package, pkg, f"Removing {pkg}…")
+    _run_pkg_op(window, install.remove_package, pkg, _("Removing {package}…").format(package=pkg))
 
 
 def _install_optional(window, pkg):
     if install.package_installed(pkg):
-        _flash_message(window, pkg, window.optional_msg.get(pkg), "already installed")
+        _flash_message(window, pkg, window.optional_msg.get(pkg), _("Already installed"))
         return
     if not install.package_in_repos(pkg):
         hint = _OPTIONAL_REPO_HINT.get(pkg)
-        msg = f"needs {hint}" if hint else "not available in your repos"
+        msg = _("Needs {repository}").format(repository=_(hint)) if hint else _("Not available in your repositories")
         _flash_message(window, pkg, window.optional_msg.get(pkg), msg)
         return
-    _run_pkg_op(window, install.install_package, pkg, f"Installing {pkg}…")
+    _run_pkg_op(window, install.install_package, pkg, _("Installing {package}…").format(package=pkg))
 
 
 def _run_pkg_op(window, func, pkg, message):
@@ -1650,11 +1710,11 @@ def _run_pkg_op(window, func, pkg, message):
 
 def _refresh_install_status(window):
     installed = cfg.fastfetch_installed()
-    window.ff_installed.set_markup("<b>installed</b>" if installed else "")
+    window.ff_installed.set_markup(_("<b>installed</b>") if installed else "")
     _refresh_optional_status(window)
     _refresh_gen_controls(window)
     _refresh_pokemon_controls(window)
-    _notify(window, "Package operation finished")
+    _notify(window, _("Package operation finished"))
     return False
 
 
@@ -1668,60 +1728,60 @@ def _presets_tab(window):
     box.set_margin_top(6)
 
     intro = _label(
-        "<b>Start here</b> — load an example preset or the Kiro default, watch the live "
+        _("<b>Start here</b> — load an example preset or the Kiro default, watch the live "
         "preview, then tweak it on the Modules and Logo &amp; Appearance tabs. Nothing is "
         "written until you Apply — and before applying we always save a backup of your "
         "current config to <tt>config.jsonc.ftt-bak</tt>, so you can Restore backup any time. "
         "<b>Fastfetch default</b> is the exception: it removes your config at once (after the "
-        "same backup), so fastfetch goes back to its own look with your distro logo.",
+        "same backup), so fastfetch goes back to its own look with your distro logo."),
         markup=True, wrap=True, max_chars=60)
     box.append(intro)
 
-    box.append(_label("<b>Presets</b> — load into the editor, then Apply", markup=True))
+    box.append(_label(_("<b>Presets</b> — load into the editor, then Apply"), markup=True))
     preset_row = _row()
-    presets = catalog.presets() or ["(none)"]
+    presets = catalog.presets() or [_("(none)")]
     window.preset_combo = _searchable_dropdown(presets)
     window.preset_combo.set_hexpand(True)
-    btn_load = Gtk.Button(label="Load preset")
+    btn_load = Gtk.Button(label=_("Load preset"))
     btn_load.connect("clicked", lambda _w: _load_preset(window))
     preset_row.append(window.preset_combo)
     preset_row.append(btn_load)
     box.append(preset_row)
 
     quick = _row()
-    btn_kiro = Gtk.Button(label="Kiro default")
+    btn_kiro = Gtk.Button(label=_("Kiro default"))
     btn_kiro.connect("clicked", lambda _w: _load_kiro(window))
-    btn_ff_default = Gtk.Button(label="Fastfetch default")
-    btn_ff_default.set_tooltip_text("Back up and remove config.jsonc right away: fastfetch shows its own "
-                                    "default look with your distro logo. Restore backup brings yours back.")
+    btn_ff_default = Gtk.Button(label=_("Fastfetch default"))
+    btn_ff_default.set_tooltip_text(_("Back up and remove config.jsonc right away: fastfetch shows its own "
+                                      "default look with your distro logo. Restore backup brings yours back."))
     btn_ff_default.connect("clicked", lambda _w: _use_fastfetch_default(window))
-    btn_restore = Gtk.Button(label="Restore backup")
+    btn_restore = Gtk.Button(label=_("Restore backup"))
     btn_restore.connect("clicked", lambda _w: _restore(window))
     quick.append(btn_kiro)
     quick.append(btn_ff_default)
     quick.append(btn_restore)
     box.append(quick)
 
-    box.append(_label("<b>Your presets</b> — save the current editor as a reusable preset, "
-                      "or share it via export/import", markup=True, wrap=True, max_chars=60))
+    box.append(_label(_("<b>Your presets</b> — save the current editor as a reusable preset, "
+                        "or share it via export/import"), markup=True, wrap=True, max_chars=60))
     saved_dir = cfg.USER_PRESET_DIR.replace(os.path.expanduser("~"), "~")
-    box.append(_label(f"Saved to <tt>{saved_dir}/</tt> — they appear in the list above "
-                      "and load anywhere with <tt>fastfetch -c &lt;name&gt;</tt>",
+    box.append(_label(_("Saved to <tt>{path}/</tt> — they appear in the list above "
+                        "and load anywhere with <tt>fastfetch -c &lt;name&gt;</tt>").format(path=saved_dir),
                       markup=True, wrap=True, max_chars=60, css_class="info-label"))
     save_row = _row()
     window.user_preset_name = Gtk.Entry()
-    window.user_preset_name.set_placeholder_text("preset name")
+    window.user_preset_name.set_placeholder_text(_("Preset name"))
     window.user_preset_name.set_hexpand(True)
-    btn_save = Gtk.Button(label="Save current as preset")
+    btn_save = Gtk.Button(label=_("Save current as preset"))
     btn_save.connect("clicked", lambda _w: _save_user_preset(window))
     save_row.append(window.user_preset_name)
     save_row.append(btn_save)
     box.append(save_row)
 
     io_row = _row()
-    btn_export = Gtk.Button(label="Export…")
+    btn_export = Gtk.Button(label=_("Export…"))
     btn_export.connect("clicked", lambda _w: _export_config(window))
-    btn_import = Gtk.Button(label="Import…")
+    btn_import = Gtk.Button(label=_("Import…"))
     btn_import.connect("clicked", lambda _w: _import_config(window))
     io_row.append(btn_export)
     io_row.append(btn_import)
@@ -1739,16 +1799,16 @@ def _raw_tab(window):
     box.set_margin_end(10)
     box.set_margin_top(6)
 
-    box.append(_label("<b>Raw config.jsonc</b> — edits here preserve comments", markup=True))
+    box.append(_label(_("<b>Raw config.jsonc</b> — edits here preserve comments"), markup=True))
     window.raw_view = Gtk.TextView()
     window.raw_view.set_monospace(True)
     window.raw_view.get_buffer().set_text(cfg.read_config_text() or cfg.serialize(window.model))
     box.append(_scrolled(window.raw_view))
 
     raw_actions = _row()
-    btn_raw_reload = Gtk.Button(label="Reload from file")
+    btn_raw_reload = Gtk.Button(label=_("Reload from file"))
     btn_raw_reload.connect("clicked", lambda _w: _raw_reload(window))
-    btn_raw_save = Gtk.Button(label="Validate & save raw")
+    btn_raw_save = Gtk.Button(label=_("Validate & save raw"))
     btn_raw_save.connect("clicked", lambda _w: _raw_save(window))
     raw_actions.append(btn_raw_reload)
     raw_actions.append(btn_raw_save)
@@ -1769,19 +1829,19 @@ def _load_preset_named(window, name):
 
     path = cfg.resolve_preset_path(name)
     if not path:
-        _notify(window, f"Preset not found: {name}")
+        _notify(window, _("Preset not found: {name}").format(name=name))
         return
     with open(path, "r", encoding="utf-8") as f:
         window.model = _normalize_model(json.loads(cfg.strip_jsonc(f.read())))
     _reload_widgets(window)
     _refresh_preview(window)
-    _notify(window, f"Loaded preset: {name}")
+    _notify(window, _("Loaded preset: {name}").format(name=name))
 
 
 def _refresh_presets(window):
     """Invalidate the preset cache and repopulate the dropdown + gallery."""
     catalog.clear()
-    names = catalog.presets() or ["(none)"]
+    names = catalog.presets() or [_("(none)")]
     window.preset_combo.set_model(Gtk.StringList.new(names))
     if hasattr(window, "gallery_flow"):
         _populate_gallery(window)
@@ -1790,11 +1850,11 @@ def _refresh_presets(window):
 def _save_user_preset(window):
     path = cfg.save_user_preset(window.user_preset_name.get_text(), window.model)
     if not path:
-        _notify(window, "Enter a preset name first")
+        _notify(window, _("Enter a preset name first"))
         return
     window.user_preset_name.set_text("")
     _refresh_presets(window)
-    _notify(window, f"Saved to {path}")
+    _notify(window, _("Saved to {path}").format(path=path))
 
 
 def _export_config(window):
@@ -1807,7 +1867,7 @@ def _export_config(window):
         except GLib.Error:
             return
         cfg.export_config(window.model, file.get_path())
-        _notify(window, f"Exported to {file.get_path()}")
+        _notify(window, _("Exported to {path}").format(path=file.get_path()))
 
     dialog.save(window, None, done)
 
@@ -1823,12 +1883,12 @@ def _import_config(window):
         try:
             raw = cfg.read_model_file(file.get_path())
         except Exception as e:
-            _notify(window, f"Import failed: {e}")
+            _notify(window, _("Import failed: {error}").format(error=e))
             return
         window.model = _normalize_model(raw)
         _reload_widgets(window)
         _refresh_preview(window)
-        _notify(window, f"Imported {file.get_path()}")
+        _notify(window, _("Imported {path}").format(path=file.get_path()))
 
     dialog.open(window, None, done)
 
@@ -1849,13 +1909,13 @@ def _preset_gallery_tab(window):
 
     header = _row()
     intro = _label(
-        "<b>Preset gallery</b> — a real screenshot of each preset. Click <b>Load</b> to pull one "
-        "into the editor; nothing is written until you Apply.", markup=True)
+        _("<b>Preset gallery</b> — a real screenshot of each preset. Click <b>Load</b> to pull one "
+          "into the editor; nothing is written until you Apply."), markup=True)
     intro.set_wrap(True)
     intro.set_hexpand(True)
     header.append(intro)
-    btn_refresh = Gtk.Button(label="Refresh")
-    btn_refresh.set_tooltip_text("Re-scan the preview-image folder after capturing new screenshots")
+    btn_refresh = Gtk.Button(label=_("Refresh"))
+    btn_refresh.set_tooltip_text(_("Re-scan the preview-image folder after capturing new screenshots"))
     btn_refresh.connect("clicked", lambda _w: _populate_gallery(window))
     header.append(btn_refresh)
     outer.append(header)
@@ -1863,12 +1923,12 @@ def _preset_gallery_tab(window):
     # All / Normal / Small logo filter (grouped toggles, like the alacritty-tweak-tool tone filter).
     window.gallery_filter = "all"
     filter_row = _row()
-    filter_row.append(_label("Logo:"))
-    btn_all = Gtk.ToggleButton(label="All")
+    filter_row.append(_label(_("Logo:")))
+    btn_all = Gtk.ToggleButton(label=_("All"))
     btn_all.set_active(True)
-    btn_normal = Gtk.ToggleButton(label="Normal")
+    btn_normal = Gtk.ToggleButton(label=_("Normal"))
     btn_normal.set_group(btn_all)
-    btn_small = Gtk.ToggleButton(label="Small")
+    btn_small = Gtk.ToggleButton(label=_("Small"))
     btn_small.set_group(btn_all)
 
     def _on_filter(_b):
@@ -1939,15 +1999,19 @@ def _populate_gallery(window):
 
     status = window.gallery_status
     if not presets:
-        status.set_text("No presets found.")
+        status.set_text(_("No presets found."))
     elif have == 0:
         status.set_markup(
-            "No preview images yet — run <tt>tools/capture-preset-previews.sh</tt> in a VM, "
-            "drop the <tt>.png</tt>s into <tt>images/preset_previews/</tt>, then Refresh.")
+            _("No preview images yet — run <tt>tools/capture-preset-previews.sh</tt> in a VM, "
+              "drop the <tt>.png</tt>s into <tt>images/preset_previews/</tt>, then Refresh."))
     else:
-        status.set_text(
-            f"{have} of {len(presets)} presets have a preview image  ·  "
-            f"{len(presets) - small} normal, {small} small logo")
+        status.set_text(ngettext(
+            "{count} preview image is available for {total} presets; {normal} presets use a normal logo "
+            "and {small} use a small logo",
+            "{count} preview images are available for {total} presets; {normal} presets use normal logos "
+            "and {small} use small logos",
+            have,
+        ).format(count=have, total=len(presets), normal=len(presets) - small, small=small))
 
 
 def _thumb_cell(window, name, img_path):
@@ -1977,7 +2041,7 @@ def _thumb_cell(window, name, img_path):
     if picture is not None:
         frame.append(picture)
     else:
-        ph = _label("no preview yet", css_class="info-label")
+        ph = _label(_("No preview yet"), css_class="info-label")
         ph.set_halign(Gtk.Align.CENTER)
         ph.set_valign(Gtk.Align.CENTER)
         ph.set_hexpand(True)
@@ -1989,7 +2053,7 @@ def _thumb_cell(window, name, img_path):
     spacer = Gtk.Box()
     spacer.set_hexpand(True)
     footer.append(spacer)
-    btn = Gtk.Button(label="Load")
+    btn = Gtk.Button(label=_("Load"))
     btn.connect("clicked", lambda _w, n=name: _load_preset_named(window, n))
     footer.append(btn)
     cell.append(footer)
@@ -2003,7 +2067,7 @@ def _load_kiro(window):
         window.model = _normalize_model(json.loads(cfg.strip_jsonc(f.read())))
     _reload_widgets(window)
     _refresh_preview(window)
-    _notify(window, "Loaded Kiro default")
+    _notify(window, _("Loaded Kiro default"))
 
 
 def _use_fastfetch_default(window):
@@ -2015,20 +2079,20 @@ def _use_fastfetch_default(window):
     _refresh_current_logo_label(window)
     if hasattr(window, "raw_view"):
         window.raw_view.get_buffer().set_text(cfg.serialize(window.model))
-    _notify(window, "Back to fastfetch's own default — config removed, Restore backup brings it back")
+    _notify(window, _("Back to fastfetch's own default — config removed, Restore backup brings it back"))
 
 
 def _restore(window):
     if cfg.restore_backup():
         _reload(window)
-        _notify(window, "Restored from backup")
+        _notify(window, _("Restored from backup"))
     else:
-        _notify(window, "No backup to restore")
+        _notify(window, _("No backup to restore"))
 
 
 def _raw_reload(window):
     window.raw_view.get_buffer().set_text(cfg.read_config_text())
-    _notify(window, "Raw view reloaded from file")
+    _notify(window, _("Raw view reloaded from file"))
 
 
 def _raw_save(window):
@@ -2036,13 +2100,13 @@ def _raw_save(window):
     text = buf.get_text(buf.get_start_iter(), buf.get_end_iter(), True)
     ok, err = cfg.validate_text(text)
     if not ok:
-        _notify(window, f"Invalid JSON — not saved: {err}")
+        _notify(window, _("Invalid JSON — not saved: {error}").format(error=err))
         return
     cfg.write_config_text(text)
     window.model = _normalize_model(cfg.read_config())
     _reload_widgets(window)
     _refresh_preview(window)
-    _notify(window, "Raw config saved")
+    _notify(window, _("Raw config saved"))
 
 
 # ── Live preview ─────────────────────────────────────────────────────────────
@@ -2076,15 +2140,15 @@ def _preview_pane(window):
     box.set_size_request(420, -1)
 
     header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-    header.append(_label("<b>Live preview</b>", markup=True))
+    header.append(_label(_("<b>Live preview</b>"), markup=True))
     spacer = Gtk.Box()
     spacer.set_hexpand(True)
     header.append(spacer)
-    window.public_ip_btn = Gtk.Button(label="Show public IP")
+    window.public_ip_btn = Gtk.Button(label=_("Show public IP"))
     window.public_ip_btn.add_css_class("flat")
     window.public_ip_btn.set_tooltip_text(
-        "Public IP is hidden in the preview by default — reveal it only when you are not "
-        "sharing your screen or recording."
+        _("Public IP is hidden in the preview by default — reveal it only when you are not "
+          "sharing your screen or recording.")
     )
     window.public_ip_btn.set_visible(False)
     window.public_ip_btn.connect("clicked", lambda _w: _toggle_public_ip(window))
@@ -2116,8 +2180,8 @@ def _preview_pane(window):
 def _preview_fallback(window):
     inner = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
     inner.set_vexpand(True)
-    inner.append(_label("vte4 not installed — preview disabled.", css_class="info-label"))
-    btn = Gtk.Button(label="Preview in terminal")
+    inner.append(_label(_("vte4 not installed — preview disabled."), css_class="info-label"))
+    btn = Gtk.Button(label=_("Preview in terminal"))
     btn.connect("clicked", lambda _w: _preview_external(window))
     inner.append(btn)
     return inner
@@ -2136,7 +2200,7 @@ def _guarded_preview_model(window):
         if cfg.module_type(m) == "publicip":
             key = m.get("key", "Public IP") if isinstance(m, dict) else "Public IP"
             masked.append({"type": "custom", "key": key,
-                           "format": "(hidden — click ‘Show public IP’)"})
+                           "format": _("(hidden — click ‘Show public IP’)")})
         else:
             masked.append(m)
     guarded = dict(model)
@@ -2150,7 +2214,7 @@ def _update_public_ip_btn(window):
         return
     has_publicip = any(cfg.module_type(m) == "publicip" for m in window.model.get("modules", []))
     btn.set_visible(has_publicip)
-    btn.set_label("Hide public IP" if window.show_public_ip else "Show public IP")
+    btn.set_label(_("Hide public IP") if window.show_public_ip else _("Show public IP"))
 
 
 def _toggle_public_ip(window):
@@ -2160,13 +2224,13 @@ def _toggle_public_ip(window):
         return
     dialog = Gtk.AlertDialog()
     dialog.set_modal(True)
-    dialog.set_message("Reveal your public IP in the preview?")
+    dialog.set_message(_("Reveal your public IP in the preview?"))
     dialog.set_detail(
-        "Your real public IP address will be fetched and shown in the live preview. "
-        "Do not do this while sharing your screen or recording — it would expose your IP. "
-        "It is hidden again the next time you open the tool."
+        _("Your real public IP address will be fetched and shown in the live preview. "
+          "Do not do this while sharing your screen or recording — it would expose your IP. "
+          "It is hidden again the next time you open the tool.")
     )
-    dialog.set_buttons(["Cancel", "Reveal public IP"])
+    dialog.set_buttons([_("Cancel"), _("Reveal public IP")])
     dialog.set_cancel_button(0)
     dialog.set_default_button(0)
     dialog.choose(window, None, lambda d, res, _u=None: _on_public_ip_choice(window, d, res))
@@ -2190,7 +2254,7 @@ def _write_preview_file(window):
 
 def _refresh_preview(window):
     if not cfg.fastfetch_installed():
-        _notify(window, "fastfetch not installed — preview unavailable")
+        _notify(window, _("fastfetch not installed — preview unavailable"))
         return
     _update_public_ip_btn(window)
     _write_preview_file(window)
@@ -2220,7 +2284,7 @@ def _refresh_preview(window):
 
 def _preview_external(window):
     if not cfg.fastfetch_installed():
-        _notify(window, "fastfetch not installed")
+        _notify(window, _("fastfetch not installed"))
         return
     _write_preview_file(window)
     install.launch_in_terminal(["fastfetch", "-c", PREVIEW_PATH])
@@ -2237,9 +2301,9 @@ def _apply(window):
     _refresh_preview(window)
     _refresh_current_logo_label(window)
     if model is not window.model:
-        _notify(window, "Configuration applied (public IP module omitted)")
+        _notify(window, _("Configuration applied (public IP module omitted)"))
     else:
-        _notify(window, "Configuration applied")
+        _notify(window, _("Configuration applied"))
 
 
 def _reload(window):
@@ -2247,7 +2311,7 @@ def _reload(window):
     _reload_widgets(window)
     _refresh_preview(window)
     _refresh_current_logo_label(window)
-    _notify(window, "Reloaded from config.jsonc")
+    _notify(window, _("Reloaded from config.jsonc"))
 
 
 def _reload_widgets(window):
@@ -2268,7 +2332,7 @@ def _reload_widgets(window):
         inline_text = str(logo_d.get("source", "")) if str(logo_d.get("type", "")) in _INLINE_LOGO_TYPES else ""
         window.logo_inline_view.get_buffer().set_text(inline_text)
     if hasattr(window, "logo_source"):
-        logos = catalog.logos() or ["(none)"]
+        logos = catalog.logos() or [_("(none)")]
         src = str((window.model.get("logo") or {}).get("source", ""))
         if src in logos:
             window.logo_source.set_selected(logos.index(src))
@@ -2282,8 +2346,9 @@ def _reload_widgets(window):
             window.kiroart_dd.set_selected(window.kiroart_names.index(art_base))
     if hasattr(window, "logo_position"):
         cur_pos = str((window.model.get("logo") or {}).get("position", "left"))
-        if cur_pos in _LOGO_POSITIONS:
-            window.logo_position.set_selected(_LOGO_POSITIONS.index(cur_pos))
+        position_values = [value for value, _label in _LOGO_POSITIONS]
+        if cur_pos in position_values:
+            window.logo_position.set_selected(position_values.index(cur_pos))
     for path, set_value in getattr(window, "color_combos", {}).items():
         set_value(_get_path(window, path))
     for path, combo, vals in getattr(window, "enum_combos", []):

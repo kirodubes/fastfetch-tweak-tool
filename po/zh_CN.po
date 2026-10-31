@@ -1,0 +1,1333 @@
+# Chinese translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fastfetch-tweak-tool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 15:56+0100\n"
+"PO-Revision-Date: 2026-10-31 00:00+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:39
+msgid "custom…"
+msgstr "自定义…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:48
+msgid "Big ASCII"
+msgstr "大号 ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:49
+msgid "Small ASCII"
+msgstr "小号 ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:50
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "None"
+msgstr "无"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:51
+msgid "Text file"
+msgstr "文本文件"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:52
+msgid "Pokémon"
+msgstr "Pokémon"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:53
+msgid "Kiro art"
+msgstr "Kiro 艺术"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:54
+msgid "Inline text"
+msgstr "内嵌文本"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:55
+msgid "Sixel image"
+msgstr "Sixel 图像"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:56
+msgid "Kitty image"
+msgstr "Kitty 图像"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:57
+msgid "Chafa image"
+msgstr "Chafa 图像"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Left"
+msgstr "左"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Right"
+msgstr "右"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Top"
+msgstr "上"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:162
+msgid "♥ Support"
+msgstr "♥ 支持"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:163
+msgid "Support Kiro's development"
+msgstr "支持 Kiro 的开发"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:166
+msgid "Quit"
+msgstr "退出"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:186
+msgid "Start / Presets"
+msgstr "开始 / 预设"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:187
+msgid "Preset Gallery"
+msgstr "预设库"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:188
+msgid "Modules"
+msgstr "模块"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:189
+msgid "Logo"
+msgstr "Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:190
+msgid "Appearance"
+msgstr "外观"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:191
+msgid "Install & Enable"
+msgstr "安装和启用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:192
+msgid "Raw"
+msgstr "原始配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:214
+#, python-brace-format
+msgid "System ({language})"
+msgstr "系统（{language}）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:217
+msgid "Language"
+msgstr "语言"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:222
+msgid "Restart now"
+msgstr "立即重启"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:228
+msgid "Saved. The app shows the new language when it starts again."
+msgstr "已保存。应用下次启动时将显示新语言。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:245
+msgid "Best value: almost all goes to the project"
+msgstr "最划算：几乎全部金额都会用于项目"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:246
+msgid "Buy a coffee: one-off tip"
+msgstr "请我喝杯咖啡：一次性打赏"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:247
+msgid "Membership tiers and perks"
+msgstr "会员等级和权益"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:248
+msgid "Join on YouTube"
+msgstr "加入 YouTube"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:249
+msgid "Direct one-off"
+msgstr "直接一次性支持"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:258
+msgid "Support Kiro"
+msgstr "支持 Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:264
+msgid "<b>Support Kiro</b>"
+msgstr "<b>支持 Kiro</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:266
+msgid ""
+"Kiro and its tools are built by one person for the community and kept free. "
+"If Fastfetch Tweak Tool saves you time, a little support keeps the work "
+"going. Thank you for being here."
+msgstr "Kiro 和它的工具由一个人面向社区开发并免费提供。如果 Fastfetch Tweak Tool 为你节省了时间，一点支持就能让开发继续下去。感谢你的使用和支持！"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:280
+msgid "Close"
+msgstr "关闭"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:335
+msgid "Ready"
+msgstr "就绪"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:339
+msgid "Reload"
+msgstr "重新加载"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:341
+msgid "Refresh preview"
+msgstr "刷新预览"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:343
+msgid "Apply"
+msgstr "应用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:358
+msgid ""
+"<b>Shown modules</b> — order matches output; select a row to edit options"
+msgstr "<b>显示的模块</b>　顺序与输出一致；选择一行即可编辑选项"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:368
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:769
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:795
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:807
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:824
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1742
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1844
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2335
+msgid "(none)"
+msgstr "（无）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:371
+msgid "Add module"
+msgstr "添加模块"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:382
+msgid "<b>Options for selected module</b>"
+msgstr "<b>所选模块的选项</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:384
+msgid ""
+"<span foreground='#e8820c'><b>↵ Press Enter in a text field to apply it.</"
+"b></span> Switches and colour pickers apply instantly."
+msgstr ""
+"<span foreground='#e8820c'><b>↵ 在文本框中按 Return 即可应用。</b></span> 开"
+"关和颜色选择会立即生效。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:406
+msgid "Drag to reorder"
+msgstr "拖动以重新排序"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:435
+msgid "↧ drop here to move to the end"
+msgstr "↧ 拖到这里即可移至末尾"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:477
+#, python-brace-format
+msgid "Moved {module} to position {position}"
+msgstr "已将 {module} 移至第 {position} 位"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:495
+msgid "(all added)"
+msgstr "（均已添加）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:508
+msgid "can be added multiple times"
+msgstr "可多次添加"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:523
+#, python-brace-format
+msgid "Added module: {module}"
+msgstr "已添加模块：{module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:533
+#, python-brace-format
+msgid "Removed module: {module}"
+msgstr "已移除模块：{module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:546
+msgid "<b>Common</b>"
+msgstr "<b>常用</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:553
+#, python-brace-format
+msgid "<b>{module} options</b>"
+msgstr "<b>{module} 选项</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:560
+msgid "Advanced (raw keys)"
+msgstr "高级（原始键）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:567
+msgid "Option key (e.g. percent, separator)"
+msgstr "选项键（例如 percent、separator）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:569
+msgid "Value (true/false/number/text)"
+msgstr "值（true/false/数字/文本）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:570
+msgid "Add option"
+msgstr "添加选项"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:712
+#, python-brace-format
+msgid "Set {key} to {value}"
+msgstr "将 {key} 设为 {value}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:744
+msgid "<b>Logo</b>"
+msgstr "<b>Logo</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:747
+msgid "Type:"
+msgstr "类型："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:761
+msgid "🎲 Random"
+msgstr "🎲 随机"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:762
+msgid "Pick a random logo: built-in, Pokémon or Kiro art"
+msgstr "随机选择一个 Logo：内置、Pokémon 或 Kiro 艺术"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:768
+msgid "Built-in logo:"
+msgstr "内置 Logo："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:781
+msgid "Bundled image:"
+msgstr "捆绑图像："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:783
+msgid "(none bundled)"
+msgstr "（没有捆绑图像）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:794
+msgid "Custom image:"
+msgstr "自定义图像："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:797
+msgid "Choose file…"
+msgstr "选择文件…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:806
+msgid "Pokémon:"
+msgstr "Pokémon："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "large"
+msgstr "大"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "small"
+msgstr "小"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:812
+msgid "Shiny"
+msgstr "闪光"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:814
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:827
+msgid "Use"
+msgstr "使用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:822
+msgid "Kiro art:"
+msgstr "Kiro 艺术："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:834
+msgid "Inline text (ASCII art stored in the config):"
+msgstr "内嵌文本（ASCII 艺术保存在配置中）："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:837
+msgid "Text:"
+msgstr "文本："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:840
+msgid "Type text, then Generate"
+msgstr "输入文本，然后选择「生成」"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:846
+msgid "Tool:"
+msgstr "工具："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:850
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1287
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1289
+msgid "Font:"
+msgstr "字体："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:855
+msgid "Rainbow"
+msgstr "彩虹"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:857
+msgid "Generate"
+msgstr "生成"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:860
+msgid "Insert Kiro figlet"
+msgstr "插入 Kiro figlet"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:886
+msgid "Logo position:"
+msgstr "Logo 位置："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:897
+msgid "Logo width"
+msgstr "Logo 宽度"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:898
+msgid "Logo height"
+msgstr "Logo 高度"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:899
+msgid "Logo padding top"
+msgstr "Logo 顶部间距"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:900
+msgid "Logo padding left"
+msgstr "Logo 左侧间距"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:908
+msgid ""
+"<b>Logo type — where the logo comes from:</b>\n"
+"• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked "
+"in “Built-in logo”.\n"
+"• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+"• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” "
+"row.\n"
+"• <b>Kiro art</b>: a bundled Kiro ASCII/ANSI logo, picked in the “Kiro art” "
+"row.\n"
+"• <b>Inline text</b>: ASCII art typed or generated in the box, stored in the "
+"config.\n"
+"• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render an image, picked in "
+"“Bundled image” or “Custom image”.\n"
+"• <b>None</b>: no logo.\n"
+"Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows without a "
+"background box.\n"
+"Tip: real images (Sixel/Kitty) need a graphics-capable terminal — kitty, "
+"Ghostty, Konsole, WezTerm or foot. <b>Alacritty shows no images</b>; use "
+"<b>Chafa</b> there (the image is rendered as coloured text)."
+msgstr ""
+"<b>Logo 类型：Logo 的来源</b>\n"
+"• <b>大号 ASCII</b> / <b>小号 ASCII</b>：fastfetch 内置的 Logo，可在「内置 "
+"Logo」中选择。\n"
+"• <b>文本文件</b>：你自己的 ASCII 艺术文本文件，可在「自定义图像」中选择。\n"
+"• <b>Pokémon</b>：pokemon-colorscripts 提供的角色，可在「Pokémon」行中选择"
+"。\n"
+"• <b>Kiro 艺术</b>：捆绑的 Kiro ASCII / ANSI Logo，可在「Kiro 艺术」行中选择"
+"。\n"
+"• <b>内嵌文本</b>：在文本框中输入或生成 ASCII 艺术，并保存到配置中。\n"
+"• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>：渲染图像，可在「捆绑图像」或「"
+"自定义图像」中选择。\n"
+"• <b>无</b>：不显示 Logo。\n"
+"提示：使用透明的 <b>PNG</b>（不要使用 JPG），即可让 Logo 不带背景框显示。\n"
+"提示：真实图像（Sixel / Kitty）需要支持图形的终端，例如 kitty、Ghostty、"
+"Konsole、WezTerm 或 foot。<b>Alacritty 不显示图像</b>，请改用 <b>Chafa</b>（"
+"图像会渲染为彩色文本）。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Celsius"
+msgstr "摄氏度"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Fahrenheit"
+msgstr "华氏度"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Kelvin"
+msgstr "开尔文"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:930
+msgid "IEC — 1024 (KiB)"
+msgstr "IEC：1024（KiB）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:931
+msgid "SI — 1000 (kB)"
+msgstr "SI：1000（kB）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:932
+msgid "JEDEC — 1024 (KB)"
+msgstr "JEDEC：1024（KB）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Both"
+msgstr "两者"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Icon"
+msgstr "图标"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Text"
+msgstr "文本"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "green"
+msgstr "绿色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "red"
+msgstr "红色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "yellow"
+msgstr "黄色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:948
+msgid "<b>Appearance</b>"
+msgstr "<b>外观</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:951
+msgid "Separator:"
+msgstr "分隔符："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:961
+#: usr/share/fastfetch-tweak-tool/ff_options.py:17
+msgid "Key color"
+msgstr "键颜色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:962
+msgid "Title color"
+msgstr "标题颜色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:963
+#: usr/share/fastfetch-tweak-tool/ff_options.py:20
+msgid "Output color"
+msgstr "输出颜色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:964
+msgid "Separator color"
+msgstr "分隔符颜色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:965
+msgid "Bright ANSI colors"
+msgstr "亮 ANSI 颜色"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:967
+msgid "<b>Key style</b>"
+msgstr "<b>键样式</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:968
+msgid "Key width"
+msgstr "键宽度"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:969
+msgid "Key style"
+msgstr "键样式"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:970
+msgid "Key left padding"
+msgstr "键左侧间距"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:972
+msgid "<b>Sizes &amp; temperature</b>"
+msgstr "<b>大小和温度</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:973
+msgid "Size binary prefix"
+msgstr "大小单位前缀"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:974
+msgid "Largest size unit"
+msgstr "最大容量单位"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:975
+msgid "Temperature unit"
+msgstr "温度单位"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:977
+msgid "<b>Threshold colors</b>"
+msgstr "<b>阈值颜色</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:978
+msgid "Colour percentages and temperatures by severity."
+msgstr "按严重程度为百分比和温度着色。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:980
+#, python-brace-format
+msgid "Percent {state}"
+msgstr "百分比 {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:983
+#, python-brace-format
+msgid "Temperature {state}"
+msgstr "温度 {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1008
+msgid "Default"
+msgstr "默认"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1056
+msgid "#hex / SGR"
+msgstr "#hex / SGR"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1142
+msgid "the chaotic-aur or cachyos repo"
+msgstr "chaotic-aur 或 cachyos 仓库"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+msgid "Built-in"
+msgstr "内置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+#, python-brace-format
+msgid "Built-in — {logo}"
+msgstr "内置：{logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1189
+msgid "inline text"
+msgstr "内嵌文本"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1196
+#, python-brace-format
+msgid "{label} — {detail}"
+msgstr "{label}：{detail}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1204
+#, python-brace-format
+msgid "In use: {summary}"
+msgstr "正在使用：{summary}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1291
+msgid "Cowfile:"
+msgstr "Cowfile："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1314
+#, python-brace-format
+msgid "Insert Kiro {tool}"
+msgstr "插入 Kiro {tool}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1317
+#, python-brace-format
+msgid ""
+"<span foreground=\"#e8820c\">{tool} not installed — install it on the "
+"Install &amp; Enable tab</span>"
+msgstr "<span foreground=\"#e8820c\">未安装 {tool}。请在「安装和启用」标签页中安装。</span>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1331
+#, python-brace-format
+msgid "{tool} not installed — install it on the Install & Enable tab"
+msgstr "未安装 {tool}。请在「安装和启用」标签页中安装。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1354
+#, python-brace-format
+msgid "Failed to run {tool}: {error}"
+msgstr "运行 {tool} 失败：{error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1386
+#, python-brace-format
+msgid "Random logo: {logo}"
+msgstr "随机 Logo：{logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1429
+msgid ""
+"chafa not installed — install it on the Install & Enable tab to render image "
+"logos"
+msgstr "未安装 chafa。要将图像渲染为 Logo，请在「安装和启用」标签页中安装。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1431
+#, python-brace-format
+msgid "Logo type: {type}"
+msgstr "Logo 类型：{type}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1468
+#, python-brace-format
+msgid "Pokémon logo: {name}"
+msgstr "Pokémon Logo：{name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1483
+#, python-brace-format
+msgid "Kiro art: {name}"
+msgstr "Kiro 艺术：{name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1496
+#, python-brace-format
+msgid "Logo image: {name}"
+msgstr "Logo 图像：{name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1529
+msgid "<b>Fastfetch</b>"
+msgstr "<b>Fastfetch</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1535
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1618
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1713
+msgid "<b>installed</b>"
+msgstr "<b>已安装</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1537
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1588
+msgid "Install"
+msgstr "安装"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1539
+msgid "Remove"
+msgstr "移除"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1549
+msgid "<b>Shell startup</b>"
+msgstr "<b>Shell 启动</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+#, python-brace-format
+msgid "Target: {path}"
+msgstr "目标：{path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+msgid "no shell rc found"
+msgstr "未找到 shell 配置文件"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1554
+msgid "Run fastfetch on shell startup"
+msgstr "在 shell 启动时运行 fastfetch"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1556
+msgid "Pipe through lolcat (rainbow)"
+msgstr "通过 lolcat 输出（彩虹效果）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1560
+msgid "<b>Optional features</b>"
+msgstr "<b>可选功能</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1564
+msgid "image logos as ASCII art"
+msgstr "将图像渲染为 ASCII 艺术"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1565
+msgid "sixel / kitty image logos"
+msgstr "Sixel / Kitty 图像 Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1566
+msgid "generate ASCII-art text logos"
+msgstr "生成 ASCII 艺术文本 Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1567
+msgid "fancy ASCII-art text logos"
+msgstr "精美 ASCII 艺术文本 Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1568
+msgid "speech-bubble text logos"
+msgstr "对话气泡文本 Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1569
+msgid "robot text logos"
+msgstr "机器人文本 Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1570
+msgid "Pokémon logos"
+msgstr "Pokémon Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1571
+msgid "rainbow output pipe"
+msgstr "彩虹输出管道"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1572
+msgid "external-display brightness"
+msgstr "外接显示器亮度"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1575
+#, python-brace-format
+msgid "{package} — {description}"
+msgstr "{package}：{description}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1594
+msgid "<b>Privacy</b>"
+msgstr "<b>隐私</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1596
+msgid "Omit public IP module from saved config"
+msgstr "不在保存的配置中包含 publicip 模块"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1600
+msgid ""
+"When on, Apply writes config.jsonc without the publicip module, so your real "
+"IP cannot leak from your config, for example while recording or sharing your "
+"screen."
+msgstr "启用后，点击「应用」时会保存不含 publicip 模块的 config.jsonc，这样你的真实 IP 地址就不会从配置中泄露，例如在录屏或共享屏幕时。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1612
+msgid "Public IP will be omitted from the saved config"
+msgstr "保存的配置中将不包含公网 IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1613
+msgid "Public IP will be written to the saved config"
+msgstr "公网 IP 将写入保存的配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1653
+msgid "Install fastfetch first"
+msgstr "请先安装 fastfetch"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup disabled"
+msgstr "Shell 启动已禁用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup enabled"
+msgstr "Shell 启动已启用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe disabled"
+msgstr "lolcat 管道已禁用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe enabled"
+msgstr "lolcat 管道已启用"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1672
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1688
+msgid "Already installed"
+msgstr "已安装"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1675
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1695
+#, python-brace-format
+msgid "Installing {package}…"
+msgstr "正在安装 {package}…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1680
+msgid "Not installed"
+msgstr "未安装"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1683
+#, python-brace-format
+msgid "Removing {package}…"
+msgstr "正在移除 {package}…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+#, python-brace-format
+msgid "Needs {repository}"
+msgstr "需要 {repository}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+msgid "Not available in your repositories"
+msgstr "你的软件仓库中没有此软件包"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1717
+msgid "Package operation finished"
+msgstr "软件包操作已完成"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1731
+msgid ""
+"<b>Start here</b> — load an example preset or the Kiro default, watch the "
+"live preview, then tweak it on the Modules and Logo &amp; Appearance tabs. "
+"Nothing is written until you Apply — and before applying we always save a "
+"backup of your current config to <tt>config.jsonc.ftt-bak</tt>, so you can "
+"Restore backup any time. <b>Fastfetch default</b> is the exception: it "
+"removes your config at once (after the same backup), so fastfetch goes back "
+"to its own look with your distro logo."
+msgstr "<b>从这里开始</b>　加载示例预设或 Kiro 默认配置，查看实时预览，然后在「模块」和「Logo 与外观」标签页中调整。点击「应用」前不会写入任何内容；应用前也总会将当前配置备份到 <tt>config.jsonc.ftt-bak</tt>，因此你随时都可以恢复备份。例外是 <b>Fastfetch 默认配置</b>：它会先执行相同的备份，然后立即删除配置，让 fastfetch 恢复为带有发行版 Logo 的默认外观。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1740
+msgid "<b>Presets</b> — load into the editor, then Apply"
+msgstr "<b>预设</b>　加载到编辑器中，然后点击「应用」"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1745
+msgid "Load preset"
+msgstr "加载预设"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1752
+msgid "Kiro default"
+msgstr "Kiro 默认"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1754
+msgid "Fastfetch default"
+msgstr "Fastfetch 默认配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1755
+msgid ""
+"Back up and remove config.jsonc right away: fastfetch shows its own default "
+"look with your distro logo. Restore backup brings yours back."
+msgstr "立即备份并删除 config.jsonc：fastfetch 将显示自带的默认外观和发行版 Logo。恢复备份即可还原你的配置。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1758
+msgid "Restore backup"
+msgstr "恢复备份"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1765
+msgid ""
+"<b>Your presets</b> — save the current editor as a reusable preset, or share "
+"it via export/import"
+msgstr "<b>你的预设</b>　将当前编辑内容保存为可重复使用的预设，或通过导出 / 导入分享"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1768
+#, python-brace-format
+msgid ""
+"Saved to <tt>{path}/</tt> — they appear in the list above and load anywhere "
+"with <tt>fastfetch -c &lt;name&gt;</tt>"
+msgstr "已保存到 <tt>{path}/</tt>。预设会显示在上方列表中，也可以在任何位置使用 <tt>fastfetch -c &lt;name&gt;</tt> 加载"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1773
+msgid "Preset name"
+msgstr "预设名称"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1775
+msgid "Save current as preset"
+msgstr "将当前配置保存为预设"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1782
+msgid "Export…"
+msgstr "导出…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1784
+msgid "Import…"
+msgstr "导入…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1802
+msgid "<b>Raw config.jsonc</b> — edits here preserve comments"
+msgstr "<b>原始 config.jsonc</b>　在这里编辑会保留注释"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1809
+msgid "Reload from file"
+msgstr "从文件重新加载"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1811
+msgid "Validate & save raw"
+msgstr "验证并保存原始配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1832
+#, python-brace-format
+msgid "Preset not found: {name}"
+msgstr "未找到预设：{name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1838
+#, python-brace-format
+msgid "Loaded preset: {name}"
+msgstr "已加载预设：{name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1853
+msgid "Enter a preset name first"
+msgstr "请先输入预设名称"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1857
+#, python-brace-format
+msgid "Saved to {path}"
+msgstr "已保存到：{path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1870
+#, python-brace-format
+msgid "Exported to {path}"
+msgstr "已导出到 {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1886
+#, python-brace-format
+msgid "Import failed: {error}"
+msgstr "导入失败：{error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1891
+#, python-brace-format
+msgid "Imported {path}"
+msgstr "已导入 {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1912
+msgid ""
+"<b>Preset gallery</b> — a real screenshot of each preset. Click <b>Load</b> "
+"to pull one into the editor; nothing is written until you Apply."
+msgstr "<b>预设库</b>　这里展示每个预设的实际截图。点击 <b>加载</b> 将预设载入编辑器；点击「应用」前不会写入任何内容。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1917
+msgid "Refresh"
+msgstr "刷新"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1918
+msgid "Re-scan the preview-image folder after capturing new screenshots"
+msgstr "截取新截图后重新扫描预览图像文件夹"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1926
+msgid "Logo:"
+msgstr "Logo："
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1927
+msgid "All"
+msgstr "全部"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1929
+msgid "Normal"
+msgstr "正常"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1931
+msgid "Small"
+msgstr "小"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2002
+msgid "No presets found."
+msgstr "未找到预设。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2005
+msgid ""
+"No preview images yet — run <tt>tools/capture-preset-previews.sh</tt> in a "
+"VM, drop the <tt>.png</tt>s into <tt>images/preset_previews/</tt>, then "
+"Refresh."
+msgstr "还没有预览图。请在虚拟机中运行 <tt>tools/capture-preset-previews.sh</tt>，将 <tt>.png</tt> 文件放入 <tt>images/preset_previews/</tt>，然后点击「刷新」。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2009
+#, python-brace-format
+msgid ""
+"{count} preview image is available for {total} presets; {normal} presets use "
+"a normal logo and {small} use a small logo"
+msgid_plural ""
+"{count} preview images are available for {total} presets; {normal} presets "
+"use normal logos and {small} use small logos"
+msgstr[0] "{count} 张预览图可用于 {total} 个预设；{normal} 个预设使用普通 Logo，{small} 个使用小号 Logo。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2044
+msgid "No preview yet"
+msgstr "暂无预览"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2056
+msgid "Load"
+msgstr "加载"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2070
+msgid "Loaded Kiro default"
+msgstr "已加载 Kiro 默认配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2082
+msgid ""
+"Back to fastfetch's own default — config removed, Restore backup brings it "
+"back"
+msgstr "已恢复为 fastfetch 自带的默认外观，配置已删除；你可以恢复备份"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2088
+msgid "Restored from backup"
+msgstr "已从备份恢复"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2090
+msgid "No backup to restore"
+msgstr "没有可恢复的备份"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2095
+msgid "Raw view reloaded from file"
+msgstr "已从文件重新加载原始配置视图"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2103
+#, python-brace-format
+msgid "Invalid JSON — not saved: {error}"
+msgstr "JSON 无效，未保存：{error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2109
+msgid "Raw config saved"
+msgstr "已保存原始配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2143
+msgid "<b>Live preview</b>"
+msgstr "<b>实时预览</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2147
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Show public IP"
+msgstr "显示公网 IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2150
+msgid ""
+"Public IP is hidden in the preview by default — reveal it only when you are "
+"not sharing your screen or recording."
+msgstr "默认情况下，预览会隐藏公网 IP。仅在你没有共享屏幕或录屏时显示。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2183
+msgid "vte4 not installed — preview disabled."
+msgstr "未安装 vte4，预览已禁用。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2184
+msgid "Preview in terminal"
+msgstr "在终端中预览"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2203
+msgid "(hidden — click ‘Show public IP’)"
+msgstr "（已隐藏，点击「显示公网 IP」）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Hide public IP"
+msgstr "隐藏公网 IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2227
+msgid "Reveal your public IP in the preview?"
+msgstr "要在预览中显示你的公网 IP 吗？"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2229
+msgid ""
+"Your real public IP address will be fetched and shown in the live preview. "
+"Do not do this while sharing your screen or recording — it would expose your "
+"IP. It is hidden again the next time you open the tool."
+msgstr "系统将获取你的真实公网 IP 地址并显示在实时预览中。共享屏幕或录屏时请勿这样做，否则会暴露你的 IP。下次打开此工具时会再次隐藏。"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Cancel"
+msgstr "取消"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Reveal public IP"
+msgstr "显示公网 IP"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2257
+msgid "fastfetch not installed — preview unavailable"
+msgstr "未安装 fastfetch，无法预览"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2287
+msgid "fastfetch not installed"
+msgstr "未安装 fastfetch"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2304
+msgid "Configuration applied (public IP module omitted)"
+msgstr "已应用配置（已排除 publicip 模块）"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2306
+msgid "Configuration applied"
+msgstr "已应用配置"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2314
+msgid "Reloaded from config.jsonc"
+msgstr "已从 config.jsonc 重新加载"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:15
+msgid "Key label"
+msgstr "键标签"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:16
+msgid "Key icon"
+msgstr "键图标"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:18
+msgid "Key width (0 = off)"
+msgstr "键宽度（0 = 关闭）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:19
+msgid "Format"
+msgstr "格式"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:27
+#: usr/share/fastfetch-tweak-tool/ff_options.py:32
+#: usr/share/fastfetch-tweak-tool/ff_options.py:45
+#: usr/share/fastfetch-tweak-tool/ff_options.py:76
+msgid "Show temperature"
+msgstr "显示温度"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:28
+msgid "Show P/E core count"
+msgstr "显示 P/E 核心数"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:29
+msgid "Temp sensor"
+msgstr "温度传感器"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:33
+msgid "Driver-specific info"
+msgstr "驱动专属信息"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:34
+msgid "Hide type (integrated/discrete)"
+msgstr "隐藏类型（集成 / 独立）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:37
+msgid "Show regular volumes"
+msgstr "显示常规卷"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:38
+msgid "Show external volumes"
+msgstr "显示外接卷"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:39
+msgid "Show hidden volumes"
+msgstr "显示隐藏卷"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:40
+msgid "Show read-only volumes"
+msgstr "显示只读卷"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:41
+msgid "Use available (not free) space"
+msgstr "使用可用空间（而非空闲空间）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:42
+msgid "Folders (':'-separated)"
+msgstr "文件夹（以「:」分隔）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:48
+msgid "Show IPv4"
+msgstr "显示 IPv4"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:49
+msgid "Show IPv6"
+msgstr "显示 IPv6"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:50
+msgid "Show MAC"
+msgstr "显示 MAC"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:51
+#: usr/share/fastfetch-tweak-tool/ff_options.py:96
+#: usr/share/fastfetch-tweak-tool/ff_options.py:122
+msgid "Compact (one line)"
+msgstr "紧凑模式（单行）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:52
+#: usr/share/fastfetch-tweak-tool/ff_options.py:80
+msgid "Default route only"
+msgstr "仅默认路由"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:53
+#: usr/share/fastfetch-tweak-tool/ff_options.py:79
+msgid "Interface name prefix"
+msgstr "接口名称前缀"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:56
+msgid "Separate swap from memory"
+msgstr "将 swap 与内存分开"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:59
+msgid "Detect plugins"
+msgstr "检测插件"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:62
+msgid "Use fully-qualified hostname"
+msgstr "使用完全限定主机名"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:65
+msgid "Command text"
+msgstr "命令文本"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:66
+msgid "Shell"
+msgstr "Shell"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:67
+msgid "Parameter"
+msgstr "参数"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:68
+msgid "Use stderr instead of stdout"
+msgstr "使用 stderr 而不是 stdout"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:69
+msgid "Run in parallel"
+msgstr "并行运行"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:70
+msgid "Split output into lines"
+msgstr "将输出拆分为多行"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:73
+msgid "Name prefix filter"
+msgstr "名称前缀筛选"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:74
+msgid "Hide virtual disks"
+msgstr "隐藏虚拟磁盘"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:75
+msgid "Hide unused disks"
+msgstr "隐藏未使用的磁盘"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:81
+#: usr/share/fastfetch-tweak-tool/ff_options.py:105
+msgid "Detect total I/O"
+msgstr "检测总 I/O"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:82
+#: usr/share/fastfetch-tweak-tool/ff_options.py:106
+#: usr/share/fastfetch-tweak-tool/ff_options.py:110
+msgid "Sample wait time (ms)"
+msgstr "采样等待时间（ms）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:85
+msgid "Location"
+msgstr "位置"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:86
+#: usr/share/fastfetch-tweak-tool/ff_options.py:91
+msgid "Timeout (ms)"
+msgstr "超时时间（ms）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:87
+msgid "wttr.in format string"
+msgstr "wttr.in 格式字符串"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:90
+msgid "Custom URL"
+msgstr "自定义 URL"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:92
+msgid "Use IPv6"
+msgstr "使用 IPv6"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:95
+msgid "Decimal places"
+msgstr "小数位数"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:99
+msgid "Compact type"
+msgstr "紧凑类型"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:100
+msgid "Precise refresh rate"
+msgstr "精确刷新率"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:101
+msgid "Sort order"
+msgstr "排序顺序"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:104
+msgid "Device name prefix"
+msgstr "设备名称前缀"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:109
+msgid "Per-core usage"
+msgstr "按核心显示使用率"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:113
+msgid "Split per GPU"
+msgstr "按 GPU 拆分"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:114
+msgid "Use Vulkan"
+msgstr "使用 Vulkan"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:115
+msgid "Show type"
+msgstr "显示类型"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:118
+msgid "DDC/CI sleep (ms)"
+msgstr "DDC/CI 睡眠时间（ms）"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:119
+msgid "Compact"
+msgstr "紧凑模式"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:123
+msgid "Current user only"
+msgstr "仅当前用户"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:126
+msgid "Sound device type"
+msgstr "声音设备类型"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:129
+msgid "Combine duplicate managers"
+msgstr "合并重复管理器"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:132
+msgid "Show disconnected devices"
+msgstr "显示已断开的设备"
+
+#: po/fastfetch-tweak-tool.desktop.in:2
+msgid "Fastfetch Tweak Tool"
+msgstr "Fastfetch Tweak Tool"
+
+#: po/fastfetch-tweak-tool.desktop.in:3
+msgid "System Info Configuration Tool"
+msgstr "系统信息配置工具"
+
+#: po/fastfetch-tweak-tool.desktop.in:5
+msgid "Configure Fastfetch: modules, logo, colors, and shell startup"
+msgstr "配置 Fastfetch：模块、Logo、颜色和 shell 启动"
+
+#: po/fastfetch-tweak-tool.desktop.in:11
+msgid "fastfetch;neofetch;system;info;logo;module;tweak"
+msgstr "fastfetch;neofetch;system;info;logo;module;tweak;配置;系统;信息;标志;模块;调整"

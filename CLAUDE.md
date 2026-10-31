@@ -70,6 +70,16 @@ usr/share/fastfetch-tweak-tool/
 - One-line PEP257 docstrings on public functions/methods; none on `_`-prefixed private.
 - Section dividers (`# ── Name ──────`) only in functions 50+ lines.
 
+### Translations (since 2026-10-31)
+
+- `ff_i18n.py` (the shared Kiro i18n module): domain `fastfetch-tweak-tool`, catalogs in `usr/share/locale`, the choice
+  in the app's prefs (`ff_config`), `FFTT_LANGUAGE` beats it and the system language; the dropdown sits top right in
+  the header. Sibling fallback pt→pt_BR, zh→zh_CN.
+- Every visible string goes through `_()` as a whole sentence with named placeholders; counts use `ngettext`. Never
+  translated: fastfetch module/option names, JSONC keys, paths, logs.
+- After changing any visible text: `po/make-mo.sh`. Edit the menu entry in `po/fastfetch-tweak-tool.desktop.in`, never
+  in `usr/share/applications/` (overwritten). Rules and tools: Kiro-HQ `TRANSLATIONS/`.
+
 ### Frozen Files
 
 `usr/bin/fastfetch-tweak-tool` — never edit without an explicit file-specific instruction.

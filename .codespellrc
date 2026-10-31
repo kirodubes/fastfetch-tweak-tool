@@ -1,0 +1,3 @@
+[codespell]
+# Catalogs and the generated desktop entry contain non-English words.
+skip = *.desktop,*.po,*.pot

@@ -25,6 +25,12 @@ the file directly if you want to keep comments. This is a deliberate trade-off t
 enables reordering and per-module editing. (The backup name differs from
 archlinux-tweak-tool's `config.jsonc-bak`, so the two tools coexist safely.)
 
+## Languages
+
+Fastfetch Tweak Tool follows your system language: English, Dutch, German, Spanish, French, Portuguese
+(Brazil), Russian, Hungarian, Italian, Turkish, Polish, Japanese, Chinese (simplified) and Romanian. Pick another one
+in the language dropdown at the top right and press **Restart now**.
+
 ## Installation
 
 Add the nemesis_repo to `/etc/pacman.conf`:

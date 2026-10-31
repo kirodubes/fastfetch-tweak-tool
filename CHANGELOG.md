@@ -2,6 +2,32 @@
 
 All notable changes to fastfetch-tweak-tool are documented here.
 
+## 2026.10.31
+
+### What Changed
+- **Fastfetch Tweak Tool speaks 13 languages**: Dutch, German, Spanish, French, Portuguese (Brazil), Russian,
+  Hungarian, Italian, Turkish, Polish, Japanese, Chinese (simplified) and Romanian, besides English. It follows the
+  system language (Portugal reads Brazilian Portuguese, Taiwan/Hong Kong simplified Chinese).
+- **Language dropdown in the header, top right** (next to Support and Quit, as in the other Kiro apps), with
+  **Restart now**. The menu entry is translated too.
+
+### Technical Details
+- New `ff_i18n.py`, the shared Kiro i18n module (domain `fastfetch-tweak-tool`, catalogs in `usr/share/locale`, the
+  choice in the app's prefs via `ff_config`, `FFTT_LANGUAGE` test pin, sibling fallback pt→pt_BR, zh→zh_CN).
+- 293 strings in `_()` (GUI and the option descriptions in `ff_options.py`); fastfetch module and option names,
+  JSONC keys and paths stay as they are.
+- `po/`: template, 13 `.po` files, `make-mo.sh` (also writes the menu entry from `po/fastfetch-tweak-tool.desktop.in`),
+  `.codespellrc`.
+- Code and drafts by GitHub Copilot (GPT-6 Luna) from the Kiro-HQ brief; review by a second AI (Luna; GPT-6.1 Terra
+  for Russian, Hungarian, Turkish, Polish, Japanese, Chinese and Romanian): 221 findings, 208 taken through guarded
+  automatic fixes. German and Russian windows checked off-screen.
+
+### Files Modified
+- `usr/share/fastfetch-tweak-tool/ff_i18n.py` (new), `ff_gui.py` (header language dropdown), `ff_options.py`
+- `po/` (new), `usr/share/locale/*/LC_MESSAGES/fastfetch-tweak-tool.mo` (new),
+  `usr/share/applications/fastfetch-tweak-tool.desktop` (now generated), `.codespellrc` (new)
+- `README.md`, `CLAUDE.md`, `CHANGELOG.md`
+
 ## 2026.10.25
 
 ### What Changed

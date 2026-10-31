@@ -1,0 +1,1356 @@
+# Romanian translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fastfetch-tweak-tool\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 15:56+0100\n"
+"PO-Revision-Date: 2026-10-31 00:00+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:39
+msgid "custom…"
+msgstr "Personalizat…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:48
+msgid "Big ASCII"
+msgstr "ASCII mare"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:49
+msgid "Small ASCII"
+msgstr "ASCII mic"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:50
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "None"
+msgstr "Niciuna"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:51
+msgid "Text file"
+msgstr "Fișier text"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:52
+msgid "Pokémon"
+msgstr "Pokémon"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:53
+msgid "Kiro art"
+msgstr "Artă Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:54
+msgid "Inline text"
+msgstr "Text încorporat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:55
+msgid "Sixel image"
+msgstr "Imagine Sixel"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:56
+msgid "Kitty image"
+msgstr "Imagine Kitty"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:57
+msgid "Chafa image"
+msgstr "Imagine Chafa"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Left"
+msgstr "Stânga"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Right"
+msgstr "Dreapta"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:59
+msgid "Top"
+msgstr "Sus"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:162
+msgid "♥ Support"
+msgstr "♥ Susține"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:163
+msgid "Support Kiro's development"
+msgstr "Susține dezvoltarea Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:166
+msgid "Quit"
+msgstr "Ieșire"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:186
+msgid "Start / Presets"
+msgstr "Start / Presetări"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:187
+msgid "Preset Gallery"
+msgstr "Galerie de presetări"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:188
+msgid "Modules"
+msgstr "Module"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:189
+msgid "Logo"
+msgstr "Logo"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:190
+msgid "Appearance"
+msgstr "Aspect"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:191
+msgid "Install & Enable"
+msgstr "Instalare și activare"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:192
+msgid "Raw"
+msgstr "Brut"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:214
+#, python-brace-format
+msgid "System ({language})"
+msgstr "Sistem ({language})"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:217
+msgid "Language"
+msgstr "Limbă"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:222
+msgid "Restart now"
+msgstr "Repornește acum"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:228
+msgid "Saved. The app shows the new language when it starts again."
+msgstr "Salvat. Aplicația va afișa noua limbă la următoarea pornire."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:245
+msgid "Best value: almost all goes to the project"
+msgstr "Cea mai bună alegere: aproape toată suma ajunge la proiect"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:246
+msgid "Buy a coffee: one-off tip"
+msgstr "O cafea: donație unică"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:247
+msgid "Membership tiers and perks"
+msgstr "Niveluri de membru și beneficii"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:248
+msgid "Join on YouTube"
+msgstr "Alătură-te pe YouTube"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:249
+msgid "Direct one-off"
+msgstr "Donație directă, unică"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:258
+msgid "Support Kiro"
+msgstr "Susține Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:264
+msgid "<b>Support Kiro</b>"
+msgstr "<b>Susține Kiro</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:266
+msgid ""
+"Kiro and its tools are built by one person for the community and kept free. "
+"If Fastfetch Tweak Tool saves you time, a little support keeps the work "
+"going. Thank you for being here."
+msgstr "Kiro și instrumentele sale sunt create de o singură persoană pentru comunitate și sunt gratuite. Dacă Fastfetch Tweak Tool îți economisește timp, o mică donație ajută la continuarea proiectului. Îți mulțumim că ești aici."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:280
+msgid "Close"
+msgstr "Închide"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:335
+msgid "Ready"
+msgstr "Gata"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:339
+msgid "Reload"
+msgstr "Reîncarcă"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:341
+msgid "Refresh preview"
+msgstr "Reîmprospătează previzualizarea"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:343
+msgid "Apply"
+msgstr "Aplică"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:358
+msgid ""
+"<b>Shown modules</b> — order matches output; select a row to edit options"
+msgstr ""
+"<b>Module afișate</b>: ordinea corespunde rezultatului; selectează un rând "
+"pentru a edita opțiunile"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:368
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:769
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:795
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:807
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:824
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1742
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1844
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2335
+msgid "(none)"
+msgstr "(nimic)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:371
+msgid "Add module"
+msgstr "Adaugă modul"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:382
+msgid "<b>Options for selected module</b>"
+msgstr "<b>Opțiuni pentru modulul selectat</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:384
+msgid ""
+"<span foreground='#e8820c'><b>↵ Press Enter in a text field to apply it.</"
+"b></span> Switches and colour pickers apply instantly."
+msgstr "<span foreground='#e8820c'><b>↵ Apasă Enter într-un câmp text pentru a aplica.</b></span> Comutatoarele și selectoarele de culoare se aplică imediat."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:406
+msgid "Drag to reorder"
+msgstr "Trage pentru a reordona"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:435
+msgid "↧ drop here to move to the end"
+msgstr "↧ plasează aici pentru a muta la final"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:477
+#, python-brace-format
+msgid "Moved {module} to position {position}"
+msgstr "{module} a fost mutat pe poziția {position}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:495
+msgid "(all added)"
+msgstr "(toate adăugate)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:508
+msgid "can be added multiple times"
+msgstr "se poate adăuga de mai multe ori"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:523
+#, python-brace-format
+msgid "Added module: {module}"
+msgstr "Modul adăugat: {module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:533
+#, python-brace-format
+msgid "Removed module: {module}"
+msgstr "Modul eliminat: {module}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:546
+msgid "<b>Common</b>"
+msgstr "<b>Comune</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:553
+#, python-brace-format
+msgid "<b>{module} options</b>"
+msgstr "<b>Opțiuni {module}</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:560
+msgid "Advanced (raw keys)"
+msgstr "Avansat (chei brute)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:567
+msgid "Option key (e.g. percent, separator)"
+msgstr "Cheia opțiunii (de ex. percent, separator)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:569
+msgid "Value (true/false/number/text)"
+msgstr "Valoare (true/false/număr/text)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:570
+msgid "Add option"
+msgstr "Adaugă opțiune"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:712
+#, python-brace-format
+msgid "Set {key} to {value}"
+msgstr "Setează {key} la {value}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:744
+msgid "<b>Logo</b>"
+msgstr "<b>Logo</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:747
+msgid "Type:"
+msgstr "Tip:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:761
+msgid "🎲 Random"
+msgstr "🎲 Aleatoriu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:762
+msgid "Pick a random logo: built-in, Pokémon or Kiro art"
+msgstr "Alege aleatoriu un logo: încorporat, Pokémon sau artă Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:768
+msgid "Built-in logo:"
+msgstr "Logo încorporat:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:781
+msgid "Bundled image:"
+msgstr "Imagine inclusă:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:783
+msgid "(none bundled)"
+msgstr "(nicio imagine inclusă)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:794
+msgid "Custom image:"
+msgstr "Imagine personalizată:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:797
+msgid "Choose file…"
+msgstr "Alege fișier…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:806
+msgid "Pokémon:"
+msgstr "Pokémon:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "large"
+msgstr "mare"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:810
+msgid "small"
+msgstr "mic"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:812
+msgid "Shiny"
+msgstr "Strălucitor"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:814
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:827
+msgid "Use"
+msgstr "Folosește"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:822
+msgid "Kiro art:"
+msgstr "Artă Kiro:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:834
+msgid "Inline text (ASCII art stored in the config):"
+msgstr "Text încorporat (artă ASCII salvată în configurație):"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:837
+msgid "Text:"
+msgstr "Text:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:840
+msgid "Type text, then Generate"
+msgstr "Scrie text, apoi selectează Generează"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:846
+msgid "Tool:"
+msgstr "Instrument:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:850
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1287
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1289
+msgid "Font:"
+msgstr "Font:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:855
+msgid "Rainbow"
+msgstr "Curcubeu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:857
+msgid "Generate"
+msgstr "Generează"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:860
+msgid "Insert Kiro figlet"
+msgstr "Inserează figlet Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:886
+msgid "Logo position:"
+msgstr "Poziția logo-ului:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:897
+msgid "Logo width"
+msgstr "Lățimea logo-ului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:898
+msgid "Logo height"
+msgstr "Înălțimea logo-ului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:899
+msgid "Logo padding top"
+msgstr "Spațiu deasupra logo-ului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:900
+msgid "Logo padding left"
+msgstr "Spațiu în stânga logo-ului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:908
+msgid ""
+"<b>Logo type — where the logo comes from:</b>\n"
+"• <b>Big ASCII</b> / <b>Small ASCII</b>: a logo built into fastfetch, picked "
+"in “Built-in logo”.\n"
+"• <b>Text file</b>: your own ASCII-art text file, picked in “Custom image”.\n"
+"• <b>Pokémon</b>: a pokemon-colorscripts critter, picked in the “Pokémon” "
+"row.\n"
+"• <b>Kiro art</b>: a bundled Kiro ASCII/ANSI logo, picked in the “Kiro art” "
+"row.\n"
+"• <b>Inline text</b>: ASCII art typed or generated in the box, stored in the "
+"config.\n"
+"• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: render an image, picked in "
+"“Bundled image” or “Custom image”.\n"
+"• <b>None</b>: no logo.\n"
+"Tip: use a transparent <b>PNG</b> (not JPG) so the logo shows without a "
+"background box.\n"
+"Tip: real images (Sixel/Kitty) need a graphics-capable terminal — kitty, "
+"Ghostty, Konsole, WezTerm or foot. <b>Alacritty shows no images</b>; use "
+"<b>Chafa</b> there (the image is rendered as coloured text)."
+msgstr ""
+"<b>Tipul logo-ului: sursa logo-ului</b>\n"
+"• <b>ASCII mare</b> / <b>ASCII mic</b>: un logo inclus în fastfetch, "
+"selectat din „Logo încorporat”.\n"
+"• <b>Fișier text</b>: propriul fișier text cu artă ASCII, selectat din „"
+"Imagine personalizată”.\n"
+"• <b>Pokémon</b>: o creatură pokemon-colorscripts, selectată din rândul „"
+"Pokémon”.\n"
+"• <b>Artă Kiro</b>: un logo ASCII/ANSI Kiro inclus în pachet, selectat din "
+"rândul „Artă Kiro”.\n"
+"• <b>Text încorporat</b>: artă ASCII scrisă sau generată în casetă și "
+"salvată în configurație.\n"
+"• <b>Sixel</b> / <b>Kitty</b> / <b>Chafa</b>: redă o imagine selectată din „"
+"Imagine inclusă” sau „Imagine personalizată”.\n"
+"• <b>Niciuna</b>: fără logo.\n"
+"Sfat: folosește un fișier <b>PNG</b> transparent (nu JPG), pentru ca logo-ul "
+"să apară fără un fundal.\n"
+"Sfat: imaginile reale (Sixel/Kitty) necesită un terminal cu suport grafic, "
+"precum kitty, Ghostty, Konsole, WezTerm sau foot. <b>Alacritty nu afișează "
+"imagini</b>; folosește <b>Chafa</b> acolo (imaginea este redată ca text "
+"colorat)."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Celsius"
+msgstr "Celsius"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:928
+msgid "Kelvin"
+msgstr "Kelvin"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:930
+msgid "IEC — 1024 (KiB)"
+msgstr "IEC: 1024 (KiB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:931
+msgid "SI — 1000 (kB)"
+msgstr "SI: 1000 (kB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:932
+msgid "JEDEC — 1024 (KB)"
+msgstr "JEDEC: 1024 (KB)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Both"
+msgstr "Ambele"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Icon"
+msgstr "Pictogramă"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:936
+msgid "Text"
+msgstr "Text"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "green"
+msgstr "verde"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "red"
+msgstr "roșu"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:938
+msgid "yellow"
+msgstr "galben"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:948
+msgid "<b>Appearance</b>"
+msgstr "<b>Aspect</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:951
+msgid "Separator:"
+msgstr "Separator:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:961
+#: usr/share/fastfetch-tweak-tool/ff_options.py:17
+msgid "Key color"
+msgstr "Culoarea cheii"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:962
+msgid "Title color"
+msgstr "Culoarea titlului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:963
+#: usr/share/fastfetch-tweak-tool/ff_options.py:20
+msgid "Output color"
+msgstr "Culoarea rezultatului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:964
+msgid "Separator color"
+msgstr "Culoarea separatorului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:965
+msgid "Bright ANSI colors"
+msgstr "Culori ANSI luminoase"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:967
+msgid "<b>Key style</b>"
+msgstr "<b>Stilul cheii</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:968
+msgid "Key width"
+msgstr "Lățimea cheii"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:969
+msgid "Key style"
+msgstr "Stilul cheii"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:970
+msgid "Key left padding"
+msgstr "Spațiu la stânga cheii"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:972
+msgid "<b>Sizes &amp; temperature</b>"
+msgstr "<b>Dimensiuni și temperatură</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:973
+msgid "Size binary prefix"
+msgstr "Prefix binar pentru dimensiune"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:974
+msgid "Largest size unit"
+msgstr "Cea mai mare unitate de dimensiune"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:975
+msgid "Temperature unit"
+msgstr "Unitatea de temperatură"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:977
+msgid "<b>Threshold colors</b>"
+msgstr "<b>Culori de prag</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:978
+msgid "Colour percentages and temperatures by severity."
+msgstr "Colorează procentele și temperaturile în funcție de nivel."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:980
+#, python-brace-format
+msgid "Percent {state}"
+msgstr "Procent {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:983
+#, python-brace-format
+msgid "Temperature {state}"
+msgstr "Temperatură {state}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1008
+msgid "Default"
+msgstr "Implicită"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1056
+msgid "#hex / SGR"
+msgstr "#hex / SGR"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1142
+msgid "the chaotic-aur or cachyos repo"
+msgstr "depozitul chaotic-aur sau cachyos"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+msgid "Built-in"
+msgstr "Încorporat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1182
+#, python-brace-format
+msgid "Built-in — {logo}"
+msgstr "Încorporat: {logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1189
+msgid "inline text"
+msgstr "text încorporat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1196
+#, python-brace-format
+msgid "{label} — {detail}"
+msgstr "{label}: {detail}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1204
+#, python-brace-format
+msgid "In use: {summary}"
+msgstr "În uz: {summary}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1291
+msgid "Cowfile:"
+msgstr "Fișier cow:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1314
+#, python-brace-format
+msgid "Insert Kiro {tool}"
+msgstr "Inserează Kiro {tool}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1317
+#, python-brace-format
+msgid ""
+"<span foreground=\"#e8820c\">{tool} not installed — install it on the "
+"Install &amp; Enable tab</span>"
+msgstr "<span foreground=\"#e8820c\">{tool} nu este instalat. Instalează-l din fila Instalare și activare.</span>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1331
+#, python-brace-format
+msgid "{tool} not installed — install it on the Install & Enable tab"
+msgstr "{tool} nu este instalat. Instalează-l din fila Instalare și activare."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1354
+#, python-brace-format
+msgid "Failed to run {tool}: {error}"
+msgstr "Nu s-a putut rula {tool}: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1386
+#, python-brace-format
+msgid "Random logo: {logo}"
+msgstr "Logo aleatoriu: {logo}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1429
+msgid ""
+"chafa not installed — install it on the Install & Enable tab to render image "
+"logos"
+msgstr "chafa nu este instalat. Instalează-l din fila Instalare și activare pentru a reda logo-uri cu imagini."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1431
+#, python-brace-format
+msgid "Logo type: {type}"
+msgstr "Tipul logo-ului: {type}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1468
+#, python-brace-format
+msgid "Pokémon logo: {name}"
+msgstr "Logo Pokémon: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1483
+#, python-brace-format
+msgid "Kiro art: {name}"
+msgstr "Artă Kiro: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1496
+#, python-brace-format
+msgid "Logo image: {name}"
+msgstr "Imaginea logo-ului: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1529
+msgid "<b>Fastfetch</b>"
+msgstr "<b>Fastfetch</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1535
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1618
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1713
+msgid "<b>installed</b>"
+msgstr "<b>instalat</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1537
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1588
+msgid "Install"
+msgstr "Instalează"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1539
+msgid "Remove"
+msgstr "Elimină"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1549
+msgid "<b>Shell startup</b>"
+msgstr "<b>Pornirea shell-ului</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+#, python-brace-format
+msgid "Target: {path}"
+msgstr "Țintă: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1551
+msgid "no shell rc found"
+msgstr "nu a fost găsit niciun fișier rc pentru shell"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1554
+msgid "Run fastfetch on shell startup"
+msgstr "Rulează fastfetch la pornirea shell-ului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1556
+msgid "Pipe through lolcat (rainbow)"
+msgstr "Trimite rezultatul prin lolcat (curcubeu)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1560
+msgid "<b>Optional features</b>"
+msgstr "<b>Funcții opționale</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1564
+msgid "image logos as ASCII art"
+msgstr "logo-uri din imagini ca artă ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1565
+msgid "sixel / kitty image logos"
+msgstr "logo-uri cu imagini sixel / kitty"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1566
+msgid "generate ASCII-art text logos"
+msgstr "generează logo-uri text ASCII"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1567
+msgid "fancy ASCII-art text logos"
+msgstr "logo-uri text ASCII elaborate"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1568
+msgid "speech-bubble text logos"
+msgstr "logo-uri text în balon de dialog"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1569
+msgid "robot text logos"
+msgstr "logo-uri text robot"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1570
+msgid "Pokémon logos"
+msgstr "logo-uri Pokémon"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1571
+msgid "rainbow output pipe"
+msgstr "redirecționarea ieșirii în culorile curcubeului"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1572
+msgid "external-display brightness"
+msgstr "luminozitatea afișajului extern"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1575
+#, python-brace-format
+msgid "{package} — {description}"
+msgstr "{package}: {description}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1594
+msgid "<b>Privacy</b>"
+msgstr "<b>Confidențialitate</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1596
+msgid "Omit public IP module from saved config"
+msgstr "Exclude modulul publicip din configurația salvată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1600
+msgid ""
+"When on, Apply writes config.jsonc without the publicip module, so your real "
+"IP cannot leak from your config, for example while recording or sharing your "
+"screen."
+msgstr "Când este activată, Aplică scrie config.jsonc fără modulul publicip, astfel încât adresa ta IP reală să nu poată fi divulgată din configurație, de exemplu în timpul unei înregistrări sau al partajării ecranului."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1612
+msgid "Public IP will be omitted from the saved config"
+msgstr "Adresa IP publică va fi exclusă din configurația salvată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1613
+msgid "Public IP will be written to the saved config"
+msgstr "Adresa IP publică va fi scrisă în configurația salvată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1653
+msgid "Install fastfetch first"
+msgstr "Instalează mai întâi fastfetch"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup disabled"
+msgstr "Pornirea shell-ului este dezactivată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1660
+msgid "Shell startup enabled"
+msgstr "Pornirea shell-ului este activată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe disabled"
+msgstr "Redirecționarea prin lolcat este dezactivată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1667
+msgid "lolcat pipe enabled"
+msgstr "Redirecționarea prin lolcat este activată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1672
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1688
+msgid "Already installed"
+msgstr "Deja instalat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1675
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1695
+#, python-brace-format
+msgid "Installing {package}…"
+msgstr "Se instalează {package}…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1680
+msgid "Not installed"
+msgstr "Neinstalat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1683
+#, python-brace-format
+msgid "Removing {package}…"
+msgstr "Se elimină {package}…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+#, python-brace-format
+msgid "Needs {repository}"
+msgstr "Necesită {repository}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1692
+msgid "Not available in your repositories"
+msgstr "Nu este disponibil în depozitele tale"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1717
+msgid "Package operation finished"
+msgstr "Operația asupra pachetului s-a încheiat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1731
+msgid ""
+"<b>Start here</b> — load an example preset or the Kiro default, watch the "
+"live preview, then tweak it on the Modules and Logo &amp; Appearance tabs. "
+"Nothing is written until you Apply — and before applying we always save a "
+"backup of your current config to <tt>config.jsonc.ftt-bak</tt>, so you can "
+"Restore backup any time. <b>Fastfetch default</b> is the exception: it "
+"removes your config at once (after the same backup), so fastfetch goes back "
+"to its own look with your distro logo."
+msgstr ""
+"<b>Începe de aici</b>: încarcă o presetare exemplu sau configurația "
+"implicită Kiro, urmărește previzualizarea live, apoi ajustează setările în "
+"filele Module și Logo și aspect. Nimic nu se scrie până când selectezi "
+"Aplică, iar înainte de aplicare salvăm întotdeauna o copie a configurației "
+"curente în <tt>config.jsonc.ftt-bak</tt>, pe care o poți restaura oricând. "
+"Excepția este <b>Fastfetch implicit</b>: elimină configurația imediat (după "
+"aceeași copie de siguranță), iar fastfetch revine la aspectul propriu, cu "
+"logo-ul distribuției tale."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1740
+msgid "<b>Presets</b> — load into the editor, then Apply"
+msgstr "<b>Presetări</b>: încarcă în editor, apoi selectează Aplică"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1745
+msgid "Load preset"
+msgstr "Încarcă presetarea"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1752
+msgid "Kiro default"
+msgstr "Implicit Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1754
+msgid "Fastfetch default"
+msgstr "Fastfetch implicit"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1755
+msgid ""
+"Back up and remove config.jsonc right away: fastfetch shows its own default "
+"look with your distro logo. Restore backup brings yours back."
+msgstr "Fă imediat o copie de siguranță și elimină config.jsonc: fastfetch va afișa aspectul implicit propriu, cu logo-ul distribuției tale. Restaurează copia de siguranță pentru a recupera configurația ta."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1758
+msgid "Restore backup"
+msgstr "Restaurează copia de siguranță"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1765
+msgid ""
+"<b>Your presets</b> — save the current editor as a reusable preset, or share "
+"it via export/import"
+msgstr ""
+"<b>Presetările tale</b>: salvează configurația din editor ca presetare "
+"reutilizabilă sau partajeaz-o prin export/import"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1768
+#, python-brace-format
+msgid ""
+"Saved to <tt>{path}/</tt> — they appear in the list above and load anywhere "
+"with <tt>fastfetch -c &lt;name&gt;</tt>"
+msgstr "Salvat în <tt>{path}/</tt>. Presetările apar în lista de mai sus și pot fi încărcate oriunde cu <tt>fastfetch -c &lt;name&gt;</tt>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1773
+msgid "Preset name"
+msgstr "Numele presetării"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1775
+msgid "Save current as preset"
+msgstr "Salvează configurația curentă ca presetare"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1782
+msgid "Export…"
+msgstr "Exportă…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1784
+msgid "Import…"
+msgstr "Importă…"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1802
+msgid "<b>Raw config.jsonc</b> — edits here preserve comments"
+msgstr ""
+"<b>config.jsonc brut</b>: modificările făcute aici păstrează comentariile"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1809
+msgid "Reload from file"
+msgstr "Reîncarcă din fișier"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1811
+msgid "Validate & save raw"
+msgstr "Validează și salvează configurația brută"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1832
+#, python-brace-format
+msgid "Preset not found: {name}"
+msgstr "Presetarea nu a fost găsită: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1838
+#, python-brace-format
+msgid "Loaded preset: {name}"
+msgstr "Presetare încărcată: {name}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1853
+msgid "Enter a preset name first"
+msgstr "Introdu mai întâi un nume pentru presetare"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1857
+#, python-brace-format
+msgid "Saved to {path}"
+msgstr "Salvat în: {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1870
+#, python-brace-format
+msgid "Exported to {path}"
+msgstr "Exportat în {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1886
+#, python-brace-format
+msgid "Import failed: {error}"
+msgstr "Importul a eșuat: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1891
+#, python-brace-format
+msgid "Imported {path}"
+msgstr "S-a importat {path}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1912
+msgid ""
+"<b>Preset gallery</b> — a real screenshot of each preset. Click <b>Load</b> "
+"to pull one into the editor; nothing is written until you Apply."
+msgstr ""
+"<b>Galeria de presetări</b>: o captură reală de ecran pentru fiecare "
+"presetare. Selectează <b>Încarcă</b> pentru a o prelua în editor; nimic nu "
+"se scrie până când selectezi Aplică."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1917
+msgid "Refresh"
+msgstr "Reîmprospătează"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1918
+msgid "Re-scan the preview-image folder after capturing new screenshots"
+msgstr ""
+"Scanează din nou dosarul imaginilor de previzualizare după realizarea unor "
+"capturi noi"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1926
+msgid "Logo:"
+msgstr "Logo:"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1927
+msgid "All"
+msgstr "Toate"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1929
+msgid "Normal"
+msgstr "Normal"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:1931
+msgid "Small"
+msgstr "Mic"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2002
+msgid "No presets found."
+msgstr "Nu s-au găsit presetări."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2005
+msgid ""
+"No preview images yet — run <tt>tools/capture-preset-previews.sh</tt> in a "
+"VM, drop the <tt>.png</tt>s into <tt>images/preset_previews/</tt>, then "
+"Refresh."
+msgstr "Nu există încă imagini de previzualizare. Rulează <tt>tools/capture-preset-previews.sh</tt> într-o mașină virtuală, pune fișierele <tt>.png</tt> în <tt>images/preset_previews/</tt>, apoi selectează Reîmprospătează."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2009
+#, python-brace-format
+msgid ""
+"{count} preview image is available for {total} presets; {normal} presets use "
+"a normal logo and {small} use a small logo"
+msgid_plural ""
+"{count} preview images are available for {total} presets; {normal} presets "
+"use normal logos and {small} use small logos"
+msgstr[0] "{count} imagine de previzualizare este disponibilă pentru {total} presetări; {normal} presetări folosesc logo-uri normale, iar {small} folosesc logo-uri mici."
+msgstr[1] "{count} imagini de previzualizare sunt disponibile pentru {total} presetări; {normal} presetări folosesc logo-uri normale, iar {small} folosesc logo-uri mici."
+msgstr[2] "{count} de imagini de previzualizare sunt disponibile pentru {total} de presetări; {normal} presetări folosesc logo-uri normale, iar {small} folosesc logo-uri mici."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2044
+msgid "No preview yet"
+msgstr "Nicio previzualizare încă"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2056
+msgid "Load"
+msgstr "Încarcă"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2070
+msgid "Loaded Kiro default"
+msgstr "S-a încărcat configurația implicită Kiro"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2082
+msgid ""
+"Back to fastfetch's own default — config removed, Restore backup brings it "
+"back"
+msgstr "S-a revenit la aspectul implicit Fastfetch. Configurația a fost eliminată, iar copia de siguranță poate fi restaurată."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2088
+msgid "Restored from backup"
+msgstr "Restaurat din copia de siguranță"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2090
+msgid "No backup to restore"
+msgstr "Nu există nicio copie de siguranță de restaurat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2095
+msgid "Raw view reloaded from file"
+msgstr "Vizualizarea brută a fost reîncărcată din fișier"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2103
+#, python-brace-format
+msgid "Invalid JSON — not saved: {error}"
+msgstr "JSON nevalid. Nu s-a salvat: {error}"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2109
+msgid "Raw config saved"
+msgstr "Configurația brută a fost salvată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2143
+msgid "<b>Live preview</b>"
+msgstr "<b>Previzualizare live</b>"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2147
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Show public IP"
+msgstr "Afișează IP-ul public"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2150
+msgid ""
+"Public IP is hidden in the preview by default — reveal it only when you are "
+"not sharing your screen or recording."
+msgstr "IP-ul public este ascuns implicit în previzualizare. Afișează-l doar când nu partajezi ecranul și nu înregistrezi."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2183
+msgid "vte4 not installed — preview disabled."
+msgstr "vte4 nu este instalat; previzualizarea este dezactivată."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2184
+msgid "Preview in terminal"
+msgstr "Previzualizare în terminal"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2203
+msgid "(hidden — click ‘Show public IP’)"
+msgstr "(ascuns. Selectează „Afișează IP-ul public”)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2217
+msgid "Hide public IP"
+msgstr "Ascunde IP-ul public"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2227
+msgid "Reveal your public IP in the preview?"
+msgstr "Afișezi IP-ul public în previzualizare?"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2229
+msgid ""
+"Your real public IP address will be fetched and shown in the live preview. "
+"Do not do this while sharing your screen or recording — it would expose your "
+"IP. It is hidden again the next time you open the tool."
+msgstr "Adresa ta IP publică reală va fi preluată și afișată în previzualizarea live. Nu face asta când partajezi ecranul sau înregistrezi, deoarece ți-ai expune IP-ul. Va fi ascunsă din nou la următoarea pornire a instrumentului."
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Cancel"
+msgstr "Anulează"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2233
+msgid "Reveal public IP"
+msgstr "Afișează IP-ul public"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2257
+msgid "fastfetch not installed — preview unavailable"
+msgstr "fastfetch nu este instalat; previzualizarea nu este disponibilă"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2287
+msgid "fastfetch not installed"
+msgstr "fastfetch nu este instalat"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2304
+msgid "Configuration applied (public IP module omitted)"
+msgstr "Configurație aplicată (modulul publicip a fost omis)"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2306
+msgid "Configuration applied"
+msgstr "Configurație aplicată"
+
+#: usr/share/fastfetch-tweak-tool/ff_gui.py:2314
+msgid "Reloaded from config.jsonc"
+msgstr "Reîncărcat din config.jsonc"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:15
+msgid "Key label"
+msgstr "Eticheta cheii"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:16
+msgid "Key icon"
+msgstr "Pictograma cheii"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:18
+msgid "Key width (0 = off)"
+msgstr "Lățimea cheii (0 = dezactivată)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:19
+msgid "Format"
+msgstr "Format"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:27
+#: usr/share/fastfetch-tweak-tool/ff_options.py:32
+#: usr/share/fastfetch-tweak-tool/ff_options.py:45
+#: usr/share/fastfetch-tweak-tool/ff_options.py:76
+msgid "Show temperature"
+msgstr "Afișează temperatura"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:28
+msgid "Show P/E core count"
+msgstr "Afișează numărul de nuclee P/E"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:29
+msgid "Temp sensor"
+msgstr "Senzor de temperatură"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:33
+msgid "Driver-specific info"
+msgstr "Informații specifice driverului"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:34
+msgid "Hide type (integrated/discrete)"
+msgstr "Ascunde tipul (integrat/discret)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:37
+msgid "Show regular volumes"
+msgstr "Afișează volumele obișnuite"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:38
+msgid "Show external volumes"
+msgstr "Afișează volumele externe"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:39
+msgid "Show hidden volumes"
+msgstr "Afișează volumele ascunse"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:40
+msgid "Show read-only volumes"
+msgstr "Afișează volumele doar pentru citire"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:41
+msgid "Use available (not free) space"
+msgstr "Folosește spațiul disponibil (nu cel liber)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:42
+msgid "Folders (':'-separated)"
+msgstr "Dosare (separate prin „:”)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:48
+msgid "Show IPv4"
+msgstr "Afișează IPv4"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:49
+msgid "Show IPv6"
+msgstr "Afișează IPv6"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:50
+msgid "Show MAC"
+msgstr "Afișează MAC"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:51
+#: usr/share/fastfetch-tweak-tool/ff_options.py:96
+#: usr/share/fastfetch-tweak-tool/ff_options.py:122
+msgid "Compact (one line)"
+msgstr "Compact (un singur rând)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:52
+#: usr/share/fastfetch-tweak-tool/ff_options.py:80
+msgid "Default route only"
+msgstr "Doar ruta implicită"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:53
+#: usr/share/fastfetch-tweak-tool/ff_options.py:79
+msgid "Interface name prefix"
+msgstr "Prefixul numelui interfeței"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:56
+msgid "Separate swap from memory"
+msgstr "Separă swap de memorie"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:59
+msgid "Detect plugins"
+msgstr "Detectează pluginuri"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:62
+msgid "Use fully-qualified hostname"
+msgstr "Folosește numele de gazdă complet calificat"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:65
+msgid "Command text"
+msgstr "Textul comenzii"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:66
+msgid "Shell"
+msgstr "Shell"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:67
+msgid "Parameter"
+msgstr "Parametru"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:68
+msgid "Use stderr instead of stdout"
+msgstr "Folosește stderr în loc de stdout"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:69
+msgid "Run in parallel"
+msgstr "Rulează în paralel"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:70
+msgid "Split output into lines"
+msgstr "Împarte ieșirea în linii"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:73
+msgid "Name prefix filter"
+msgstr "Filtru pentru prefixul numelui"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:74
+msgid "Hide virtual disks"
+msgstr "Ascunde discurile virtuale"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:75
+msgid "Hide unused disks"
+msgstr "Ascunde discurile neutilizate"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:81
+#: usr/share/fastfetch-tweak-tool/ff_options.py:105
+msgid "Detect total I/O"
+msgstr "Detectează I/O total"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:82
+#: usr/share/fastfetch-tweak-tool/ff_options.py:106
+#: usr/share/fastfetch-tweak-tool/ff_options.py:110
+msgid "Sample wait time (ms)"
+msgstr "Timp de așteptare pentru eșantion (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:85
+msgid "Location"
+msgstr "Locație"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:86
+#: usr/share/fastfetch-tweak-tool/ff_options.py:91
+msgid "Timeout (ms)"
+msgstr "Timp de expirare (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:87
+msgid "wttr.in format string"
+msgstr "Șir de format wttr.in"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:90
+msgid "Custom URL"
+msgstr "URL personalizat"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:92
+msgid "Use IPv6"
+msgstr "Folosește IPv6"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:95
+msgid "Decimal places"
+msgstr "Zecimale"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:99
+msgid "Compact type"
+msgstr "Tip compact"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:100
+msgid "Precise refresh rate"
+msgstr "Rată de reîmprospătare precisă"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:101
+msgid "Sort order"
+msgstr "Ordinea de sortare"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:104
+msgid "Device name prefix"
+msgstr "Prefixul numelui dispozitivului"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:109
+msgid "Per-core usage"
+msgstr "Utilizare per nucleu"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:113
+msgid "Split per GPU"
+msgstr "Împarte per GPU"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:114
+msgid "Use Vulkan"
+msgstr "Folosește Vulkan"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:115
+msgid "Show type"
+msgstr "Afișează tipul"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:118
+msgid "DDC/CI sleep (ms)"
+msgstr "Pauză DDC/CI (ms)"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:119
+msgid "Compact"
+msgstr "Compact"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:123
+msgid "Current user only"
+msgstr "Doar utilizatorul curent"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:126
+msgid "Sound device type"
+msgstr "Tipul dispozitivului audio"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:129
+msgid "Combine duplicate managers"
+msgstr "Combină managerii duplicați"
+
+#: usr/share/fastfetch-tweak-tool/ff_options.py:132
+msgid "Show disconnected devices"
+msgstr "Afișează dispozitivele deconectate"
+
+#: po/fastfetch-tweak-tool.desktop.in:2
+msgid "Fastfetch Tweak Tool"
+msgstr "Fastfetch Tweak Tool"
+
+#: po/fastfetch-tweak-tool.desktop.in:3
+msgid "System Info Configuration Tool"
+msgstr "Instrument de configurare a informațiilor despre sistem"
+
+#: po/fastfetch-tweak-tool.desktop.in:5
+msgid "Configure Fastfetch: modules, logo, colors, and shell startup"
+msgstr "Configurează Fastfetch: module, logo, culori și pornirea shell-ului"
+
+#: po/fastfetch-tweak-tool.desktop.in:11
+msgid "fastfetch;neofetch;system;info;logo;module;tweak"
+msgstr "fastfetch;neofetch;system;info;logo;module;tweak;configurare;sistem;informații;logo;module;ajustare"
